@@ -1,4 +1,4 @@
-package com.topfood.top_food_recipes;
+package com.topfood.recipes;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
