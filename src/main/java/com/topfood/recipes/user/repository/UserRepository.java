@@ -1,4 +1,9 @@
 package com.topfood.recipes.user.repository;
 
-public class UsersRepository {
+import com.topfood.recipes.user.model.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface UserRepository extends JpaRepository<User, Long> {
+
 }
+
