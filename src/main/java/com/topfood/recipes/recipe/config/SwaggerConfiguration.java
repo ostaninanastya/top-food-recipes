@@ -1,4 +1,4 @@
-package com.topfood.recipes.user.config;
+package com.topfood.recipes.recipe.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,26 +11,26 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 import static springfox.documentation.builders.PathSelectors.regex;
 import static springfox.documentation.builders.RequestHandlerSelectors.basePackage;
 
-@Configuration("UsersSwaggerConfiguration")
+@Configuration("RecipesSwaggerConfiguration")
 @EnableSwagger2
 public class SwaggerConfiguration {
 
 	@Bean
-    public Docket usersApi() {
+    public Docket recipesApi() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                .apis(basePackage("com.topfood.recipes.user"))
+                .apis(basePackage("com.topfood.recipes.recipe"))
                 .paths(regex("/api/.*"))
                 .build()
-                .groupName("users")
+                .groupName("recipes")
                 .useDefaultResponseMessages(false)
                 .apiInfo(getApiInfo());
     }
 
     private ApiInfo getApiInfo() {
         return new ApiInfoBuilder()
-                .title("Users REST API")
-                .description("This API allows to perform all operations related to users")
+                .title("Recipes REST API")
+                .description("This API allows to perform all operations related to recipes")
                 .version("1.0")
                 .build();
     }
