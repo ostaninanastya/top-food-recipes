@@ -16,8 +16,8 @@ public class Recipe {
     @Column(name="recipe")
     private String recipe;
 
-    @Column(name="cusiene_id")
-    private Long cusiene_id;
+//    @Column(name="cuisine_id")
+//    private Long cuisine_id;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -35,9 +35,9 @@ public class Recipe {
 
     }
 
-    public Recipe(String recipe, Long cusiene_id, User user, Cuisine cuisine) {
+    public Recipe(String recipe, User user, Cuisine cuisine) {
         this.recipe = recipe;
-        this.cusiene_id = cusiene_id;
+//        this.cusiene_id = cusiene_id;
         this.user = user;
         this.cuisine = cuisine;
     }
@@ -58,13 +58,13 @@ public class Recipe {
         this.recipe = recipe;
     }
 
-    public Long getCusiene_id() {
-        return cusiene_id;
-    }
-
-    public void setCusiene_id(Long cusiene_id) {
-        this.cusiene_id = cusiene_id;
-    }
+//    public Long getCusiene_id() {
+//        return cusiene_id;
+//    }
+//
+//    public void setCusiene_id(Long cusiene_id) {
+//        this.cusiene_id = cusiene_id;
+//    }
 
     public User getUser() {
         return user;
