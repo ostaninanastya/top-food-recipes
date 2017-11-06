@@ -1,4 +1,4 @@
-package com.topfood.recipes.cuisine.config;
+package com.topfood.recipes.measure.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,26 +11,25 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 import static springfox.documentation.builders.PathSelectors.regex;
 import static springfox.documentation.builders.RequestHandlerSelectors.basePackage;
 
-@Configuration("MeasureSwaggerConfiguration")
+@Configuration("CuisineSwaggerConfiguration")
 @EnableSwagger2
 public class SwaggerConfiguration {
-
     @Bean
-    public Docket cuisinesApi() {
+    public Docket measuresApi() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                .apis(basePackage("com.topfood.recipes.cuisine"))
+                .apis(basePackage("com.topfood.recipes.measure"))
                 .paths(regex("/api/.*"))
                 .build()
-                .groupName("cuisines")
+                .groupName("measures")
                 .useDefaultResponseMessages(false)
                 .apiInfo(getApiInfo());
     }
 
     private ApiInfo getApiInfo() {
         return new ApiInfoBuilder()
-                .title("Cuisines REST API")
-                .description("This API allows to perform all operations related to cuisines")
+                .title("Measures REST API")
+                .description("This API allows to perform all operations related to measures")
                 .version("1.0")
                 .build();
     }
