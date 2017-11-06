@@ -16,9 +16,6 @@ public class Recipe {
     @Column(name="recipe")
     private String recipe;
 
-//    @Column(name="cuisine_id")
-//    private Long cuisine_id;
-
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
@@ -27,17 +24,12 @@ public class Recipe {
     @JoinColumn(name = "cuisine_id")
     private Cuisine cuisine;
 
-//    @OneToMany(fetch = FetchType.EAGER, mappedBy = "recipe")
-//    @JoinColumn(name = "recipe_id", referencedColumnName = "recipe_id")
-//    private List<IngredientRecipe> ingredients;
-
     public Recipe(){
 
     }
 
     public Recipe(String recipe, User user, Cuisine cuisine) {
         this.recipe = recipe;
-//        this.cusiene_id = cusiene_id;
         this.user = user;
         this.cuisine = cuisine;
     }
@@ -57,14 +49,6 @@ public class Recipe {
     public void setRecipe(String recipe) {
         this.recipe = recipe;
     }
-
-//    public Long getCusiene_id() {
-//        return cusiene_id;
-//    }
-//
-//    public void setCusiene_id(Long cusiene_id) {
-//        this.cusiene_id = cusiene_id;
-//    }
 
     public User getUser() {
         return user;

@@ -11,11 +11,11 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 import static springfox.documentation.builders.PathSelectors.regex;
 import static springfox.documentation.builders.RequestHandlerSelectors.basePackage;
 
-@Configuration("RecipesSwaggerConfiguration")
+@Configuration("RecipeSwaggerConfiguration")
 @EnableSwagger2
 public class SwaggerConfiguration {
 
-	@Bean
+    @Bean
     public Docket recipesApi() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
