@@ -3,6 +3,7 @@ package com.topfood.recipes.ingredient.service;
 import com.topfood.recipes.cuisine.repository.CuisineRepository;
 import com.topfood.recipes.ingredient.model.Ingredient;
 import com.topfood.recipes.ingredient.repository.IngredientRepository;
+import com.topfood.recipes.measure.repository.MeasureRepository;
 import com.topfood.recipes.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,12 +16,12 @@ public class IngredientService {
     @Autowired
     private IngredientRepository ingredientRepository;
 
-    //@Autowired
-  //  private MeusureRepository meusureRepository;
+    @Autowired
+    private MeasureRepository meusureRepository;
 
     @PostConstruct
     public void init() {
-  //      ingredientRepository.save(new Ingredient("томат", meusureRepository.findOne(1)));
+        ingredientRepository.save(new Ingredient("томат", meusureRepository.findOne(Long.valueOf(1))));
     }
 
     public List<Ingredient> findAll() {
@@ -43,7 +44,7 @@ public class IngredientService {
     {
         Ingredient ingredient = ingredientRepository.findOne(newIngredient.getIngredient_id());
         ingredient.setIngredient_name(newIngredient.getIngredient_name());
-//        ingredient.setMeasure(newIngredient.getMeasure());
+        ingredient.setMeasure(newIngredient.getMeasure());
         ingredientRepository.flush();
     }
 
