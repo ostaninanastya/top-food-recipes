@@ -43,7 +43,7 @@ public class CuisineRestController {
 
     @ApiOperation(value = "Update a cuisine", produces = APPLICATION_JSON_UTF8_VALUE)
     @RequestMapping(value = "/{id}", method = PUT)
-    public ResponseEntity<Cuisine> updateLaptop(@RequestBody Cuisine cuisine) {
+    public ResponseEntity<Cuisine> updateCuisine(@RequestBody Cuisine cuisine) {
         cuisineService.update(cuisine);
         return new ResponseEntity<Cuisine>(cuisine, HttpStatus.OK);
     }
