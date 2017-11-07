@@ -14,8 +14,8 @@ public class Ingredient {
     @Column(name ="ingredient_id")
     private Long ingredient_id;
 
-    @Column(name="ingredient_name")
-    private String ingredient_name;
+    @Column(name="name")
+    private String name;
 
     @ManyToOne
     @JoinColumn(name = "measure_id")
@@ -25,7 +25,7 @@ public class Ingredient {
     }
 
     public Ingredient(String ingredient_name, Measure measure) {
-        this.ingredient_name = ingredient_name;
+        this.name = ingredient_name;
         this.measure = measure;
     }
 
@@ -38,12 +38,12 @@ public class Ingredient {
         this.ingredient_id = ingredient_id;
     }
 
-    public String getIngredient_name() {
-        return ingredient_name;
+    public String getName() {
+        return name;
     }
 
-    public void setIngredient_name(String ingredient_name) {
-        this.ingredient_name = ingredient_name;
+    public void setName(String ingredient_name) {
+        this.name = ingredient_name;
     }
 
     public Measure getMeasure() {

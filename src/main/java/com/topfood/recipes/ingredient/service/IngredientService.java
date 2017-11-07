@@ -19,10 +19,6 @@ public class IngredientService {
     @Autowired
     private MeasureRepository meusureRepository;
 
-    @PostConstruct
-    public void init() {
-        ingredientRepository.save(new Ingredient("томат", meusureRepository.findOne(Long.valueOf(1))));
-    }
 
     public List<Ingredient> findAll() {
         return ingredientRepository.findAll();
@@ -43,7 +39,7 @@ public class IngredientService {
     public void update(Ingredient newIngredient)
     {
         Ingredient ingredient = ingredientRepository.findOne(newIngredient.getIngredient_id());
-        ingredient.setIngredient_name(newIngredient.getIngredient_name());
+        ingredient.setName(newIngredient.getName());
         ingredient.setMeasure(newIngredient.getMeasure());
         ingredientRepository.flush();
     }

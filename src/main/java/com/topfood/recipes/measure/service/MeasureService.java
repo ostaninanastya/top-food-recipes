@@ -16,18 +16,6 @@ public class MeasureService {
     @Autowired
     private MeasureRepository measureRepository;
 
-    @PostConstruct
-    public void init(){
-        measureRepository.save(new Measure("кг."));
-        measureRepository.save(new Measure("г."));
-        measureRepository.save(new Measure("л."));
-        measureRepository.save(new Measure("стакан"));
-        measureRepository.save(new Measure("ст. ложка"));
-        measureRepository.save(new Measure("ч. ложка"));
-        measureRepository.save(new Measure("мл."));
-        measureRepository.save(new Measure("щепотка"));
-    }
-
     public List<Measure> findAll() {
         return measureRepository.findAll();
     }

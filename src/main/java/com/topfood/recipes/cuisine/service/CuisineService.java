@@ -13,14 +13,6 @@ public class CuisineService {
     @Autowired
     private CuisineRepository cuisineRepository;
 
-    @PostConstruct
-    public void init(){
-        cuisineRepository.save(new Cuisine("Американская"));
-        cuisineRepository.save(new Cuisine("Русская"));
-        cuisineRepository.save(new Cuisine("Китайская"));
-        cuisineRepository.save(new Cuisine("Японская"));
-        cuisineRepository.save(new Cuisine("Итальянская"));
-    }
 
     public List<Cuisine> findAll() {
         return cuisineRepository.findAll();

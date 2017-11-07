@@ -22,12 +22,6 @@ public class RecipeService {
     @Autowired
     private CuisineRepository cuisineRepository;
 
-    @PostConstruct
-    public void init() {
-        recipeRepository.save(new Recipe("Рецепт пиццы", userRepository.findOne(Long.valueOf(1)), cuisineRepository.findOne(Long.valueOf(1))));
-        recipeRepository.save(new Recipe("Рецепт пасты", userRepository.findOne(Long.valueOf(2)), cuisineRepository.findOne(Long.valueOf(1))));
-    }
-
     public List<Recipe> findAll() {
         return recipeRepository.findAll();
     }

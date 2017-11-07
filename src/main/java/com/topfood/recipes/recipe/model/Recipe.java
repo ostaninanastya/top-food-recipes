@@ -13,6 +13,9 @@ public class Recipe {
     @Column(name ="recipe_id")
     private Long recipe_id;
 
+    @Column(name ="name")
+    private String name;
+
     @Column(name="recipe")
     private String recipe;
 
@@ -28,7 +31,8 @@ public class Recipe {
 
     }
 
-    public Recipe(String recipe, User user, Cuisine cuisine) {
+    public Recipe(String name, String recipe, User user, Cuisine cuisine) {
+        this.name = name;
         this.recipe = recipe;
         this.user = user;
         this.cuisine = cuisine;
@@ -40,6 +44,14 @@ public class Recipe {
 
     public void setRecipe_id(Long recipe_id) {
         this.recipe_id = recipe_id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getRecipe() {

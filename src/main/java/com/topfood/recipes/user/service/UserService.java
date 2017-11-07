@@ -13,11 +13,6 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    @PostConstruct
-    public void init() {
-        userRepository.save(new User("admin", "admin"));
-    }
-
     public List<User> findAll() {
         return userRepository.findAll();
     }
@@ -36,8 +31,8 @@ public class UserService {
 
     public void update(User newUser) {
         User user = userRepository.findOne(newUser.getUser_id());
-        user.setUser_name(newUser.getUser_name());
-        user.setUser_password(newUser.getUser_password());
+        user.setName(newUser.getName());
+        user.setPassword(newUser.getPassword());
         userRepository.flush();
     }
 }
