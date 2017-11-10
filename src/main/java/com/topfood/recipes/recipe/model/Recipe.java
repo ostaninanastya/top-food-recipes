@@ -19,6 +19,17 @@ public class Recipe {
     @Column(name="recipe")
     private String recipe;
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    @Column(name ="image")
+    private String image;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
@@ -36,6 +47,14 @@ public class Recipe {
         this.recipe = recipe;
         this.user = user;
         this.cuisine = cuisine;
+    }
+
+    public Recipe(String name, String recipe, User user, Cuisine cuisine, String image) {
+        this.name = name;
+        this.recipe = recipe;
+        this.user = user;
+        this.cuisine = cuisine;
+        this.image = image;
     }
 
     public Long getRecipe_id() {

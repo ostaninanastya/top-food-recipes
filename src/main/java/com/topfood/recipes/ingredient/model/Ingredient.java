@@ -7,7 +7,7 @@ import com.topfood.recipes.user.model.User;
 import javax.persistence.*;
 
 @Entity
-@Table(name="ingredint")
+@Table(name="ingredient")
 public class Ingredient {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
