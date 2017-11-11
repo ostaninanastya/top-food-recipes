@@ -31,7 +31,9 @@ public class RecipeRestController {
     private static String UPLOADED_FOLDER = "/var/www/html/topfoodrecipes/";
     @Autowired
     private RecipeService recipeService;
+    @Autowired
     private CuisineService cuisineService;
+    @Autowired
     private UserService userService;
 
     @ApiOperation(value = "Get all recipes", produces = APPLICATION_JSON_UTF8_VALUE)
