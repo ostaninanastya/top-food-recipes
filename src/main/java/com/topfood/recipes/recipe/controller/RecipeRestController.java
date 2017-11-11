@@ -63,8 +63,8 @@ public class RecipeRestController {
         Files.write(path, bytes);
         Cuisine cuisine = cuisineService.getByID(Long.toString(cuisine_id));
         User user = userService.getByID(Long.toString(user_id));
-        Recipe newRecipe = new Recipe(name, recipe,user, cuisine);
-        newRecipe.setImage("http://188.166.30.145/topfoodrecipes/"+file.getOriginalFilename());
+        Recipe newRecipe = new Recipe(name, recipe, user, cuisine, "http://188.166.30.145/topfoodrecipes/"+file.getOriginalFilename());
+        //newRecipe.setImage("http://188.166.30.145/topfoodrecipes/"+file.getOriginalFilename());
         recipeService.add(newRecipe);
         return new ResponseEntity<>(HttpStatus.OK);
     }
