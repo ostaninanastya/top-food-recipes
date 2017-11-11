@@ -59,7 +59,7 @@ public class RecipeRestController {
 
     //@ApiOperation(value = "Upload image", produces = APPLICATION_JSON_UTF8_VALUE)
     @RequestMapping(value = "/img", method = POST)
-    public ResponseEntity<?> uploadImage(@RequestParam MultipartFile file, @RequestParam("name") String name, @RequestParam("recipe") String recipe, @RequestParam("user_id") Long user_id, @RequestParam("cuisine_id") Long cuisine_id) throws IOException {
+    public ResponseEntity<?> uploadImage(@RequestParam MultipartFile file, @RequestParam String name, @RequestParam String recipe, @RequestParam Long user_id, @RequestParam Long cuisine_id) throws IOException {
         byte[] bytes = file.getBytes();
         Path path = Paths.get(UPLOADED_FOLDER+file.getOriginalFilename());
         Files.write(path, bytes);
