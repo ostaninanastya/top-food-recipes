@@ -28,7 +28,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 @RequestMapping("/api/recipe")
 public class RecipeRestController {
     //private static final Logger LOG = LoggerFactory.getLogger(RecipeRestController.class);
-    private static String UPLOADED_FOLDER = "/var/www/html/topfoodrecipes";
+    private static String UPLOADED_FOLDER = "/var/www/html/topfoodrecipes/";
     @Autowired
     private RecipeService recipeService;
     private CuisineService cuisineService;
