@@ -17,7 +17,7 @@ public class IngredientService {
     private IngredientRepository ingredientRepository;
 
     @Autowired
-    private MeasureRepository meusureRepository;
+    private MeasureRepository measureRepository;
 
 
     public List<Ingredient> findAll() {
