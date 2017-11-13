@@ -36,6 +36,7 @@ public class RecipeRestController {
     @Autowired
     private UserService userService;
 
+    @CrossOrigin
     @ApiOperation(value = "Get all recipes", produces = APPLICATION_JSON_UTF8_VALUE)
     @RequestMapping(method = GET)
     public ResponseEntity<List<Recipe>> getAllRecipes() {

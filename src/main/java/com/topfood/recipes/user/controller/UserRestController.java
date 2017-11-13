@@ -20,6 +20,7 @@ public class UserRestController {
     @Autowired
     private UserService userService;
 
+    @CrossOrigin
     @ApiOperation(value = "Get all users", produces = APPLICATION_JSON_UTF8_VALUE)
     @RequestMapping(method = GET)
     public ResponseEntity<List<User>> getAllUsers() {

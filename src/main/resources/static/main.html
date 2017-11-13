@@ -1,0 +1,21 @@
+<div ng-app="topFoodRecipesApp" ng-controller="RecipeController">
+    <div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Recipe</th>
+                <th width="100"></th>
+                <th width="100"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="recipe in recipes">
+                <td>{{ recipe.name }}</td>
+                <td>{{ recipe.recipe }}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
