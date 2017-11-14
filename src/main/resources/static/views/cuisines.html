@@ -1,0 +1,18 @@
+<div> <!-- ng-app="topFoodRecipesApp" ng-controller="RecipeController"> -->
+    <div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th width="100"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="cuisine in cuisines">
+                <td>{{ cuisine.name }}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
