@@ -9,5 +9,9 @@ const myApp = angular.module('topFoodRecipesApp', ["ngRoute"])
     	}).when('/ingredients', {
     		templateUrl:'views/ingredients.html',
 			controller:'IngredientController'
-		});
+		}).when('/ingredients/add', {
+			templateUrl:'views/add_ingredient.html',
+			controller:'IngredientController'
+		})
+		;
 });

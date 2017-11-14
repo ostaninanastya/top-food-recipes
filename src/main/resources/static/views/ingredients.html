@@ -4,12 +4,16 @@
             <thead>
             <tr>
                 <th>Name</th>
+                <th>Measure</th>
                 <th width="100"></th>
+                <th width="100"></th>
+
             </tr>
             </thead>
             <tbody>
             <tr ng-repeat="ingredient in ingredients">
                 <td>{{ ingredient.name }}</td>
+                <td>{{ ingredient.measure.name}}</td>
             </tr>
             </tbody>
         </table>
