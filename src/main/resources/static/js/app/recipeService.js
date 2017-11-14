@@ -17,4 +17,13 @@ angular.module('topFoodRecipesApp')
     });
     }
 })
+    .service('IngredientService', function($http) {
+        this.getIngredients = function() {
+            return $http.get('http://localhost:8080/top_food_recipes-0.0.1-SNAPSHOT/api/ingredient').then(function(response){
+                return response.data;
+            }).catch(function(err) {
+                return [];
+            });
+        }
+    })
 ;

@@ -12,5 +12,12 @@ angular.module('topFoodRecipesApp')
 	CuisineService.getCuisines().then(function(cuisines){
 		$scope.cuisines = cuisines;
 	});
+})
+.controller('IngredientController', function($scope, $http, IngredientService) {
+	$scope.ingredients = [];
+
+	IngredientService.getIngredients().then(function(ingredients){
+		$scope.ingredients = ingredients;
+	})
 });
 

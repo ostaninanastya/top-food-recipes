@@ -6,5 +6,8 @@ const myApp = angular.module('topFoodRecipesApp', ["ngRoute"])
     	}).when('/cuisines', {
     		templateUrl:'views/cuisines.html',
     		controller:'CuisineController'
-    	});
+    	}).when('/ingredients', {
+    		templateUrl:'views/ingredients.html',
+			controller:'IngredientController'
+		});
 });
