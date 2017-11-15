@@ -20,7 +20,8 @@ angular.module('topFoodRecipesApp')
 		$scope.ingredients = ingredients;
 	});
 
-    $scope.ingredients ={};
+    $scope.ingredient ={};
+    $scope.measureName = {};
     $scope.submit = function() {
         IngredientService.addNewIngredient($scope.ingredient, $scope.measureName).then(function () {
             IngredientService.getIngredients().then(function(ingredients){
