@@ -28,7 +28,7 @@ angular.module('topFoodRecipesApp')
                 $scope.ingredients = ingredients;
             });
             console.log("completed");
-        }) ;
+        });
     }
 });
 
