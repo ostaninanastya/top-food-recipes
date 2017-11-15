@@ -19,7 +19,6 @@ angular.module('topFoodRecipesApp')
 	IngredientService.getIngredients().then(function(ingredients){
 		$scope.ingredients = ingredients;
 	});
-
     $scope.ingredient ={};
     $scope.measureName = {};
     $scope.submit = function() {
@@ -30,5 +29,12 @@ angular.module('topFoodRecipesApp')
             console.log("completed");
         });
     }
-});
+})
+    .controller('MeasureController', function($scope, $http, MeasureService) {
+        $scope.measures = [];
+
+        MeasureService.getMeasures().then(function(measures){
+            $scope.measures = measures;
+        });
+    });
 

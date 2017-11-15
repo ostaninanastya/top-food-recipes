@@ -32,4 +32,13 @@ angular.module('topFoodRecipesApp')
             });
         }
     })
+    .service('MeasureService', function($http) {
+        this.getMeasures = function() {
+            return $http.get('http://188.166.30.145:8080/top_food_recipes-0.0.1-SNAPSHOT/api/measure').then(function(response){
+                return response.data;
+            }).catch(function(err) {
+                return [];
+            });
+        }
+    })
 ;
