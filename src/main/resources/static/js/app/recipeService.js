@@ -19,7 +19,7 @@ angular.module('topFoodRecipesApp')
 })
     .service('IngredientService', function($http) {
         this.getIngredients = function() {
-            return $http.get(SERVER_URL + 'api/ingredient').then(function(response){
+            return $http.get('http://188.166.30.145:8080/top_food_recipes-0.0.1-SNAPSHOT/api/ingredient').then(function(response){
                 return response.data;
             }).catch(function(err) {
                 return [];
@@ -27,7 +27,7 @@ angular.module('topFoodRecipesApp')
         }
         this.addNewIngredient = function(ingredient, measure) {
             console.log("posting data....");
-            return $http.post(SERVER_URL + 'api/ingredient', JSON.stringify(ingredient, measure)).success(function(){
+            return $http.post('http://188.166.30.145:8080/top_food_recipes-0.0.1-SNAPSHOT/api/ingredient', JSON.stringify(ingredient, measure)).success(function(){
                 console.log("success");
             });
         }
