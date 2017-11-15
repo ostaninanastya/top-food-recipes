@@ -25,9 +25,9 @@ angular.module('topFoodRecipesApp')
                 return [];
             });
         }
-        this.addNewIngredient = function(ingredient) {
+        this.addNewIngredient = function(ingredient, measure) {
             console.log("posting data....");
-            return $http.post(SERVER_URL+'api/ingredient', JSON.stringify(ingredient)).success(function(){
+            return $http.post(SERVER_URL+'api/ingredient', JSON.stringify(ingredient, measure)).success(function(){
                 console.log("success");
             });
         }
