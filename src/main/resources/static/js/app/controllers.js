@@ -12,14 +12,14 @@ angular.module('topFoodRecipesApp')
             $scope.cuisines = cuisines;
         });
 
-
         $scope.cuisine ={};
-
-
-        $scope.submit = function(cuisine, $http, CuisineService) {
-          CuisineService.addNewCuisine().then(function () {
-			  console.log("complited");
-          }) ;
-        };
+        $scope.submit = function() {
+            CuisineService.addNewCuisine($scope.cuisine).then(function () {
+                CuisineService.getCuisines().then(function(cuisines){
+                    $scope.cuisines = cuisines;
+                });
+                console.log("completed");
+            }) ;
+        }
     });
 

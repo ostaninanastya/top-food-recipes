@@ -1,31 +1,27 @@
 angular.module('topFoodRecipesApp')
-    .service('RecipeService', function($http) {
+    .service('RecipeService', function($http,SERVER_URL) {
 
         this.getRecipes = function() {
-
-            //return $http.get('http://localhost:8080/top_food_recipes-0.0.1-SNAPSHOT/api/recipe').then(function(response){
-
-            return $http.get('http://localhost:8080/top_food_recipes-0.0.1-SNAPSHOT/api/recipe').then(function(response){
+            return $http.get(SERVER_URL+'api/recipe').then(function(response){
                 return response.data;
             }).catch(function(err) {
                 return [{"name" : "рецепт пиццы", "recipe" : "dhduhdishdisj"}];
             });
         }
     })
-    .service('CuisineService', function($http) {
+    .service('CuisineService', function($http, SERVER_URL) {
         this.getCuisines = function() {
-            return $http.get('http://localhost:8080/top_food_recipes-0.0.1-SNAPSHOT/api/cuisine').then(function(response){
+            return $http.get(SERVER_URL+'api/cuisine').then(function(response){
                 return response.data;
             }).catch(function(err) {
                 return [];
             });
         }
-        this.addNewCuisine = function(cuisine, $http) {
+        this.addNewCuisine = function(cuisine) {
             console.log("posting data....");
-            $http.post('http://localhost:8080/top_food_recipes-0.0.1-SNAPSHOT/api/cuisine', JSON.stringify(cuisine)).success(function(){
-                /*success callback*/
-                console.log("Success!");
+            return $http.post(SERVER_URL+'api/cuisine', JSON.stringify(cuisine)).success(function(){
+                console.log("success");
             });
-        };
+        }
     })
 ;
