@@ -32,7 +32,7 @@ angular.module('topFoodRecipesApp')
 })
     .controller('MeasureController', function($scope, $http, MeasureService) {
         $scope.measures = [];
-
+		$scope.name = {};
         MeasureService.getMeasures().then(function(measures){
             $scope.measures = measures;
         });
