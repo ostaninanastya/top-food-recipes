@@ -9,9 +9,6 @@ const myApp = angular.module('topFoodRecipesApp', ["ngRoute"])
     	}).when('/ingredients', {
     		templateUrl:'views/ingredients.html',
 			controller:'IngredientController'
-		}).when('/ingredients/add', {
-			templateUrl:'views/add_ingredient.html',
-			controller:'IngredientController'
-		})
-		;
-});
+		});
+})
+    .constant('SERVER_URL', 'http://localhost:8080/top_food_recipes-0.0.1-SNAPSHOT/');

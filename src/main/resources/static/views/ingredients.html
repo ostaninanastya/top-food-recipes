@@ -17,8 +17,19 @@
             </tr>
             </tbody>
         </table>
-        <form action="#/ingredients/add">
-            <button type="submit">Add ingredient</button>
+    </div>
+    <div>
+        <form  ng-submit="submit()">
+            <div>
+                <b>Create new ingredient</b>
+                <div>
+                    Ingredient name :  <input type="text" ng-model="ingredient.name" name="ingredient" >
+                    Measure name :  <input type="text" ng-model="ingredient.measure.name" name="measure" >
+                </div>
+            </div>
+            <div>
+                <input type="submit" id="submit" value="Submit" />
+            </div>
         </form>
     </div>
 

@@ -18,6 +18,16 @@ angular.module('topFoodRecipesApp')
 
 	IngredientService.getIngredients().then(function(ingredients){
 		$scope.ingredients = ingredients;
-	})
+	});
+
+    $scope.ingredients ={};
+    $scope.submit = function() {
+        IngredientService.addNewIngredient($scope.ingredient).then(function () {
+            IngredientService.getIngredients().then(function(ingredients){
+                $scope.ingredients = ingredients;
+            });
+            console.log("completed");
+        }) ;
+    }
 });
 
