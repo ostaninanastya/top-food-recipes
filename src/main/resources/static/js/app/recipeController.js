@@ -13,8 +13,12 @@ angular.module('topFoodRecipesApp')
 		$scope.cuisines = cuisines;
 	});
 })
-.controller('IngredientController', function($scope, $http, IngredientService) {
+.controller('IngredientController', function($scope, $http, IngredientService, MeasureService) {
 	$scope.ingredients = [];
+    $scope.measures = [];
+    MeasureService.getMeasures().then(function(measures){
+        $scope.measures = measures;
+    });
 
 	IngredientService.getIngredients().then(function(ingredients){
 		$scope.ingredients = ingredients;
