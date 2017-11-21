@@ -25,7 +25,10 @@
                 <b>Create new ingredient</b>
                 <div>
                     Ingredient name :  <input type="text" ng-model="ingredient.name" name="ingredient" >
-                    Measure name :  <select ng-model="ingredient.measure.name" name = "measure" ng-options="measure for measure in measures">
+                    Measure name :  <select ng-model="measure.id" name = "measure">
+                    <option ng-for="measure in measures" value="{{::measure.id}}">
+                        {{::measure.name}}
+                    </option>
                 </select>
                 </div>
             </div>
