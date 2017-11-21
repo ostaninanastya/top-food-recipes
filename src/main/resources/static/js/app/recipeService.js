@@ -25,10 +25,10 @@ angular.module('topFoodRecipesApp')
                 return [];
             });
         }
-        this.addNewIngredient = function(ingredient, measure) {
+        this.addNewIngredient = function(ingredient) {
             //ingredient.measure = measure;
             console.log("posting data....");
-            return $http.post('http://188.166.30.145:8080/top_food_recipes-0.0.1-SNAPSHOT/api/ingredient', JSON.stringify({ingredient:ingredient,measure: measure})).success(function(){
+            return $http.post('http://188.166.30.145:8080/top_food_recipes-0.0.1-SNAPSHOT/api/ingredient', JSON.stringify(ingredient)).success(function(){
                 console.log("success");
             });
         }
