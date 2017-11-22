@@ -1,13 +1,19 @@
-<form name="form" ng-submit="register()" role="form">
-    <label for="username">Username</label>
-    <input type="text" name="username" id="username" class="form-control" ng-model="user.name" size="20" required />
-    <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block">Username is required</span>
-    <br/>
-    <label for="password">Password</label>
-    <input type="password" name="password" id="password" class="form-control" ng-model="user.password" size="20" required />
-    <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Password is required</span>
-    <br/>
-            
-    <a href="#/login" class="btn btn-link">Login</a>
-    <button type="submit" ng-disabled="form.$invalid" class="btn btn-primary">Register</button>
-</form>
+<div>
+    <div class="login">
+        <form name="form" ng-submit="register()" role="form">
+            <label for="username">Username</label>
+            <input type="text" name="username" id="username" class="form-control" ng-model="user.name" size="20"
+                   required/>
+            <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block">Username is required</span>
+            <br/>
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password" class="form-control" ng-model="user.password" size="20"
+                   required/>
+            <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Password is required</span>
+            <br/>
+
+            <a href="#/login" class="btn btn-link">Login</a>
+            <button type="submit" ng-disabled="form.$invalid" class="btn btn-primary">Register</button>
+        </form>
+    </div>
+</div>

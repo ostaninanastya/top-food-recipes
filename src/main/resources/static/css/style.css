@@ -20,7 +20,13 @@ div{
     overflow: hidden;
     margin: 0px;
 }
+.blocknav
+{
+    display: inline-block;
+    float: left;
+    margin: 0px;
 
+}
 /* Style the links inside the navigation bar */
 .topnav a {
     float: left;
@@ -30,6 +36,7 @@ div{
     padding: 14px 16px;
     text-decoration: none;
     font-size: 17px;
+    width: 160px;
 
 }
 
@@ -43,4 +50,12 @@ div{
 .topnav a.active {
     background-color: #4CAF50;
     color: white;
+}
+
+.login{
+    width: 500px;
+    position: fixed;
+    left: 50%;
+    margin-left: -250px;
+    margin-top: 30px;
 }

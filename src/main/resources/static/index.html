@@ -7,8 +7,10 @@
 </head>
 <body ng-controller="MainController">
 
-    <div class="topnav" id="myTopnav" ng-repeat="item in menu">
-        <a class="topnav" ng-href="{{item.url}}">{{item.title}}</a> 
+    <div class="topnav" id="myTopnav">
+         <div ng-repeat="item in menu" class = "blocknav">
+            <a class="topnav" ng-href="{{item.url}}">{{item.title}}</a>
+         </div>
     </div>
 
 	<div ng-view></div>
