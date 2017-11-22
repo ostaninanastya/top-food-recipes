@@ -27,22 +27,71 @@ controllerModule.controller('CuisineController', function($scope, $http, Cuisine
     }
 });
 
-controllerModule.controller('LoginController', function($scope, $http, LoginService) {
+controllerModule.controller('MainController', function($scope, $rootScope, $location, LoginService) {
+    $rootScope.menu = LoginService.getMenu();
 
-    $scope.login = function() {
-        LoginService.loginUser($scope.user, function(response) {
+    $rootScope.$on('registration_event', function(event, data) {
+        console.log('XXXXX: received data: ' + data);
+        LoginService.loginUser(data, function(response) {
             if (response.success) {
-                console.log('Successfully logged in under ' + $scope.user.name);
-                $location.path('/');
+                console.log('Successfully logged in under ' + $rootScope.user.name);
+                $rootScope.$broadcast('reload_page_event');
             } else {
                 console.log('Login under ' + $scope.user.name + ' failed');
             }
         });
+    });
 
-/*
-        LoginService.loginUser($scope.user).then(function () {
-            console.log("Login successful.");
-        }) ;
-*/
+    $rootScope.$on('reload_page_event', function(event, data) {
+        $rootScope.menu = LoginService.getMenu();
+        $location.path('/');
+    });
+
+});
+
+
+controllerModule.controller('LoginController', function($scope, $rootScope, $location, LoginService) {
+
+    $scope.login = function() {
+        LoginService.loginUser($scope.user, function(response) {
+            if (response.success) {
+                console.log('Successfully logged in under ' + $rootScope.user.name);
+                $rootScope.$broadcast('reload_page_event');
+            } else {
+                console.log('Login under ' + $scope.user.name + ' failed');
+            }
+        });
+    }
+
+    $scope.$on('registration_event', function(event, data) {
+       console.log('YYYYYY');
+    });
+
+});
+
+controllerModule.controller('RegisterController', function($scope, $rootScope, $location, LoginService) {
+
+    $scope.register = function() {
+        console.log('Register user, name=' + $scope.user.name + ', password=' + $scope.user.password);
+
+        LoginService.registerUser($scope.user, function(response) {
+            if (response.success) {
+                console.log('Success');
+                $rootScope.$broadcast('registration_event', $scope.user);
+            } else {
+                console.log('Fail');
+            }
+        }); 
+
     }
 });
+
+controllerModule.controller('LogoutController', function($scope, $rootScope, $location, LoginService) {
+
+    $scope.$on('$routeChangeSuccess', function () {
+        $rootScope.user = undefined;
+        $rootScope.$broadcast('reload_page_event');
+    });
+
+});
+

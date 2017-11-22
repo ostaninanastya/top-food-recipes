@@ -5,14 +5,10 @@
     <link href="css/bootstrap.css" rel="stylesheet"/>
     <link href="css/style.css" rel="stylesheet"/>
 </head>
-<body>
+<body ng-controller="MainController">
 
-    <div class="topnav" id="myTopnav">
-        <a href="#/recipes">Recipes</a>
-        <a href="#/cuisines">Cuisines</a>
-        <a href="#/ingredients">Ingredients</a>
-        <a href="#about">About</a>
-        <a href="#login">Login</a>
+    <div class="topnav" id="myTopnav" ng-repeat="item in menu">
+        <a class="topnav" ng-href="{{item.url}}">{{item.title}}</a> 
     </div>
 
 	<div ng-view></div>
