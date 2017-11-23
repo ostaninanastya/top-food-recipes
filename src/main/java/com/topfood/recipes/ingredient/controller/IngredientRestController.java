@@ -36,7 +36,7 @@ public class IngredientRestController {
 
     @ApiOperation(value = "Create a ingredient", produces = APPLICATION_JSON_UTF8_VALUE)
     @RequestMapping(method = POST)
-    public ResponseEntity<Ingredient> createIngredient(@RequestBody Ingredient ingredient) {
+    public ResponseEntity<Ingredient> createIngredient(@RequestBody Ingredient  ingredient) {
         ingredientService.add(ingredient);
         return new ResponseEntity<Ingredient>(ingredient, HttpStatus.OK);
     }
