@@ -1,6 +1,8 @@
 package com.topfood.recipes.ingredientRecipe.controller;
 
 
+import com.topfood.recipes.common.Enums.ErrorCodeMap;
+import com.topfood.recipes.common.Enums.ErrorCodes;
 import com.topfood.recipes.ingredient.model.Ingredient;
 import com.topfood.recipes.ingredientRecipe.model.IngredientRecipe;
 import com.topfood.recipes.ingredientRecipe.service.IngredientRecipeService;
@@ -39,9 +41,13 @@ public class IngredientRecipeRestController {
 
     @ApiOperation(value = "Create ingredients of recipes", produces = APPLICATION_JSON_UTF8_VALUE)
     @RequestMapping(method = POST)
-    public ResponseEntity<IngredientRecipe> createIngredientRecipe(@RequestBody IngredientRecipe ingredientRecipe) {
-        ingredientRecipeService.add(ingredientRecipe);
-        return new ResponseEntity<IngredientRecipe>(ingredientRecipe, HttpStatus.OK);
+    public ResponseEntity<? extends Object> createIngredientRecipe(@RequestBody IngredientRecipe ingredientRecipe) {
+        ErrorCodes code = ingredientRecipeService.add(ingredientRecipe);
+
+        if (!code.equals(ErrorCodes.OK))
+            return new ResponseEntity<String>(ErrorCodeMap.errors.get(code), HttpStatus.BAD_REQUEST);
+        else
+            return new ResponseEntity<IngredientRecipe>(ingredientRecipe, HttpStatus.OK);
     }
 
     @ApiOperation(value = "Update ingredients of recipes", produces = APPLICATION_JSON_UTF8_VALUE)

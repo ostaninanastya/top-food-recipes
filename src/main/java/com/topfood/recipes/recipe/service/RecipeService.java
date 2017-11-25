@@ -1,5 +1,6 @@
 package com.topfood.recipes.recipe.service;
 
+import com.topfood.recipes.common.Enums.ErrorCodes;
 import com.topfood.recipes.cuisine.repository.CuisineRepository;
 import com.topfood.recipes.recipe.model.Recipe;
 
@@ -10,6 +11,8 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.util.List;
+
+import static com.topfood.recipes.common.Enums.ErrorCodes.OK;
 
 @Service
 public class RecipeService {
@@ -31,8 +34,9 @@ public class RecipeService {
         return recipeRepository.findOne(Long.valueOf(recipe_id));
     }
 
-    public void add(Recipe recipe){
+    public ErrorCodes add(Recipe recipe){
         recipeRepository.save(recipe);
+        return (OK);
     }
     public void delete(String recipe_id){
         recipeRepository.delete(Long.valueOf(recipe_id));

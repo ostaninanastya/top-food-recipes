@@ -1,5 +1,7 @@
 package com.topfood.recipes.measure.controller;
 
+import com.topfood.recipes.common.Enums.ErrorCodeMap;
+import com.topfood.recipes.common.Enums.ErrorCodes;
 import com.topfood.recipes.measure.model.Measure;
 import com.topfood.recipes.measure.service.MeasureService;
 import io.swagger.annotations.ApiOperation;
@@ -36,9 +38,13 @@ public class MeasureRestController {
 
     @ApiOperation(value = "Create a measure", produces = APPLICATION_JSON_UTF8_VALUE)
     @RequestMapping(method = POST)
-    public ResponseEntity<Measure> createMeasure(@RequestBody Measure measure) {
-        measureService.add(measure);
-        return new ResponseEntity<Measure>(measure, HttpStatus.OK);
+    public ResponseEntity<? extends Object> createMeasure(@RequestBody Measure measure) {
+        ErrorCodes code = measureService.add(measure);
+
+        if (!code.equals(ErrorCodes.OK))
+            return new ResponseEntity<String>(ErrorCodeMap.errors.get(code), HttpStatus.BAD_REQUEST);
+        else
+            return new ResponseEntity<Measure>(measure, HttpStatus.OK);
     }
 
     @ApiOperation(value = "Update a measure", produces = APPLICATION_JSON_UTF8_VALUE)

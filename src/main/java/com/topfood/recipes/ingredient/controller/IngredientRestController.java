@@ -1,5 +1,7 @@
 package com.topfood.recipes.ingredient.controller;
 
+import com.topfood.recipes.common.Enums.ErrorCodeMap;
+import com.topfood.recipes.common.Enums.ErrorCodes;
 import com.topfood.recipes.ingredient.model.Ingredient;
 import com.topfood.recipes.ingredient.service.IngredientService;
 import io.swagger.annotations.ApiOperation;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static com.topfood.recipes.common.Enums.ErrorCodes.OK;
 import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE;
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
@@ -36,9 +39,13 @@ public class IngredientRestController {
 
     @ApiOperation(value = "Create a ingredient", produces = APPLICATION_JSON_UTF8_VALUE)
     @RequestMapping(method = POST)
-    public ResponseEntity<Ingredient> createIngredient(@RequestBody Ingredient  ingredient) {
-        ingredientService.add(ingredient);
-        return new ResponseEntity<Ingredient>(ingredient, HttpStatus.OK);
+    public ResponseEntity<? extends Object> createIngredient(@RequestBody Ingredient ingredient) {
+        ErrorCodes code = ingredientService.add(ingredient);
+
+        if (!code.equals(OK))
+            return new ResponseEntity<String>(ErrorCodeMap.errors.get(code), HttpStatus.BAD_REQUEST);
+        else
+            return new ResponseEntity<Ingredient>(ingredient, HttpStatus.OK);
     }
 
     @ApiOperation(value = "Update a ingredient", produces = APPLICATION_JSON_UTF8_VALUE)

@@ -1,5 +1,7 @@
 package com.topfood.recipes.ingredientRecipe.service;
 
+import com.topfood.recipes.common.Enums.ErrorCodes;
+import com.topfood.recipes.ingredient.model.Ingredient;
 import com.topfood.recipes.ingredient.repository.IngredientRepository;
 import com.topfood.recipes.ingredientRecipe.model.IngredientRecipe;
 import com.topfood.recipes.ingredientRecipe.repository.IngredientRecipeRepository;
@@ -9,6 +11,8 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.util.List;
+
+import static com.topfood.recipes.common.Enums.ErrorCodes.OK;
 
 @Service
 public class IngredientRecipeService {
@@ -31,8 +35,9 @@ public class IngredientRecipeService {
         return ingredientRecipeRepository.findOne(Long.valueOf(id));
     }
 
-    public void add(IngredientRecipe ingredientRecipe){
+    public ErrorCodes add(IngredientRecipe ingredientRecipe){
         ingredientRecipeRepository.save(ingredientRecipe);
+        return (OK);
     }
     public void delete(String id){
         ingredientRecipeRepository.delete(Long.valueOf(id));

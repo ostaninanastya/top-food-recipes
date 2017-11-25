@@ -1,5 +1,7 @@
 package com.topfood.recipes.user.controller;
 
+import com.topfood.recipes.common.Enums.ErrorCodeMap;
+import com.topfood.recipes.common.Enums.ErrorCodes;
 import com.topfood.recipes.user.model.User;
 import com.topfood.recipes.user.service.UserService;
 import io.swagger.annotations.ApiOperation;
@@ -37,9 +39,13 @@ public class UserRestController {
 
     @ApiOperation(value = "Create a user", produces = APPLICATION_JSON_UTF8_VALUE)
     @RequestMapping(method = POST)
-    public ResponseEntity<User> createUser(@RequestBody User user) {
-    	userService.add(user);
-        return new ResponseEntity<User>(user, HttpStatus.OK);
+    public ResponseEntity<? extends Object> createUser(@RequestBody User user) {
+        ErrorCodes code = userService.add(user);
+
+        if (!code.equals(ErrorCodes.OK))
+            return new ResponseEntity<String>(ErrorCodeMap.errors.get(code), HttpStatus.BAD_REQUEST);
+        else
+            return new ResponseEntity<User>(user, HttpStatus.OK);
     }
 
     @ApiOperation(value = "Update a user", produces = APPLICATION_JSON_UTF8_VALUE)
