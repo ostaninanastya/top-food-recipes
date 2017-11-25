@@ -15,6 +15,9 @@ const myApp = angular.module('topFoodRecipesApp', ["ngRoute", "topFoodRecipeAppC
     	}).when('/register', {
     		templateUrl:'views/register.html',
     		controller:'RegisterController'
+    	}).when('/ingredients', {
+            templateUrl:'views/ingredients.html',
+            controller:'IngredientController'
     	});
 
 })

@@ -29,6 +29,32 @@ servicesModule.service('CuisineService', function($http, SERVER_URL) {
     }
 });
 
+servicesModule.service('IngredientService', function($http, SERVER_URL) {
+    this.getIngredients = function() {
+        return $http.get(SERVER_URL+'api/ingredient').then(function(response){
+            return response.data;
+        }).catch(function(err) {
+            return [];
+        });
+    }
+    this.addNewIngredient = function(ingredient) {
+        //ingredient.measure = measure;
+        console.log("posting data....");
+        return $http.post(SERVER_URL+'api/ingredient', JSON.stringify(ingredient)).success(function(){
+            console.log("success");
+        });
+    }
+});
+servicesModule.service('MeasureService', function($http, SERVER_URL) {
+    this.getMeasures = function () {
+        return $http.get(SERVER_URL+'api/measure').then(function (response) {
+            return response.data;
+        }).catch(function (err) {
+            return [];
+        });
+    }
+});
+
 servicesModule.service('LoginService', function($http, $rootScope, SERVER_URL) {
     var allUsers = [];
 

@@ -86,6 +86,27 @@ controllerModule.controller('RegisterController', function($scope, $rootScope, $
     }
 });
 
+controllerModule.controller('IngredientController', function($scope, $http, IngredientService, MeasureService) {
+    $scope.ingredients = [];
+    $scope.measures = [];
+    MeasureService.getMeasures().then(function(measures){
+        $scope.measures = measures;
+    });
+
+    IngredientService.getIngredients().then(function(ingredients){
+        $scope.ingredients = ingredients;
+    });
+    $scope.ingredient ={};
+    $scope.submit = function() {
+        IngredientService.addNewIngredient($scope.ingredient).then(function () {
+            IngredientService.getIngredients().then(function(ingredients){
+                $scope.ingredients = ingredients;
+            });
+            console.log("completed");
+        });
+    }
+});
+
 controllerModule.controller('LogoutController', function($scope, $rootScope, $location, LoginService) {
 
     $scope.$on('$routeChangeSuccess', function () {
