@@ -62,13 +62,19 @@ public class Service {
         ingredientRepository.save(new Ingredient("молоко", measureRepository.findByName("стакан").get(0)));
         ingredientRepository.save(new Ingredient("сахар", measureRepository.findByName("ч. ложка").get(0)));
 
-        recipeRepository.save(new Recipe(strPizzaRecipe, recipePizza, adminUser, cuisineRepository.findByName("Итальянская").get(0)));
-        //recipeRepository.save(new Recipe("Рецепт пасты", adminUser, cuisineRepository.findByName("Итальянская").get(0)));
-        Recipe pizzaRecipe = recipeRepository.findByName(strPizzaRecipe).get(0);
+        ingredientRepository.save(new Ingredient("соль", measureRepository.findByName("г.").get(0)));
 
-        ingredientRecipeRepository.save(new IngredientRecipe(ingredientRepository.findByName("молоко").get(0), pizzaRecipe, 2));
-        ingredientRecipeRepository.save(new IngredientRecipe(ingredientRepository.findByName("сахар").get(0), pizzaRecipe, 1));
-        ingredientRecipeRepository.save(new IngredientRecipe(ingredientRepository.findByName("томат").get(0), pizzaRecipe , 1));
+
+
+        //recipeRepository.save(new Recipe(strPizzaRecipe, recipePizza, adminUser, cuisineRepository.findByName("Итальянская").get(0)));
+
+        //recipeRepository.save(new Recipe("Рецепт пасты", adminUser, cuisineRepository.findByName("Итальянская").get(0)));
+
+        //Recipe pizzaRecipe = recipeRepository.findByName(strPizzaRecipe).get(0);
+
+        //ingredientRecipeRepository.save(new IngredientRecipe(ingredientRepository.findByName("молоко").get(0), pizzaRecipe, 2));
+        //ingredientRecipeRepository.save(new IngredientRecipe(ingredientRepository.findByName("сахар").get(0), pizzaRecipe, 1));
+        //ingredientRecipeRepository.save(new IngredientRecipe(ingredientRepository.findByName("томат").get(0), pizzaRecipe , 1));
 
     }
 }

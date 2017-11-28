@@ -1,6 +1,7 @@
 package com.topfood.recipes.recipe.model;
 
 import com.topfood.recipes.cuisine.model.Cuisine;
+import com.topfood.recipes.like.model.Like;
 import com.topfood.recipes.user.model.User;
 
 import javax.persistence.*;
@@ -19,14 +20,6 @@ public class Recipe {
     @Column(name="recipe")
     private String recipe;
 
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
     @Column(name ="image")
     private String image;
 
@@ -42,18 +35,19 @@ public class Recipe {
 
     }
 
-    public Recipe(String name, String recipe, User user, Cuisine cuisine) {
+    public Recipe(String name, String recipe, String image, User user, Cuisine cuisine) {
         this.name = name;
         this.recipe = recipe;
+        this.image = image;
         this.user = user;
         this.cuisine = cuisine;
     }
 
-    public Recipe(String name, String recipe, User user, Cuisine cuisine, String image) {
-        this.name = name;
-        this.recipe = recipe;
-        this.user = user;
-        this.cuisine = cuisine;
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
         this.image = image;
     }
 
