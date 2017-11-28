@@ -36,6 +36,8 @@ public class Service {
         userRepository.save(new User("admin", "admin"));
         User adminUser = userRepository.findByName("admin").get(0);
         String strPizzaRecipe = "Рецепт пиццы";
+        String recipePizza = "Хорошее тесто для пиццы можно приготовить, смешав четыре стакана муки с двумя упаковками сухих дрожжей, четвертью стакана оливкового масла, двумя столовыми ложками сахара, двумя чайными ложки крупной соли и добавив примерно полтора стакана теплой воды.";
+
         cuisineRepository.save(new Cuisine("Американская"));
         cuisineRepository.save(new Cuisine("Русская"));
         cuisineRepository.save(new Cuisine("Китайская"));
@@ -60,7 +62,7 @@ public class Service {
         ingredientRepository.save(new Ingredient("молоко", measureRepository.findByName("стакан").get(0)));
         ingredientRepository.save(new Ingredient("сахар", measureRepository.findByName("ч. ложка").get(0)));
 
-        recipeRepository.save(new Recipe(strPizzaRecipe, "YUIODFGHJKSDFGYUIDFGHJCVBNM<",adminUser, cuisineRepository.findByName("Итальянская").get(0)));
+        recipeRepository.save(new Recipe(strPizzaRecipe, recipePizza, adminUser, cuisineRepository.findByName("Итальянская").get(0)));
         //recipeRepository.save(new Recipe("Рецепт пасты", adminUser, cuisineRepository.findByName("Итальянская").get(0)));
         Recipe pizzaRecipe = recipeRepository.findByName(strPizzaRecipe).get(0);
 

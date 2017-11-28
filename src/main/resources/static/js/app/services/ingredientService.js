@@ -1,4 +1,3 @@
-
 servicesModule.service('IngredientService', function($http, SERVER_URL) {
     this.getIngredients = function() {
         return $http.get(SERVER_URL+'api/ingredient').then(function(response){

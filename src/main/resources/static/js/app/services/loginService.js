@@ -31,23 +31,28 @@ servicesModule.service('LoginService', function($http, $rootScope, SERVER_URL) {
     this.getMenu = function() {
         var menu = [
             {
-                title: 'Recipes',
+                title: 'Top Food Recipes',
                 url: '#/recipes',
                 f: 'a()'
             },
             {
-                title: 'Cuisines',
+                title: 'RECIPES',
+                url: '#/recipes',
+                f: 'a()'
+            },
+            {
+                title: 'CUISINES',
                 url: '#/cuisines',
                 f: 'a()'
             },
             {
-                title: 'Ingredients',
-                url: '#/ingredients',
+                title: 'POPULAR',
+                url: '#/popular',
                 f: 'a()'
             },
             {
-                title: 'About',
-                url: '#/about',
+                title: 'ADVANCED SEARCH',
+                url: '#/recipes',
                 f: 'a()'
             }
         ];

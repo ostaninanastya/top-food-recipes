@@ -1,9 +1,7 @@
 <div class="header">
-    <label>SEARCH  <input ng-model="searchRecipe"></label>
+    <h2>The most popular recipes</h2>
 </div>
-<div>
-    <a href="#/createRecipe" class="btn btn-link">Create new recipe</a>
-</div>
+
 <div>
     <div>
         <table class="table">
@@ -16,7 +14,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="recipe in recipes | filter:searchRecipe">
+            <tr ng-repeat="recipe in recipes">
                 <td>{{ recipe.name }}</td>
                 <td>{{ recipe.recipe }}</td>
             </tr>

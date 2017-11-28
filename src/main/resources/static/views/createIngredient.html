@@ -1,0 +1,37 @@
+<div class="header">
+    <div>
+        <form  ng-submit="submit()">
+            <div>
+                <b>Create new ingredient</b>
+                <div>
+                    Ingredient name :  <input type="text" ng-model="ingredient.name" name="ingredient" >
+                    Measure name :  <select ng-model="ingredient.measure" name = "measure" ng-options="m.name for m in measures">
+                </select>
+                </div>
+            </div>
+            <div>
+                <input type="submit" id="submit" value="Submit" />
+            </div>
+        </form>
+    </div>
+    <div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Measure</th>
+                <th width="100"></th>
+                <th width="100"></th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="ingredient in ingredients">
+                <td>{{ ingredient.name }}</td>
+                <td>{{ ingredient.measure.name}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>

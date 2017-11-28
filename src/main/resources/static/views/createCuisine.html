@@ -1,0 +1,28 @@
+<div class="header">
+    <form  ng-submit="submit()">
+        <div>
+            <b>Create new cuisine</b>
+            <div>
+                Cuisine name :  <input type="text" ng-model="cuisine.name" name="cuisine" >
+            </div>
+        </div>
+        <div>
+            <input type="submit" id="submit" value="Submit" />
+        </div>
+    </form>
+</div>
+<div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th width="100"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="cuisine in cuisines | filter:searchCuisine">
+            <td>{{ cuisine.name }}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>

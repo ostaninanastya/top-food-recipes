@@ -1,4 +1,16 @@
 <div> <!-- ng-app="topFoodRecipesApp" ng-controller="RecipeController"> -->
+    <div class="header">
+        <form name="myForm">
+
+            <select name="ngvalueselect" ng-model="searchCuisine.name">
+                <option value="">---Please select---</option>
+                <option ng-repeat="option in cuisines" ng-value="option.name">{{option.name}}</option>
+            </select>
+        </form>
+    </div>
+
+
+
     <div>
         <table class="table">
             <thead>
@@ -8,25 +20,12 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="cuisine in cuisines">
+            <tr ng-repeat="cuisine in cuisines | filter:searchCuisine">
                 <td>{{ cuisine.name }}</td>
             </tr>
             </tbody>
         </table>
     </div>
 
-    <div>
-    <form  ng-submit="submit()">
-        <div>
-            <b>Create new cuisine</b>
-            <div>
-                Cuisine name :  <input type="text" ng-model="cuisine.name" name="cuisine" >
-            </div>
-        </div>
-        <div>
-            <input type="submit" id="submit" value="Submit" />
-        </div>
-    </form>
-    </div>
 
 </div>

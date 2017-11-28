@@ -5,6 +5,7 @@ body {
 }
 div{
     margin: 10px;
+
 }
 .table {
     margin: 0 auto;
@@ -25,7 +26,17 @@ div{
     display: inline-block;
     float: left;
     margin: 0px;
+}
+.blocknavlogin
+{
+    display: inline-block;
+    float: right;
+    margin: 0px;
 
+}
+#logo{
+    text-align: left;
+    word-wrap: break-word;
 }
 /* Style the links inside the navigation bar */
 .topnav a {
@@ -36,7 +47,9 @@ div{
     padding: 14px 16px;
     text-decoration: none;
     font-size: 17px;
+    margin: 0px;
     width: 160px;
+    height: 80px;
 
 }
 
@@ -58,4 +71,8 @@ div{
     left: 50%;
     margin-left: -250px;
     margin-top: 30px;
+}
+.header{
+    height: 150px;
+    padding-top: 50px;
 }

@@ -1,4 +1,3 @@
-
 controllerModule.controller('LogoutController', function($scope, $rootScope, $location, LoginService) {
 
     $scope.$on('$routeChangeSuccess', function () {

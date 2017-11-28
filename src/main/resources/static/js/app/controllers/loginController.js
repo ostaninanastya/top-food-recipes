@@ -1,4 +1,3 @@
-
 controllerModule.controller('LoginController', function($scope, $rootScope, $location, LoginService) {
 
     $scope.login = function() {

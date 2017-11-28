@@ -15,12 +15,20 @@ const myApp = angular.module('topFoodRecipesApp', ["ngRoute", "topFoodRecipeAppC
     	}).when('/register', {
     		templateUrl:'views/register.html',
     		controller:'RegisterController'
-    	}).when('/ingredients', {
-            templateUrl:'views/ingredients.html',
+    	}).when('/popular', {
+            templateUrl:'views/popular.html',
+            controller:'PopularController'
+        }).when('/createRecipe', {
+            templateUrl:'views/createRecipe.html',
+            controller:'RecipeController'
+        }).when('/createIngredient', {
+            templateUrl:'views/createIngredient.html',
             controller:'IngredientController'
-    	});
+        }).when('/createCuisine', {
+            templateUrl:'views/createCuisine.html',
+            controller:'CuisineController'
+        });
 
 })
-        .constant('SERVER_URL', 'http://localhost:8020/')
-	//.constant('SERVER_URL', 'http://188.166.30.145:8080/top_food_recipes-0.0.1-SNAPSHOT/')
+	.constant('SERVER_URL', 'http://188.166.30.145:8080/top_food_recipes-0.0.1-SNAPSHOT/')
 ;
