@@ -1,19 +1,16 @@
 package com.topfood.recipes.like.service;
 
-import com.topfood.recipes.common.Enums.ErrorCodes;
-import com.topfood.recipes.cuisine.model.Cuisine;
-import com.topfood.recipes.cuisine.repository.CuisineRepository;
+import com.topfood.recipes.common.enums.ErrorCodes;
 import com.topfood.recipes.like.model.Like;
 import com.topfood.recipes.like.repository.LikeRepository;
 import com.topfood.recipes.recipe.model.Recipe;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Calendar;
 import java.util.List;
 
-import static com.topfood.recipes.common.Enums.ErrorCodes.OK;
-import static com.topfood.recipes.common.Enums.ErrorCodes.TOO_OFTEN_LIKES;
+import static com.topfood.recipes.common.enums.ErrorCodes.OK;
+import static com.topfood.recipes.common.enums.ErrorCodes.TOO_OFTEN_LIKES;
 
 @Service
 public class LikeService {

@@ -1,7 +1,7 @@
 package com.topfood.recipes.recipe.controller;
 
-import com.topfood.recipes.common.Enums.ErrorCodeMap;
-import com.topfood.recipes.common.Enums.ErrorCodes;
+import com.topfood.recipes.common.enums.ErrorCodeMap;
+import com.topfood.recipes.common.enums.ErrorCodes;
 import com.topfood.recipes.cuisine.model.Cuisine;
 import com.topfood.recipes.cuisine.service.CuisineService;
 import com.topfood.recipes.recipe.model.Recipe;
@@ -15,8 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;

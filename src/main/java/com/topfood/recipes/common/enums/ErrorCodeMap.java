@@ -1,10 +1,10 @@
-package com.topfood.recipes.common.Enums;
+package com.topfood.recipes.common.enums;
 
 import java.util.Map;
 
-import static com.topfood.recipes.common.Enums.ErrorCodes.OK;
-import static com.topfood.recipes.common.Enums.ErrorCodes.REG_USER_ALREADY_EXISTS;
-import static com.topfood.recipes.common.Enums.ErrorCodes.TOO_OFTEN_LIKES;
+import static com.topfood.recipes.common.enums.ErrorCodes.OK;
+import static com.topfood.recipes.common.enums.ErrorCodes.REG_USER_ALREADY_EXISTS;
+import static com.topfood.recipes.common.enums.ErrorCodes.TOO_OFTEN_LIKES;
 
 public class ErrorCodeMap {
     public static Map<ErrorCodes, String> errors;

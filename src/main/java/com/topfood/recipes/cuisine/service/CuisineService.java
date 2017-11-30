@@ -1,15 +1,14 @@
 package com.topfood.recipes.cuisine.service;
 
-import com.topfood.recipes.common.Enums.ErrorCodes;
+import com.topfood.recipes.common.enums.ErrorCodes;
 import com.topfood.recipes.cuisine.model.Cuisine;
 import com.topfood.recipes.cuisine.repository.CuisineRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
 import java.util.List;
 
-import static com.topfood.recipes.common.Enums.ErrorCodes.OK;
+import static com.topfood.recipes.common.enums.ErrorCodes.OK;
 
 @Service
 public class CuisineService {

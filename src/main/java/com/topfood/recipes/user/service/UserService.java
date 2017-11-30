@@ -1,16 +1,15 @@
 package com.topfood.recipes.user.service;
 
-import com.topfood.recipes.common.Enums.ErrorCodes;
+import com.topfood.recipes.common.enums.ErrorCodes;
 import com.topfood.recipes.user.model.User;
 import com.topfood.recipes.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
 import java.util.List;
 
-import static com.topfood.recipes.common.Enums.ErrorCodes.OK;
-import static com.topfood.recipes.common.Enums.ErrorCodes.REG_USER_ALREADY_EXISTS;
+import static com.topfood.recipes.common.enums.ErrorCodes.OK;
+import static com.topfood.recipes.common.enums.ErrorCodes.REG_USER_ALREADY_EXISTS;
 
 @Service
 public class UserService {

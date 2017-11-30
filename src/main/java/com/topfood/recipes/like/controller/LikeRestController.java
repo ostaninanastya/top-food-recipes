@@ -1,12 +1,10 @@
 package com.topfood.recipes.like.controller;
 
-import com.topfood.recipes.common.Enums.ErrorCodeMap;
-import com.topfood.recipes.common.Enums.ErrorCodes;
-import com.topfood.recipes.ingredientRecipe.model.IngredientRecipe;
+import com.topfood.recipes.common.enums.ErrorCodeMap;
+import com.topfood.recipes.common.enums.ErrorCodes;
 import com.topfood.recipes.like.model.Like;
 import com.topfood.recipes.like.service.LikeService;
 import com.topfood.recipes.recipe.model.Recipe;
-import com.topfood.recipes.user.model.User;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
