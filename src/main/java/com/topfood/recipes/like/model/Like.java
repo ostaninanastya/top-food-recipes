@@ -28,8 +28,8 @@ public class Like {
     private Boolean sign;
 
     @Column(name ="timestamp")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "ss")
+    //@Temporal(TemporalType.TIME)
     private Date timestamp;
 
     public Like(Recipe recipe, User user, Boolean sign, Date timestamp) {

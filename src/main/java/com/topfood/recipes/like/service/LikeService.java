@@ -8,9 +8,11 @@ import com.topfood.recipes.like.repository.LikeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Calendar;
 import java.util.List;
 
 import static com.topfood.recipes.common.Enums.ErrorCodes.OK;
+import static com.topfood.recipes.common.Enums.ErrorCodes.TOO_OFTEN_LIKES;
 
 @Service
 public class LikeService {
@@ -22,21 +24,30 @@ public class LikeService {
         return likeRepository.findAll();
     }
 
-    public Like getByID(String like_id)
-    {
+    public Like getByID(String like_id) {
         return likeRepository.findOne(Long.valueOf(like_id));
     }
 
-    public ErrorCodes add(Like like){
-        likeRepository.save(like);
-        return (OK);
+    public ErrorCodes add(Like like) {
+        if (likeRepository.findByUser(like.getUser()).size() != 0) {
+            Like lastLike = likeRepository.findByUser(like.getUser()).get(likeRepository.findByUser(like.getUser()).size() - 1);
+            //getTime returns time in milliseconds. we divide into 1000 to get seconds
+            if ((like.getTimestamp().getTime() - lastLike.getTimestamp().getTime()) / 1000 > 120) {
+                likeRepository.save(like);
+                return (OK);
+            } else return (TOO_OFTEN_LIKES);
+        } else {
+            likeRepository.save(like);
+            return (OK);
+        }
+
     }
-    public void delete(String like_id){
+
+    public void delete(String like_id) {
         likeRepository.delete(Long.valueOf(like_id));
     }
 
-    public void update(Like newLike)
-    {
+    public void update(Like newLike) {
         Like like = likeRepository.findOne(newLike.getId());
         like.setRecipe(newLike.getRecipe());
         like.setSign(newLike.getSign());
