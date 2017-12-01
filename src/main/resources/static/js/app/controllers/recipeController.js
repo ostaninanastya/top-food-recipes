@@ -1,4 +1,4 @@
-controllerModule.controller('RecipeController', function($scope, $http, RecipeService, CuisineService) {
+controllerModule.controller('RecipeController', function($scope, $http, $rootScope, RecipeService, CuisineService) {
     $scope.recipes = [];
     $scope.cuisines = [];
 
@@ -12,8 +12,8 @@ controllerModule.controller('RecipeController', function($scope, $http, RecipeSe
 
     $scope.recipe ={};
     $scope.submit = function() {
-        IngredientService.addNewRecipe($scope.recipe).then(function () {
-            IngredientService.getRecipes().then(function(recipes){
+        RecipeService.addNewRecipe($scope.recipe).then(function () {
+            RecipeService.getRecipes().then(function(recipes){
                 $scope.recipes = recipes;
             });
             console.log("completed");

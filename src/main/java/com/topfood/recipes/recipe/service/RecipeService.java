@@ -35,6 +35,7 @@ public class RecipeService {
 
     public ErrorCodes add(Recipe recipe){
         recipeRepository.save(recipe);
+        recipeRepository.flush();
         return (OK);
     }
     public void delete(String recipe_id){

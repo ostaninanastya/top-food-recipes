@@ -64,7 +64,7 @@ public class RecipeRestController {
     }
 
     //@ApiOperation(value = "Upload image", produces = APPLICATION_JSON_UTF8_VALUE)
-    @RequestMapping(value = "/img", method = POST)
+  /*  @RequestMapping(value = "/img", method = POST)
     public ResponseEntity<?> uploadImage(@RequestParam MultipartFile file, @RequestParam String name, @RequestParam String recipe, @RequestParam Long user_id, @RequestParam Long cuisine_id) throws IOException {
         byte[] bytes = file.getBytes();
         Path path = Paths.get(UPLOADED_FOLDER+file.getOriginalFilename());
@@ -75,7 +75,7 @@ public class RecipeRestController {
         //newRecipe.setImage("http://188.166.30.145/topfoodrecipes/"+file.getOriginalFilename());
         //recipeService.add(newRecipe);
         return new ResponseEntity<>(HttpStatus.OK);
-    }
+    } */
 
 
    /* @ApiOperation(value = "Create a recipe with the picture", produces = APPLICATION_JSON_UTF8_VALUE)
