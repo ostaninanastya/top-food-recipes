@@ -8,7 +8,6 @@ servicesModule.service('RecipeService', function($http,$rootScope,SERVER_URL) {
     }
     this.addNewRecipe = function(recipe) {
         recipe.user = $rootScope.user;
-        recipe.image = 'fdsfsdf';
         console.log(recipe);
         console.log("posting data....");
         return $http.post(SERVER_URL + 'api/recipe', JSON.stringify(recipe)).success(function () {

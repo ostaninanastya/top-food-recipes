@@ -54,7 +54,11 @@ public class RecipeRestController {
 
     @ApiOperation(value = "Create a recipe", produces = APPLICATION_JSON_UTF8_VALUE)
     @RequestMapping(method = POST)
-    public ResponseEntity<? extends Object> createRecipe(@RequestBody Recipe recipe) {
+    public ResponseEntity<? extends Object> createRecipe(@RequestBody Recipe recipe, @RequestParam MultipartFile file) throws IOException {
+        byte[] bytes = file.getBytes();
+        Path path = Paths.get(UPLOADED_FOLDER+file.getOriginalFilename());
+        Files.write(path, bytes);
+        recipe.setImage("http://188.166.30.145/topfoodrecipes/"+file.getOriginalFilename());
         ErrorCodes code = recipeService.add(recipe);
 
         if (!code.equals(ErrorCodes.OK))
