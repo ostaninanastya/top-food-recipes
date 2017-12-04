@@ -34,6 +34,13 @@ public class LikeRestController {
         return new ResponseEntity<List<Like>>(likes, HttpStatus.OK);
     }
 
+    @ApiOperation(value = "Get rating", produces = APPLICATION_JSON_UTF8_VALUE)
+    @RequestMapping(method = GET, value = "/rating")
+    public ResponseEntity<Integer> getRating(@ApiParam(value = "Recipe", required = true) @PathVariable Recipe recipe) {
+        Integer rating = likeService.Rating(recipe);
+        return new ResponseEntity<Integer>(rating, HttpStatus.OK);
+    }
+
     @ApiOperation(value = "Create a new like", produces = APPLICATION_JSON_UTF8_VALUE)
     @RequestMapping(method = POST)
     public ResponseEntity<? extends Object> createLike(@RequestBody Like like) {

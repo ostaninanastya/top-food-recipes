@@ -22,6 +22,18 @@ public class LikeService {
         return likeRepository.findByRecipe(recipe);
     }
 
+    public Integer Rating(Recipe recipe){
+        Integer rate = 0;
+        for (Like loice: findByRecipe(recipe))
+        {
+            if (loice.getSign() == true)
+                rate++;
+            else
+                rate--;
+        }
+        return rate;
+    }
+
     public ErrorCodes add(Like like) {
         if (likeRepository.findByUser(like.getUser()).size() != 0) {
             Like lastLike = likeRepository.findByUser(like.getUser()).get(likeRepository.findByUser(like.getUser()).size() - 1);
