@@ -2,15 +2,15 @@
     <h2>Create new recipe</h2>
 </div>
 <div>
-    <form  ng-submit="submit()">
+    <form  ng-submit="submit()" enctype="multipart/form-data">
         <div>
             <b>Create new recipe</b>
             <div>
                 Recipe name :  <input type="text" ng-model="recipe.name" name="name" >
                 Recipe text :  <input type="text" ng-model="recipe.recipe" name="text" >
                 Cuisine name :  <select ng-model="recipe.cuisine" name = "cuisine" ng-options="c.name for c in cuisines">
+                </select>
                 <input type="file" name="f">
-            </select>
             </div>
         </div>
         <div>
