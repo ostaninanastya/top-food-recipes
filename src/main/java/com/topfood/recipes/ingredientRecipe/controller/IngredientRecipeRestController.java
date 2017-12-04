@@ -1,9 +1,8 @@
 package com.topfood.recipes.ingredientRecipe.controller;
 
 
-import com.topfood.recipes.common.Enums.ErrorCodeMap;
-import com.topfood.recipes.common.Enums.ErrorCodes;
-import com.topfood.recipes.ingredient.model.Ingredient;
+import com.topfood.recipes.common.enums.ErrorCodeMap;
+import com.topfood.recipes.common.enums.ErrorCodes;
 import com.topfood.recipes.ingredientRecipe.model.IngredientRecipe;
 import com.topfood.recipes.ingredientRecipe.service.IngredientRecipeService;
 import io.swagger.annotations.ApiOperation;

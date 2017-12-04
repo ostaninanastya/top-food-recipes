@@ -1,7 +1,7 @@
 package com.topfood.recipes.ingredient.controller;
 
-import com.topfood.recipes.common.Enums.ErrorCodeMap;
-import com.topfood.recipes.common.Enums.ErrorCodes;
+import com.topfood.recipes.common.enums.ErrorCodeMap;
+import com.topfood.recipes.common.enums.ErrorCodes;
 import com.topfood.recipes.ingredient.model.Ingredient;
 import com.topfood.recipes.ingredient.service.IngredientService;
 import io.swagger.annotations.ApiOperation;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static com.topfood.recipes.common.Enums.ErrorCodes.OK;
+import static com.topfood.recipes.common.enums.ErrorCodes.OK;
 import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE;
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 

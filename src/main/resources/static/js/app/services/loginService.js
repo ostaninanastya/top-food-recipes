@@ -75,8 +75,9 @@ servicesModule.service('LoginService', function($http, $rootScope, SERVER_URL) {
             console.log('Successfully registered user ' + user.name);
             resp = { success: true };
             callback(resp);
-        }).catch(function (err) {
-            console.log("Failed to register user " + user.name + ": " + err.statusText);
+        }).catch(function (response) {
+            console.log("Failed to register user " + user.name + ": " + response.data);
+            resp = {success: false, errorMessage: response.data};
             callback(resp);
         });
     }

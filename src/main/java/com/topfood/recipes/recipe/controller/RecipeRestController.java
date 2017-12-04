@@ -1,7 +1,7 @@
 package com.topfood.recipes.recipe.controller;
 
-import com.topfood.recipes.common.Enums.ErrorCodeMap;
-import com.topfood.recipes.common.Enums.ErrorCodes;
+import com.topfood.recipes.common.enums.ErrorCodeMap;
+import com.topfood.recipes.common.enums.ErrorCodes;
 import com.topfood.recipes.cuisine.model.Cuisine;
 import com.topfood.recipes.cuisine.service.CuisineService;
 import com.topfood.recipes.recipe.model.Recipe;
@@ -15,8 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -55,7 +54,11 @@ public class RecipeRestController {
 
     @ApiOperation(value = "Create a recipe", produces = APPLICATION_JSON_UTF8_VALUE)
     @RequestMapping(method = POST)
-    public ResponseEntity<? extends Object> createRecipe(@RequestBody Recipe recipe) {
+    public ResponseEntity<? extends Object> createRecipe(@RequestBody Recipe recipe, @RequestParam MultipartFile file) throws IOException {
+        byte[] bytes = file.getBytes();
+        Path path = Paths.get(UPLOADED_FOLDER+file.getOriginalFilename());
+        Files.write(path, bytes);
+        recipe.setImage("http://188.166.30.145/topfoodrecipes/"+file.getOriginalFilename());
         ErrorCodes code = recipeService.add(recipe);
 
         if (!code.equals(ErrorCodes.OK))
@@ -65,7 +68,7 @@ public class RecipeRestController {
     }
 
     //@ApiOperation(value = "Upload image", produces = APPLICATION_JSON_UTF8_VALUE)
-    @RequestMapping(value = "/img", method = POST)
+  /*  @RequestMapping(value = "/img", method = POST)
     public ResponseEntity<?> uploadImage(@RequestParam MultipartFile file, @RequestParam String name, @RequestParam String recipe, @RequestParam Long user_id, @RequestParam Long cuisine_id) throws IOException {
         byte[] bytes = file.getBytes();
         Path path = Paths.get(UPLOADED_FOLDER+file.getOriginalFilename());
@@ -76,7 +79,7 @@ public class RecipeRestController {
         //newRecipe.setImage("http://188.166.30.145/topfoodrecipes/"+file.getOriginalFilename());
         //recipeService.add(newRecipe);
         return new ResponseEntity<>(HttpStatus.OK);
-    }
+    } */
 
 
    /* @ApiOperation(value = "Create a recipe with the picture", produces = APPLICATION_JSON_UTF8_VALUE)

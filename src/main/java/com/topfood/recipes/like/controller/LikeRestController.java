@@ -1,12 +1,10 @@
 package com.topfood.recipes.like.controller;
 
-import com.topfood.recipes.common.Enums.ErrorCodeMap;
-import com.topfood.recipes.common.Enums.ErrorCodes;
-import com.topfood.recipes.ingredientRecipe.model.IngredientRecipe;
+import com.topfood.recipes.common.enums.ErrorCodeMap;
+import com.topfood.recipes.common.enums.ErrorCodes;
 import com.topfood.recipes.like.model.Like;
 import com.topfood.recipes.like.service.LikeService;
 import com.topfood.recipes.recipe.model.Recipe;
-import com.topfood.recipes.user.model.User;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +32,13 @@ public class LikeRestController {
     public ResponseEntity<List<Like>> getAllLikes(@ApiParam(value = "Recipe", required = true) @PathVariable Recipe recipe) {
         List<Like> likes = likeService.findByRecipe(recipe);
         return new ResponseEntity<List<Like>>(likes, HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "Get rating", produces = APPLICATION_JSON_UTF8_VALUE)
+    @RequestMapping(method = GET, value = "/rating")
+    public ResponseEntity<Integer> getRating(@ApiParam(value = "Recipe", required = true) @PathVariable Recipe recipe) {
+        Integer rating = likeService.Rating(recipe);
+        return new ResponseEntity<Integer>(rating, HttpStatus.OK);
     }
 
     @ApiOperation(value = "Create a new like", produces = APPLICATION_JSON_UTF8_VALUE)

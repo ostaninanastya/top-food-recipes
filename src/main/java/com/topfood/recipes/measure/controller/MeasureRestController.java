@@ -1,7 +1,7 @@
 package com.topfood.recipes.measure.controller;
 
-import com.topfood.recipes.common.Enums.ErrorCodeMap;
-import com.topfood.recipes.common.Enums.ErrorCodes;
+import com.topfood.recipes.common.enums.ErrorCodeMap;
+import com.topfood.recipes.common.enums.ErrorCodes;
 import com.topfood.recipes.measure.model.Measure;
 import com.topfood.recipes.measure.service.MeasureService;
 import io.swagger.annotations.ApiOperation;

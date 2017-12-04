@@ -1,7 +1,6 @@
 package com.topfood.recipes.ingredientRecipe.service;
 
-import com.topfood.recipes.common.Enums.ErrorCodes;
-import com.topfood.recipes.ingredient.model.Ingredient;
+import com.topfood.recipes.common.enums.ErrorCodes;
 import com.topfood.recipes.ingredient.repository.IngredientRepository;
 import com.topfood.recipes.ingredientRecipe.model.IngredientRecipe;
 import com.topfood.recipes.ingredientRecipe.repository.IngredientRecipeRepository;
@@ -9,10 +8,9 @@ import com.topfood.recipes.recipe.repository.RecipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
 import java.util.List;
 
-import static com.topfood.recipes.common.Enums.ErrorCodes.OK;
+import static com.topfood.recipes.common.enums.ErrorCodes.OK;
 
 @Service
 public class IngredientRecipeService {

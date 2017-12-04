@@ -1,4 +1,4 @@
-package com.topfood.recipes.common.Enums;
+package com.topfood.recipes.common.enums;
 
 public enum ErrorCodes {
     OK,
