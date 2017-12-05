@@ -1,4 +1,4 @@
-controllerModule.controller('RecipeController', function($scope, $http, $rootScope, RecipeService, CuisineService) {
+controllerModule.controller('RecipeController', function($scope, $location, $http, $rootScope, RecipeService, CuisineService) {
     $scope.recipes = [];
     $scope.cuisines = [];
 
@@ -20,4 +20,9 @@ controllerModule.controller('RecipeController', function($scope, $http, $rootSco
         });
     }
 
+    $scope.setSelectedRecipe = function(recipe) {
+        $rootScope.selectedRecipe = recipe;
+        console.log("function called!!!");
+        $location.path('/recipeView');
+    }
 });
