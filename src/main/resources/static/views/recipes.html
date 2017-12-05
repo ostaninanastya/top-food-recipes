@@ -13,12 +13,16 @@
                 <th>Recipe</th>
                 <th width="100"></th>
                 <th width="100"></th>
+                <th width="100"></th>
             </tr>
             </thead>
             <tbody style="cursor:pointer;">
             <tr ng-repeat="recipe in recipes | filter:searchRecipe" ng-class="{'selected':$index == selectedRow}" ng-click="setSelectedRecipe(recipe)" style="pointer:cursor">
                 <td>{{ recipe.name }}</td>
                 <td>{{ recipe.recipe }}</td>
+                <td></td>
+                <td><a href="#/editRecipe" ng-click="Edit(recipe)">edit</button></a></td>
+                <td><a href="#/" ng-click="Delete(recipe)">delete</button></a></td>
             </tr>
             </tbody>
         </table>
