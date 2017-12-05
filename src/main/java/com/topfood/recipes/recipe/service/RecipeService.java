@@ -2,10 +2,13 @@ package com.topfood.recipes.recipe.service;
 
 import com.topfood.recipes.common.enums.ErrorCodes;
 import com.topfood.recipes.cuisine.repository.CuisineRepository;
+import com.topfood.recipes.recipe.controller.RecipeRestController;
 import com.topfood.recipes.recipe.model.Recipe;
 
 import com.topfood.recipes.recipe.repository.RecipeRepository;
 import com.topfood.recipes.user.repository.UserRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +18,8 @@ import static com.topfood.recipes.common.enums.ErrorCodes.OK;
 
 @Service
 public class RecipeService {
+    private static final Logger LOG = LoggerFactory.getLogger(RecipeService.class);
+
     @Autowired
     private RecipeRepository recipeRepository;
 
@@ -45,6 +50,9 @@ public class RecipeService {
     public void update(Recipe newRecipe)
     {
         Recipe recipe = recipeRepository.findOne(newRecipe.getRecipe_id());
+        LOG.info("Old recipe: " + recipe);
+        LOG.info("New recipe: " + newRecipe);
+        recipe.setName(newRecipe.getName());
         recipe.setCuisine(newRecipe.getCuisine());
         recipe.setRecipe(newRecipe.getRecipe());
         recipe.setUser(newRecipe.getUser());

@@ -10,6 +10,8 @@ import com.topfood.recipes.user.model.User;
 import com.topfood.recipes.user.service.UserService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,7 +30,8 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 @RestController
 @RequestMapping("/api/recipe")
 public class RecipeRestController {
-    //private static final Logger LOG = LoggerFactory.getLogger(RecipeRestController.class);
+    private static final Logger LOG = LoggerFactory.getLogger(RecipeRestController.class);
+
     private static String UPLOADED_FOLDER = "/var/www/html/topfoodrecipes/";
     @Autowired
     private RecipeService recipeService;
@@ -95,8 +98,9 @@ public class RecipeRestController {
 */
 
     @ApiOperation(value = "Update a recipe", produces = APPLICATION_JSON_UTF8_VALUE)
-    @RequestMapping(value = "/{id}", method = PUT)
+    @RequestMapping(method = PUT)
     public ResponseEntity<Recipe> updateRecipe(@RequestBody Recipe recipe) {
+        LOG.info("Update recipe " + recipe + "...");
         recipeService.update(recipe);
         return new ResponseEntity<Recipe>(recipe, HttpStatus.OK);
     }

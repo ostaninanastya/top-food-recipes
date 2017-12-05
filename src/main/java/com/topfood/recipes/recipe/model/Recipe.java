@@ -90,4 +90,12 @@ public class Recipe {
     public void setCuisine(Cuisine cuisine) {
         this.cuisine = cuisine;
     }
+
+    @Override
+    public String toString() {
+        return "id: " + getRecipe_id()
+                + "name: " + getName()
+                + "recipe: " + getRecipe()
+                + "cuisine: " + getCuisine().getName();
+    }
 }

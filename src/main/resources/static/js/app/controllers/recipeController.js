@@ -25,4 +25,8 @@ controllerModule.controller('RecipeController', function($scope, $location, $htt
         console.log("function called!!!");
         $location.path('/recipeView');
     }
+    $scope.Edit = function(recipe) {
+        $rootScope.selectedRecipe = recipe;
+        $location.path('recipeEdit');
+    }
 });
