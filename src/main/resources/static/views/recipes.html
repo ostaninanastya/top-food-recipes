@@ -15,7 +15,7 @@
                 <th width="100"></th>
             </tr>
             </thead>
-            <tbody>
+            <tbody style="cursor:pointer;">
             <tr ng-repeat="recipe in recipes | filter:searchRecipe" ng-class="{'selected':$index == selectedRow}" ng-click="setSelectedRecipe(recipe)" style="pointer:cursor">
                 <td>{{ recipe.name }}</td>
                 <td>{{ recipe.recipe }}</td>

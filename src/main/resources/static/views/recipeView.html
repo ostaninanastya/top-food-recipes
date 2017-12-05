@@ -1,8 +1,13 @@
 <div class="header">
     <h1>{{selectedRecipe.name}}</h1>
-    <br/>
-    <br/>
-    {{selectedRecipe.recipe}}
-    <br/>
-    <br/>
 </div>
+<div>
+    <div>
+        {{selectedRecipe.recipe}}
+    </div>
+    <div style="float: left;">
+        Created by {{selectedRecipe.user.name}}
+    </div>
+
+</div>
+
