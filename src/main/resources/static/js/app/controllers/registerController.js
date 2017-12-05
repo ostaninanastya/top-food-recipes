@@ -7,6 +7,7 @@ controllerModule.controller('RegisterController', function($scope, $rootScope, $
             if (response.success) {
                 console.log('Success');
                 $rootScope.$broadcast('registration_event', $scope.user);
+                $rootScope.isLog = true;
             } else {
                 console.log('Fail: '+ response.errorMessage);
                 $scope.exists = response.errorMessage;

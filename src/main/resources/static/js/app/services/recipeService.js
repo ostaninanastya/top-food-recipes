@@ -6,11 +6,11 @@ servicesModule.service('RecipeService', function($http,$rootScope,SERVER_URL) {
             return [{"name" : "рецепт пиццы", "recipe" : "dhduhdishdisj"}];
         });
     }
-    this.addNewRecipe = function(recipe) {
+    this.addNewRecipe = function(recipe, f) {
         recipe.user = $rootScope.user;
         console.log(recipe);
         console.log("posting data....");
-        return $http.post(SERVER_URL + 'api/recipe', JSON.stringify(recipe)).success(function () {
+        return $http.post(SERVER_URL + 'api/recipe', JSON.stringify(recipe, f)).success(function () {
             console.log("success");
         });
     }

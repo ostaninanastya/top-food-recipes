@@ -5,6 +5,7 @@ controllerModule.controller('LoginController', function($scope, $rootScope, $loc
             if (response.success) {
                 console.log('Successfully logged in under ' + $rootScope.user.name);
                 $rootScope.$broadcast('reload_page_event');
+                $rootScope.isLog = true;
             } else {
                 console.log('Login under ' + $scope.user.name + ' failed');
             }

@@ -19,6 +19,7 @@
             <tr ng-repeat="recipe in recipes | filter:searchRecipe">
                 <td>{{ recipe.name }}</td>
                 <td>{{ recipe.recipe }}</td>
+                <td><div ng-show="isLog"><a href="#/editRecipe" class="btn btn-link">Edit</a></div></td>
             </tr>
             </tbody>
         </table>

@@ -11,8 +11,9 @@ controllerModule.controller('RecipeController', function($scope, $http, $rootSco
     });
 
     $scope.recipe ={};
+    $scope.f = [];
     $scope.submit = function() {
-        RecipeService.addNewRecipe($scope.recipe).then(function () {
+        RecipeService.addNewRecipe($scope.recipe, $scope.f).then(function () {
             RecipeService.getRecipes().then(function(recipes){
                 $scope.recipes = recipes;
             });

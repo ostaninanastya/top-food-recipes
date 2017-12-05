@@ -27,6 +27,9 @@ const myApp = angular.module('topFoodRecipesApp', ["ngRoute", "topFoodRecipeAppC
         }).when('/createCuisine', {
             templateUrl:'views/createCuisine.html',
             controller:'CuisineController'
+        }).when('/editRecipe', {
+            templateUrl: 'views/editRecipe.html',
+            controller: 'RecipeController'
         });
 
 })
