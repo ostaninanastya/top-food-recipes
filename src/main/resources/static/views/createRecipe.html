@@ -10,7 +10,7 @@
                 Recipe text :  <input type="text" ng-model="recipe.recipe" name="text" >
                 Cuisine name :  <select ng-model="recipe.cuisine" name = "cuisine" ng-options="c.name for c in cuisines">
                 </select>
-                <input type="file" name="f">
+                <input type="file" id="file" name="file" onchange="angular.element(this).scope().fileChanged(this)">
             </div>
         </div>
         <div>

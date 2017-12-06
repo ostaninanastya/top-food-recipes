@@ -12,19 +12,29 @@ controllerModule.controller('RecipeController', function($scope, $location, $htt
 
     $scope.recipe ={};
     $scope.submit = function() {
-        RecipeService.addNewRecipe($scope.recipe).then(function () {
-            RecipeService.getRecipes().then(function(recipes){
-                $scope.recipes = recipes;
-            });
-            console.log("completed");
+        RecipeService.addNewRecipe($scope.recipe, $scope.fff, function(response) {
+            if (response.success) {
+                console.log('Successfully added recipe ' + response.recipe);
+                $location.path('/recipes');
+            } else {
+                console.log('Failed to add a recipe: ' + response.error);
+            }
+
         });
     }
+
+    $scope.fileChanged = function(element) {
+        $scope.fff = element.files[0];
+        console.log('Uploaded file: ' + $scope.fff.name);
+    }
+
 
     $scope.setSelectedRecipe = function(recipe) {
         $rootScope.selectedRecipe = recipe;
         console.log("function called!!!");
         $location.path('/recipeView');
     }
+
     $scope.Edit = function(recipe) {
         $rootScope.selectedRecipe = recipe;
         $location.path('recipeEdit');
