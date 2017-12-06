@@ -39,4 +39,8 @@ controllerModule.controller('RecipeController', function($scope, $location, $htt
         $rootScope.selectedRecipe = recipe;
         $location.path('recipeEdit');
     }
+
+    $rootScope.loggedIn = ($rootScope.user !== undefined);
+
+
 });

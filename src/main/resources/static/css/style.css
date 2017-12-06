@@ -76,3 +76,7 @@ div{
     height: 150px;
     padding-top: 50px;
 }
+.recipeView{
+    float: left;
+    margin:10px;
+}

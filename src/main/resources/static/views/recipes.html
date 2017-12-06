@@ -21,8 +21,8 @@
                 <td>{{ recipe.name }}</td>
                 <td>{{ recipe.recipe }}</td>
                 <td></td>
-                <td><a href="#/recipeEdit" ng-click="Edit(recipe)">edit</button></a></td>
-                <td><a href="#/" ng-click="Delete(recipe)">delete</button></a></td>
+                <td><a href="#/recipeEdit" ng-click="Edit(recipe)" ng-show="loggedIn">edit</a></td>
+                <td><a href="#/recipes" ng-click="Delete(recipe)"  ng-show="loggedIn">delete</a></td>
             </tr>
             </tbody>
         </table>

@@ -5,9 +5,13 @@
     <div>
         {{selectedRecipe.recipe}}
     </div>
-    <div style="float: left;">
-        Created by {{selectedRecipe.user.name}}
-    </div>
 
+    <div class="recipeView">Created by {{selectedRecipe.user.name}}</div>
+    <br/>
+
+        <div class="recipeView">
+            <a class="btn btn-default" href="#/recipeEdit" ng-click="Edit(recipe)" ng-show="loggedIn">edit</a>
+            <a class="btn btn-default" href="#/recipes" ng-click="Delete(recipe)" ng-show="loggedIn">delete</a>
+        </div>
 </div>
 
