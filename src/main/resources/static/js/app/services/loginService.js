@@ -13,7 +13,7 @@ servicesModule.service('LoginService', function($http, $rootScope, SERVER_URL) {
                 var usr = allUsers[i];
                 console.log('Name: ' + usr.name + ', password: ' + usr.password);
 
-                if (usr.name == user.name && usr.password == user.password) {
+                if (usr.name === user.name && usr.password === user.password) {
                     console.log("User matches!!!");
                     $rootScope.user = user;
                     resp = { success: true };
@@ -57,7 +57,7 @@ servicesModule.service('LoginService', function($http, $rootScope, SERVER_URL) {
             }
         ];
 
-        if ($rootScope.user != undefined) {
+        if ($rootScope.user !== undefined) {
             menu.push({title: 'Logout', url: '#/logout', f: 'logout()'});
         } else {
             menu.push({title: 'Login', url: '#/login', f: ''});

@@ -81,6 +81,8 @@ public class RecipeRestController {
     @ApiOperation(value = "Create a recipe without a picture", produces = APPLICATION_JSON_UTF8_VALUE)
     @RequestMapping(value = "/withoutpicture", method = POST)
     public ResponseEntity<? extends Object> createRecipeWithoutPicture(@RequestBody Recipe recipe) {
+        recipe.setRating(0);
+        if (recipe.getUser() != null) recipe.getUser().setUser_id(userService.findByName(recipe.getUser().getName()).get(0).getUser_id());
         ErrorCodes code = recipeService.add(recipe);
 
         if (!code.equals(ErrorCodes.OK))

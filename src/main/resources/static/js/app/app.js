@@ -1,9 +1,6 @@
 const myApp = angular.module('topFoodRecipesApp', ["ngRoute", "topFoodRecipeAppControllers", "topFoodRecipeAppServices"])
     .config(function($routeProvider) {
-    	$routeProvider.when('', {
-            templateUrl:'views/recipes.html',
-            controller:'RecipeController'
-        }).when('/recipes', {
+    	$routeProvider.when('/recipes', {
     		templateUrl:'views/recipes.html',
     		controller:'RecipeController'
     	}).when('/cuisines', {

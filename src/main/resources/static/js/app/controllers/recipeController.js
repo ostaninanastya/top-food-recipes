@@ -16,17 +16,34 @@ controllerModule.controller('RecipeController', function($scope, $location, $htt
     });
 
     $scope.recipe ={};
+    $scope.ingredientRecipe1={};
+    $scope.ingredientRecipe2={};
+    $scope.ingredientRecipe3={};
+    $scope.ingredientRecipe4={};
+    $scope.ingredientRecipe5={};
+
+
     $scope.submit = function() {
+        $scope.ingredientRecipe1.recipe =$scope.recipe;
+        $scope.ingredientRecipe2.recipe =$scope.recipe;
+        $scope.ingredientRecipe3.recipe =$scope.recipe;
+        $scope.ingredientRecipe4.recipe =$scope.recipe;
+        $scope.ingredientRecipe5.recipe =$scope.recipe;
+
         RecipeService.addNewRecipe($scope.recipe, $scope.fff, function(response) {
             if (response.success) {
                 console.log('Successfully added recipe ' + response.recipe);
-                $location.path('/recipes');
             } else {
                 console.log('Failed to add a recipe: ' + response.error);
             }
-
         });
+        RecipeService.addNewIngredientRecipe($scope.ingredientRecipe1,$scope.ingredientRecipe2,
+            $scope.ingredientRecipe3,$scope.ingredientRecipe4,
+            $scope.ingredientRecipe5);
+        $location.path('/recipes');
     }
+
+
 
     $scope.fileChanged = function(element) {
         $scope.fff = element.files[0];

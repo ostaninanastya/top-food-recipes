@@ -70,7 +70,7 @@ public class Service {
         ingredientRepository.save(new Ingredient("томат", measureRepository.findByName("штука").get(0)));
         ingredientRepository.save(new Ingredient("сахар", measureRepository.findByName("г.").get(0)));
         ingredientRepository.save(new Ingredient("молоко", measureRepository.findByName("стакан").get(0)));
-        ingredientRepository.save(new Ingredient("сахар", measureRepository.findByName("ч. ложка").get(0)));
+        ingredientRepository.save(new Ingredient("сода", measureRepository.findByName("ч. ложка").get(0)));
 
         ingredientRepository.save(new Ingredient("соль", measureRepository.findByName("г.").get(0)));
         ingredientRepository.save(new Ingredient("бекон", measureRepository.findByName("г.").get(0)));

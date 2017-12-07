@@ -23,6 +23,9 @@ public class UserService {
     public User getByID(String id) {
         return userRepository.findOne(Long.valueOf(id));
     }
+    public List<User> findByName(String name){
+        return userRepository.findByName(name);
+    };
 
     public ErrorCodes add(User user){
         List<User> users = userRepository.findAll();

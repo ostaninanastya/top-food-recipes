@@ -16,29 +16,29 @@
                 <label style="width: 100px; height: 25px;">Ingredients</label>
                 <br/>
                 <div>
-                    <select style="width: 300px; height: 25px; display:inline-block;" ng-model="recipe.ingredient1" ng-options="i.name for i in ingredients"></select>
-                    <input style="width: 300px; height: 25px; display:inline-block;" ng-model="quantity1">
-                    <output style="width: 300px; height: 25px; display:inline-block;">{{recipe.ingredient1.measure.name}}</output>
+                    <select style="width: 300px; height: 25px; display:inline-block;" ng-model="ingredientRecipe1.ingredient" ng-options="i.name for i in ingredients"></select>
+                    <input style="width: 300px; height: 25px; display:inline-block;" ng-model="ingredientRecipe1.quantity">
+                    <output style="width: 300px; height: 25px; display:inline-block;">{{ingredientRecipe1.ingredient.measure.name}}</output>
                 </div>
                 <div>
-                    <select style="width: 300px; height: 25px;" ng-model="recipe.ingredient2" ng-options="i.name for i in ingredients"></select>
-                    <input style="width: 300px; height: 25px; display:inline-block;" ng-model="quantity2">
-                    <output style="width: 300px; height: 25px; display:inline-block;">{{recipe.ingredient2.measure.name}}</output>
+                    <select style="width: 300px; height: 25px;" ng-model="ingredientRecipe2.ingredient" ng-options="i.name for i in ingredients"></select>
+                    <input type= "number" style="width: 300px; height: 25px; display:inline-block;" ng-model="ingredientRecipe2.quantity">
+                    <output style="width: 300px; height: 25px; display:inline-block;">{{ingredientRecipe2.ingredient.measure.name}}</output>
                 </div>
                 <div>
-                    <select style="width: 300px; height: 25px;" ng-model="recipe.ingredient3" ng-options="i.name for i in ingredients"></select>
-                    <input style="width: 300px; height: 25px; display:inline-block;" ng-model="quantity3">
-                    <output style="width: 300px; height: 25px; display:inline-block;">{{recipe.ingredient3.measure.name}}</output>
+                    <select style="width: 300px; height: 25px;" ng-model="ingredientRecipe3.ingredient" ng-options="i.name for i in ingredients"></select>
+                    <input type= "number" style="width: 300px; height: 25px; display:inline-block;" ng-model="ingredientRecipe3.quantity">
+                    <output style="width: 300px; height: 25px; display:inline-block;">{{ingredientRecipe3.ingredient.measure.name}}</output>
                 </div>
                 <div>
-                    <select style="width: 300px; height: 25px;" ng-model="recipe.ingredient4" ng-options="i.name for i in ingredients"></select>
-                    <input style="width: 300px; height: 25px; display:inline-block;" ng-model="quantity4">
-                    <output style="width: 300px; height: 25px; display:inline-block;">{{recipe.ingredient4.measure.name}}</output>
+                    <select style="width: 300px; height: 25px;" ng-model="ingredientRecipe4.ingredient" ng-options="i.name for i in ingredients"></select>
+                    <input type= "number" style="width: 300px; height: 25px; display:inline-block;" ng-model="ingredientRecipe4.quantity" required>
+                    <output style="width: 300px; height: 25px; display:inline-block;">{{ingredientRecipe4.ingredient.measure.name}}</output>
                 </div>
                 <div>
-                    <select style="width: 300px; height: 25px; " ng-model="recipe.ingredient5" ng-options="i.name for i in ingredients"></select>
-                    <input style="width: 300px; height: 25px; display:inline-block;" ng-model="quantity5">
-                    <output style="width: 300px; height: 25px; display:inline-block;">{{recipe.ingredient5.measure.name}}</output>
+                    <select style="width: 300px; height: 25px; " ng-model="ingredientRecipe5.ingredient" ng-options="i.name for i in ingredients"></select>
+                    <input type="number" style="width: 300px; height: 25px; display:inline-block;" ng-model="ingredientRecipe5.quantity">
+                    <output style="width: 300px; height: 25px; display:inline-block;">{{ingredientRecipe5.ingredient.measure.name}}</output>
                 </div>
             </div>
             <div class="createRecipe">

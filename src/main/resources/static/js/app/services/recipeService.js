@@ -68,10 +68,11 @@ servicesModule.service('RecipeService', function($http,$rootScope,SERVER_URL) {
     }
 
     this.addNewRecipe = function(recipe, f, callback) {
+
         recipe.user = $rootScope.user;
         var resp = {};
 
-        if (f == undefined) {
+        if (f === undefined) {
             resp = this.uploadRecipeOnly(recipe);
             callback(resp);
         } else {
@@ -86,4 +87,12 @@ servicesModule.service('RecipeService', function($http,$rootScope,SERVER_URL) {
             return [];
         });
     }
+    this.addNewIngredientRecipe = function (ir1,ir2,ir3,ir4,ir5) {
+        $http.post(SERVER_URL + '/api/ingredientRecipe', JSON.stringify(ir1));
+        $http.post(SERVER_URL + '/api/ingredientRecipe', JSON.stringify(ir2));
+        $http.post(SERVER_URL + '/api/ingredientRecipe', JSON.stringify(ir3));
+        $http.post(SERVER_URL + '/api/ingredientRecipe', JSON.stringify(ir4));
+        $http.post(SERVER_URL + '/api/ingredientRecipe', JSON.stringify(ir5));
+    }
+
 });

@@ -5,6 +5,8 @@ import com.topfood.recipes.common.enums.ErrorCodeMap;
 import com.topfood.recipes.common.enums.ErrorCodes;
 import com.topfood.recipes.ingredientRecipe.model.IngredientRecipe;
 import com.topfood.recipes.ingredientRecipe.service.IngredientRecipeService;
+import com.topfood.recipes.recipe.repository.RecipeRepository;
+import com.topfood.recipes.user.repository.UserRepository;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,10 @@ public class IngredientRecipeRestController {
 
     @Autowired
     private IngredientRecipeService ingredientRecipeService;
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private RecipeRepository recipeRepository;
 
     @ApiOperation(value = "Get all ingredients in recipes", produces = APPLICATION_JSON_UTF8_VALUE)
     @RequestMapping(method = GET)
@@ -41,6 +47,8 @@ public class IngredientRecipeRestController {
     @ApiOperation(value = "Create ingredients of recipes", produces = APPLICATION_JSON_UTF8_VALUE)
     @RequestMapping(method = POST)
     public ResponseEntity<? extends Object> createIngredientRecipe(@RequestBody IngredientRecipe ingredientRecipe) {
+        if (ingredientRecipe.getRecipe().getUser() != null) ingredientRecipe.getRecipe().getUser().setUser_id(userRepository.findByName(ingredientRecipe.getRecipe().getUser().getName()).get(0).getUser_id());
+        ingredientRecipe.getRecipe().setRecipe_id(recipeRepository.findByName(ingredientRecipe.getRecipe().getName()).get(0).getRecipe_id());
         ErrorCodes code = ingredientRecipeService.add(ingredientRecipe);
 
         if (!code.equals(ErrorCodes.OK))

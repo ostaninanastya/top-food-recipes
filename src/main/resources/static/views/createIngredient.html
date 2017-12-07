@@ -6,7 +6,10 @@
                 <div>
                     Ingredient name :  <input type="text" ng-model="ingredient.name" name="ingredient" >
                     Measure name :  <select ng-model="ingredient.measure" name = "measure" ng-options="m.name for m in measures">
-                </select>
+                    </select>
+                    <div class="createRecipe">
+                        <a href="#/createMesure" class="btn btn-link">Create new measure</a>
+                    </div>
                 </div>
             </div>
             <div>
