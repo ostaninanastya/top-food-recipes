@@ -18,9 +18,9 @@
             </tr>
             </thead>
             <tbody style="cursor:pointer;">
-            <tr ng-repeat="recipe in recipes | filter:searchRecipe" ng-class="{'selected':$index == selectedRow}" ng-click="setSelectedRecipe(recipe)" style="pointer:cursor">
-                <td>{{ recipe.name }}</td>
-                <td>{{ recipe.recipe }}</td>
+            <tr ng-repeat="recipe in recipes | filter:searchRecipe" >
+                <td ng-class="{'selected':$index == selectedRow}" ng-click="setSelectedRecipe(recipe)" >{{ recipe.name }}</td>
+                <td ng-class="{'selected':$index == selectedRow}" ng-click="setSelectedRecipe(recipe)" >{{ recipe.recipe }}</td>
                 <td>{{recipe.rating}}</td>
                 <td><a href="#/recipes" ng-click = "addLike(recipe)"><p><img src="http://188.166.30.145/topfoodrecipes/likes/like.jpg"></p></a></td>
                 <td><a href="#/recipes" ng-click = "addDislike(recipe)"><p><img src="http://188.166.30.145/topfoodrecipes/likes/dislike.jpg"></p></a></td>

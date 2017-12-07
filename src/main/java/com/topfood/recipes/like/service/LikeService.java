@@ -30,7 +30,7 @@ public class LikeService {
         Integer rate = 0;
         for (Like loice: findByRecipe(recipeRepository.findOne(Long.valueOf(id))))
         {
-            if (loice.getSign() == true)
+            if (loice.getSign())
                 rate++;
             else
                 rate--;
@@ -39,8 +39,9 @@ public class LikeService {
     }
 
     public ErrorCodes add(Like like) {
-        if (likeRepository.findByUser(like.getUser()).size() != 0) {
-            Like lastLike = likeRepository.findByUser(like.getUser()).get(likeRepository.findByUser(like.getUser()).size() - 1);
+        if (likeRepository.findByUserAndRecipeOrderByTimestampDesc(like.getUser(), like.getRecipe()).size() != 0) {
+
+            Like lastLike = likeRepository.findByUserAndRecipeOrderByTimestampDesc(like.getUser(), like.getRecipe()).get(0);
             //getTime returns time in milliseconds. we divide into 1000 to get seconds
             if ((like.getTimestamp().getTime() - lastLike.getTimestamp().getTime()) / 1000 > 120) {
                 likeRepository.save(like);

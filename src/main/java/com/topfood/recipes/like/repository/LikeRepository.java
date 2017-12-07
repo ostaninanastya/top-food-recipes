@@ -10,5 +10,6 @@ import java.util.List;
 
 public interface LikeRepository extends JpaRepository<Like, Long> {
     List<Like> findByUser(User user);
+    List<Like> findByUserAndRecipeOrderByTimestampDesc(User user, Recipe recipe);
     List<Like> findByRecipe(Recipe recipe);
 }

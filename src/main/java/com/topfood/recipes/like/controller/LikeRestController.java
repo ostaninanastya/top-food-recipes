@@ -28,7 +28,7 @@ public class LikeRestController {
     @Autowired
     private LikeService likeService;
 
-    @ApiOperation(value = "Get all likes", produces = APPLICATION_JSON_UTF8_VALUE)
+    @ApiOperation(value = "Get all likes for recipe", produces = APPLICATION_JSON_UTF8_VALUE)
     @RequestMapping(method = GET)
     public ResponseEntity<List<Like>> getAllLikes(@ApiParam(value = "Recipe", required = true) @PathVariable Recipe recipe) {
         List<Like> likes = likeService.findByRecipe(recipe);
