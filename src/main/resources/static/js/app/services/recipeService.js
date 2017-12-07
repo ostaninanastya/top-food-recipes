@@ -73,4 +73,11 @@ servicesModule.service('RecipeService', function($http,$rootScope,SERVER_URL) {
             callback(resp);
         }
     }
+    this.getIngredients = function() {
+        return $http.get(SERVER_URL+'api/ingredient').then(function(response){
+            return response.data;
+        }).catch(function(err) {
+            return [];
+        });
+    }
 });

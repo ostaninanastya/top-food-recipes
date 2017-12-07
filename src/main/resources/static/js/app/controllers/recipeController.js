@@ -10,6 +10,11 @@ controllerModule.controller('RecipeController', function($scope, $location, $htt
         $scope.recipes = recipes;
     });
 
+    RecipeService.getIngredients().then(function(ingredients){
+        $scope.ingredients = ingredients;
+    });
+
+
     $scope.recipe ={};
     $scope.submit = function() {
         RecipeService.addNewRecipe($scope.recipe, $scope.fff, function(response) {
