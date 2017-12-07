@@ -1,40 +1,24 @@
 <div class="header">
+    <h2>Create new ingredient</h2>
+</div>
+
+<div class="header">
     <div>
         <form  ng-submit="submit()">
             <div>
-                <b>Create new ingredient</b>
                 <div>
-                    Ingredient name :  <input type="text" ng-model="ingredient.name" name="ingredient" >
-                    Measure name :  <select ng-model="ingredient.measure" name = "measure" ng-options="m.name for m in measures">
+                    Name  <input type="text" ng-model="ingredient.name" name="ingredient" >
+                    Measure  <select ng-model="ingredient.measure" name = "measure" ng-options="m.name for m in measures">
                     </select>
                     <div class="createRecipe">
-                        <a href="#/createMesure" class="btn btn-link">Create new measure</a>
+                        <a href="#/createMeasure" class="btn btn-link">Create new measure</a>
                     </div>
                 </div>
             </div>
-            <div>
-                <input type="submit" id="submit" value="Submit" />
+            <div style="floa:center;">
+                <input class="btn btn-default" type="submit" id="submit" value="Submit" />
             </div>
         </form>
-    </div>
-    <div>
-        <table class="table">
-            <thead>
-            <tr>
-                <th>Name</th>
-                <th>Measure</th>
-                <th width="100"></th>
-                <th width="100"></th>
-
-            </tr>
-            </thead>
-            <tbody>
-            <tr ng-repeat="ingredient in ingredients">
-                <td>{{ ingredient.name }}</td>
-                <td>{{ ingredient.measure.name}}</td>
-            </tr>
-            </tbody>
-        </table>
     </div>
 
 </div>

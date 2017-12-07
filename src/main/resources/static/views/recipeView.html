@@ -6,7 +6,7 @@
         {{selectedRecipe.recipe}}
     </div>
 
-    <div class="recipeView">Created by {{selectedRecipe.user.name}}</div>
+    <div class="recipeView" ng-show="loggedIn">Created by {{selectedRecipe.user.name}}</div>
     <br/>
 
         <div class="recipeView">

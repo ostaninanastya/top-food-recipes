@@ -7,7 +7,7 @@
             <b>Edit recipe</b>
             <div>
                 Recipe name :  <input type="text" ng-model="selectedRecipe.name" name="name" value = "selectedRecipe.name">
-                Recipe text :  <input type="text" ng-model="selectedRecipe.recipe" name="text" value = "selectedRecipe.recipe">
+                Recipe text :  <textarea type="text" ng-model="selectedRecipe.recipe" name="text">{{selectedRecipe.recipe}}</textarea>
                 Cuisine name :  <select ng-model="selectedRecipe.cuisine" name = "cuisine" ng-options="c.name for c in cuisines" value = "selectedRecipe.cuisine.name">
             </select>
             </div>

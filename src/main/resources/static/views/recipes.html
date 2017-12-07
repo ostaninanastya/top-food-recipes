@@ -1,5 +1,5 @@
 <div class="header">
-    <label>SEARCH  <input ng-model="searchRecipe"></label>
+    <h3>Search <input style="width: 500px;" ng-model="searchRecipe"> </h3>
 </div>
 <div>
     <a href="#/createRecipe" class="btn btn-link">Create new recipe</a>
@@ -22,8 +22,8 @@
                 <td ng-class="{'selected':$index == selectedRow}" ng-click="setSelectedRecipe(recipe)" >{{ recipe.name }}</td>
                 <td ng-class="{'selected':$index == selectedRow}" ng-click="setSelectedRecipe(recipe)" >{{ recipe.recipe }}</td>
                 <td>{{recipe.rating}}</td>
-                <td><a href="#/recipes" ng-click = "addLike(recipe)"><p><img src="http://188.166.30.145/topfoodrecipes/likes/like.jpg"></p></a></td>
-                <td><a href="#/recipes" ng-click = "addDislike(recipe)"><p><img src="http://188.166.30.145/topfoodrecipes/likes/dislike.jpg"></p></a></td>
+                <td><a href="#/recipes" ng-click = "addLike(recipe)"><p><img style = "width: 40px; height: 40px" src="http://188.166.30.145/topfoodrecipes/likes/like.jpg"></p></a></td>
+                <td><a href="#/recipes" ng-click = "addDislike(recipe)"><p><img style = "width: 40px; height: 40px" src="http://188.166.30.145/topfoodrecipes/likes/dislike.jpg"></p></a></td>
                 <td></td>
                 <td><a href="#/recipeEdit" ng-click="Edit(recipe)" ng-show="loggedIn">edit</a></td>
                 <td><a href="#/recipes" ng-click="Delete(recipe)"  ng-show="loggedIn">delete</a></td>
