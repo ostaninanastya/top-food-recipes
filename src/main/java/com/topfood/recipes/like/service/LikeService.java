@@ -4,6 +4,8 @@ import com.topfood.recipes.common.enums.ErrorCodes;
 import com.topfood.recipes.like.model.Like;
 import com.topfood.recipes.like.repository.LikeRepository;
 import com.topfood.recipes.recipe.model.Recipe;
+import com.topfood.recipes.recipe.repository.RecipeRepository;
+import com.topfood.recipes.recipe.service.RecipeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,15 +18,17 @@ import static com.topfood.recipes.common.enums.ErrorCodes.TOO_OFTEN_LIKES;
 public class LikeService {
     @Autowired
     private LikeRepository likeRepository;
+    @Autowired
+    private RecipeRepository recipeRepository;
 
     public List<Like> findByRecipe(Recipe recipe) {
 
         return likeRepository.findByRecipe(recipe);
     }
 
-    public Integer Rating(Recipe recipe){
+    public Integer Rating(String id){
         Integer rate = 0;
-        for (Like loice: findByRecipe(recipe))
+        for (Like loice: findByRecipe(recipeRepository.findOne(Long.valueOf(id))))
         {
             if (loice.getSign() == true)
                 rate++;

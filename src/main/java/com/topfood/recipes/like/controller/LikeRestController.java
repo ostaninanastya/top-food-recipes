@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Date;
 import java.util.List;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE;
@@ -35,15 +36,16 @@ public class LikeRestController {
     }
 
     @ApiOperation(value = "Get rating", produces = APPLICATION_JSON_UTF8_VALUE)
-    @RequestMapping(method = GET, value = "/rating")
-    public ResponseEntity<Integer> getRating(@ApiParam(value = "Recipe", required = true) @PathVariable Recipe recipe) {
-        Integer rating = likeService.Rating(recipe);
+    @RequestMapping(method = GET, value = "/{id}")
+    public ResponseEntity<Integer> getRating(@ApiParam(value = "Recipe", required = true) @PathVariable String id) {
+        Integer rating = likeService.Rating(id);
         return new ResponseEntity<Integer>(rating, HttpStatus.OK);
     }
 
     @ApiOperation(value = "Create a new like", produces = APPLICATION_JSON_UTF8_VALUE)
     @RequestMapping(method = POST)
     public ResponseEntity<? extends Object> createLike(@RequestBody Like like) {
+        like.setTimestamp(new Date());
         ErrorCodes code = likeService.add(like);
 
         if (!code.equals(ErrorCodes.OK))

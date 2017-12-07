@@ -1,6 +1,7 @@
-controllerModule.controller('RecipeController', function($scope, $location, $http, $rootScope, RecipeService, CuisineService) {
+controllerModule.controller('RecipeController', function($scope, $location, $http, $rootScope, RecipeService, CuisineService, LikeService) {
     $scope.recipes = [];
     $scope.cuisines = [];
+    $scope.like = {};
 
     CuisineService.getCuisines().then(function(cuisines){
         $scope.cuisines = cuisines;
@@ -13,7 +14,6 @@ controllerModule.controller('RecipeController', function($scope, $location, $htt
     RecipeService.getIngredients().then(function(ingredients){
         $scope.ingredients = ingredients;
     });
-
 
     $scope.recipe ={};
     $scope.submit = function() {
@@ -43,6 +43,16 @@ controllerModule.controller('RecipeController', function($scope, $location, $htt
     $scope.Edit = function(recipe) {
         $rootScope.selectedRecipe = recipe;
         $location.path('recipeEdit');
+    }
+
+    $scope.addLike = function(recipe) {
+        LikeService.addLike(recipe, $scope.like);
+        $scope.recipe = RecipeService.getRecipe(recipe.id);
+    }
+
+    $scope.addDislike = function(recipe) {
+        LikeService.addDislike(recipe, $scope.like);
+        $scope.recipe = RecipeService.getRecipe(recipe.id);
     }
 
     $rootScope.loggedIn = ($rootScope.user !== undefined);

@@ -11,6 +11,7 @@
             <tr>
                 <th>Name</th>
                 <th>Recipe</th>
+                <th>Rating</th>
                 <th width="100"></th>
                 <th width="100"></th>
                 <th width="100"></th>
@@ -20,6 +21,9 @@
             <tr ng-repeat="recipe in recipes | filter:searchRecipe" ng-class="{'selected':$index == selectedRow}" ng-click="setSelectedRecipe(recipe)" style="pointer:cursor">
                 <td>{{ recipe.name }}</td>
                 <td>{{ recipe.recipe }}</td>
+                <td>{{recipe.rating}}</td>
+                <td><a href="#/recipes" ng-click = "addLike(recipe)"><p><img src="http://188.166.30.145/topfoodrecipes/likes/like.jpg"></p></a></td>
+                <td><a href="#/recipes" ng-click = "addDislike(recipe)"><p><img src="http://188.166.30.145/topfoodrecipes/likes/dislike.jpg"></p></a></td>
                 <td></td>
                 <td><a href="#/recipeEdit" ng-click="Edit(recipe)" ng-show="loggedIn">edit</a></td>
                 <td><a href="#/recipes" ng-click="Delete(recipe)"  ng-show="loggedIn">delete</a></td>

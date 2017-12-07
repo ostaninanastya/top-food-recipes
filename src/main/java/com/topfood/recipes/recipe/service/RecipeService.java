@@ -8,6 +8,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
+import com.topfood.recipes.like.repository.LikeRepository;
+import com.topfood.recipes.like.service.LikeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,13 +39,26 @@ public class RecipeService {
     @Autowired
     private CuisineRepository cuisineRepository;
 
+    @Autowired
+    private LikeService likeService;
+
     public List<Recipe> findAll() {
-        return recipeRepository.findAll();
+
+        List <Recipe> recipes = recipeRepository.findAll();
+        for (Recipe r: recipes)
+        {
+            r.setRating(likeService.Rating(String.valueOf(r.getRecipe_id())));
+            recipeRepository.save(r);
+        }
+        return recipes;
     }
 
     public Recipe getByID(String recipe_id)
     {
-        return recipeRepository.findOne(Long.valueOf(recipe_id));
+        Recipe recipe = recipeRepository.findOne(Long.valueOf(recipe_id));
+        recipe.setRating(likeService.Rating(recipe_id));
+        recipeRepository.save(recipe);
+        return recipe;
     }
 
     public ErrorCodes add(Recipe recipe){

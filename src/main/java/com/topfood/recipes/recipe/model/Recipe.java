@@ -31,6 +31,9 @@ public class Recipe {
     @JoinColumn(name = "cuisine_id")
     private Cuisine cuisine;
 
+    @Column(name="rating")
+    private Integer rating;
+
     public Recipe(){
 
     }
@@ -89,6 +92,14 @@ public class Recipe {
 
     public void setCuisine(Cuisine cuisine) {
         this.cuisine = cuisine;
+    }
+
+    public Integer getRating() {
+        return rating;
+    }
+
+    public void setRating(Integer rating) {
+        this.rating = rating;
     }
 
     @Override

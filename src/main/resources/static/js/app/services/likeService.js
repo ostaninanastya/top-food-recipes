@@ -1,7 +1,23 @@
-servicesModule.service('LikeService', function($http, SERVER_URL) {
-    this.getRating = function(recipe) {
-        return $http.get(SERVER_URL + 'api/like/rating', JSON.stringify(recipe)).then(function(response){
-            return response.data;
+servicesModule.service('LikeService', function($http, $rootScope, SERVER_URL) {
+
+    this.addLike = function(recipe, like) {
+        like.user = $rootScope.user;
+        like.recipe = recipe;
+        like.sign = true;
+        like.timeStamp = Date.now();
+        return $http.post(SERVER_URL + 'api/like', JSON.stringify(like)).success(function(){
+            console.log("success");
         });
     }
+
+    this.addDislike = function(recipe, like) {
+        like.user = $rootScope.user;
+        like.recipe = recipe;
+        like.sign = false;
+        like.timeStamp = Date.now();
+        return $http.post(SERVER_URL + 'api/like', JSON.stringify(like)).success(function(){
+            console.log("success");
+        });
+    }
+
     });
