@@ -1,26 +1,18 @@
-controllerModule.controller('RecipeController', function($scope, $location, $http, $rootScope, RecipeService, CuisineService, LikeService) {
-    $scope.recipes = [];
-    $scope.cuisines = [];
+controllerModule.controller('RecipeController', function($scope, $location, $http, $rootScope, $interval, RecipeService, CuisineService, LikeService) {
     $scope.like = {};
 
     CuisineService.getCuisines().then(function(cuisines){
         $scope.cuisines = cuisines;
     });
 
-    RecipeService.getRecipes().then(function(recipes){
+
+    reloadRecipesPeriodically = function() {
+        RecipeService.getRecipes().then(function(recipes){
         $scope.recipes = recipes;
-    });
+        });
+    };
 
-    RecipeService.getIngredients().then(function(ingredients){
-        $scope.ingredients = ingredients;
-    });
-
-    $scope.recipe ={};
-    $scope.ingredientRecipe1={};
-    $scope.ingredientRecipe2={};
-    $scope.ingredientRecipe3={};
-    $scope.ingredientRecipe4={};
-    $scope.ingredientRecipe5={};
+    $interval(reloadRecipesPeriodically, 1000);
 
 
     $scope.submit = function() {
@@ -64,12 +56,12 @@ controllerModule.controller('RecipeController', function($scope, $location, $htt
 
     $scope.addLike = function(recipe) {
         LikeService.addLike(recipe, $scope.like);
-        $scope.recipe = RecipeService.getRecipe(recipe.id);
+        //$scope.recipe = RecipeService.getRecipe(recipe.id);
     }
 
     $scope.addDislike = function(recipe) {
         LikeService.addDislike(recipe, $scope.like);
-        $scope.recipe = RecipeService.getRecipe(recipe.id);
+        //$scope.recipe = RecipeService.getRecipe(recipe.id);
     }
 
     $rootScope.loggedIn = ($rootScope.user !== undefined);
