@@ -56,12 +56,10 @@ controllerModule.controller('RecipeController', function($scope, $location, $htt
 
     $scope.addLike = function(recipe) {
         LikeService.addLike(recipe, $scope.like);
-        //$scope.recipe = RecipeService.getRecipe(recipe.id);
     }
 
     $scope.addDislike = function(recipe) {
         LikeService.addDislike(recipe, $scope.like);
-        //$scope.recipe = RecipeService.getRecipe(recipe.id);
     }
 
     $rootScope.loggedIn = ($rootScope.user !== undefined);
