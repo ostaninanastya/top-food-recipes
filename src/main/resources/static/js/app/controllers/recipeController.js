@@ -1,29 +1,17 @@
 controllerModule.controller('RecipeController', function ($scope, $location, $http, $rootScope, $interval, RecipeService, CuisineService, LikeService) {
     $scope.like = {};
 
-    /*-------------old version without reload---------------
-    $scope.recipes = [];
     RecipeService.getRecipes().then(function(recipes){
-    $scope.recipes = recipes;
+        $scope.recipes = recipes;
     });
-    -------------old version without reload---------------*/
 
     RecipeService.getIngredients().then(function(ingredients){
         $scope.ingredients = ingredients;
     });
 
-    $scope.cuisines = [];
     CuisineService.getCuisines().then(function (cuisines) {
         $scope.cuisines = cuisines;
     });
-
-    reloadRecipesPeriodically = function () {
-        RecipeService.getRecipes().then(function (recipes) {
-            $scope.recipes = recipes;
-        });
-    };
-
-    $interval(reloadRecipesPeriodically, 1000);
 
     $scope.ingredientRecipeArray = [{}];
     $scope.addIngedient = function () {
@@ -41,6 +29,8 @@ controllerModule.controller('RecipeController', function ($scope, $location, $ht
             } else {
                 console.log('Failed to add a recipe: ' + response.error);
             }
+
+            $scope.recipe = RecipeService.getRecipe($scope.recipe.id);
         });
         RecipeService.addNewIngredientRecipe($scope.ingredientRecipeArray);
         $location.path('/recipes');
@@ -64,11 +54,25 @@ controllerModule.controller('RecipeController', function ($scope, $location, $ht
     }
 
     $scope.addLike = function (recipe) {
-        LikeService.addLike(recipe, $scope.like);
+        LikeService.addLike(recipe, $scope.like, function(response) {
+            if (response.success) {
+                console.log('Controller: success like');
+                recipe.rating++;
+            } else {
+                console.log('Controller: fail like: ' + response.errorMessage);
+            }
+        });
     }
 
     $scope.addDislike = function (recipe) {
-        LikeService.addDislike(recipe, $scope.like);
+        LikeService.addDislike(recipe, $scope.like, function(response) {
+            if (response.success) {
+                console.log('Controller: success dislike');
+                recipe.rating--;
+            } else {
+                console.log('Controller: fail dislike: ' + response.errorMessage);
+            }
+        });
     }
 
     $rootScope.loggedIn = ($rootScope.user !== undefined);

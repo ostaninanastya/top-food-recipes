@@ -8,7 +8,7 @@ servicesModule.service('RecipeService', function($http,$rootScope,SERVER_URL) {
     }
 
     this.getRecipe = function(id) {
-        return $http({method: 'GET', url: SERVER_URL + 'api/recipe/', params: {id: id}}).then(function(response){
+        $http.get(SERVER_URL + 'api/recipe/' + id).then(function(response){
             return response.data;
         });
     }
