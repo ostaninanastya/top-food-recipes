@@ -3,16 +3,16 @@ controllerModule.controller('RecipeController', function ($scope, $location, $ht
 
     /*-------------old version without reload---------------
     $scope.recipes = [];
-    $scope.cuisines = [];
     RecipeService.getRecipes().then(function(recipes){
     $scope.recipes = recipes;
     });
-
+    -------------old version without reload---------------*/
+    
     RecipeService.getIngredients().then(function(ingredients){
         $scope.ingredients = ingredients;
     });
-    -------------old version without reload---------------*/
 
+    $scope.cuisines = [];
     CuisineService.getCuisines().then(function (cuisines) {
         $scope.cuisines = cuisines;
     });
