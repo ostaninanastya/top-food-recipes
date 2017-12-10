@@ -50,7 +50,11 @@ controllerModule.controller('RecipeController', function ($scope, $location, $ht
 
     $scope.Edit = function (recipe) {
         $rootScope.selectedRecipe = recipe;
-        $location.path('recipeEdit');
+    }
+
+    $scope.Delete = function (recipe) {
+        console.log(recipe.recipe_id + 'id')
+        RecipeService.deleteRecipe(recipe);
     }
 
     $scope.addLike = function (recipe) {

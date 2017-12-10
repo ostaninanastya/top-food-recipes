@@ -13,6 +13,13 @@ servicesModule.service('RecipeService', function($http,$rootScope,SERVER_URL) {
         });
     }
 
+    this.deleteRecipe = function(recipe) {
+        $http.delete(SERVER_URL+'api/recipe/' + recipe.recipe_id).then(function(response)
+        {
+           return response.data;
+        });
+    }
+
     this.logResponse = function(data, status, headers, config) {
       	console.log('SUCCESS');
        	console.log('data: ' + data);
