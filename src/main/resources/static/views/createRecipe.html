@@ -2,7 +2,7 @@
     <h2>Create new recipe</h2>
 </div>
 <div>
-    <form ng-submit="submit()" enctype="multipart/form-data">
+    <form name="form" ng-submit="submit()" enctype="multipart/form-data">
         <div>
             <div class="createRecipe">
                 <label style="width: 100px; height: 25px;">Name</label>
@@ -15,31 +15,17 @@
             <div class="createRecipe">
                 <label style="width: 100px; height: 25px;">Ingredients</label>
                 <br/>
-                <div>
-                    <select style="width: 300px; height: 25px; display:inline-block;" ng-model="ingredientRecipe1.ingredient" ng-options="i.name for i in ingredients"></select>
-                    <input style="width: 300px; height: 25px; display:inline-block;" ng-model="ingredientRecipe1.quantity">
-                    <output style="width: 300px; height: 25px; display:inline-block;">{{ingredientRecipe1.ingredient.measure.name}}</output>
+
+                <div ng-repeat="ingredientRecipe in ingredientRecipeArray" >
+                    <select style="width: 300px; height: 25px; display:inline-block;" ng-model="ingredientRecipe.ingredient" ng-options="i.name for i in ingredients"></select>
+                    <input type = "number" name="quantity" id="quantity" class="form-control" style="width: 300px; height: 25px; display:inline-block;" ng-model="ingredientRecipe.quantity" required>
+                    <output style="width: 300px; height: 25px; display:inline-block;">{{ingredientRecipe.ingredient.measure.name}}</output>
                 </div>
-                <div>
-                    <select style="width: 300px; height: 25px;" ng-model="ingredientRecipe2.ingredient" ng-options="i.name for i in ingredients"></select>
-                    <input type= "number" style="width: 300px; height: 25px; display:inline-block;" ng-model="ingredientRecipe2.quantity">
-                    <output style="width: 300px; height: 25px; display:inline-block;">{{ingredientRecipe2.ingredient.measure.name}}</output>
+
+                <div class="createRecipe">
+                    <input class="btn btn-default" ng-click="addIngedient()" value="Add ingredient"/>
                 </div>
-                <div>
-                    <select style="width: 300px; height: 25px;" ng-model="ingredientRecipe3.ingredient" ng-options="i.name for i in ingredients"></select>
-                    <input type= "number" style="width: 300px; height: 25px; display:inline-block;" ng-model="ingredientRecipe3.quantity">
-                    <output style="width: 300px; height: 25px; display:inline-block;">{{ingredientRecipe3.ingredient.measure.name}}</output>
-                </div>
-                <div>
-                    <select style="width: 300px; height: 25px;" ng-model="ingredientRecipe4.ingredient" ng-options="i.name for i in ingredients"></select>
-                    <input type= "number" style="width: 300px; height: 25px; display:inline-block;" ng-model="ingredientRecipe4.quantity" required>
-                    <output style="width: 300px; height: 25px; display:inline-block;">{{ingredientRecipe4.ingredient.measure.name}}</output>
-                </div>
-                <div>
-                    <select style="width: 300px; height: 25px; " ng-model="ingredientRecipe5.ingredient" ng-options="i.name for i in ingredients"></select>
-                    <input type="number" style="width: 300px; height: 25px; display:inline-block;" ng-model="ingredientRecipe5.quantity">
-                    <output style="width: 300px; height: 25px; display:inline-block;">{{ingredientRecipe5.ingredient.measure.name}}</output>
-                </div>
+
             </div>
             <div class="createRecipe">
                 <a href="#/createIngredient" class="btn btn-link">Create new ingredient</a>

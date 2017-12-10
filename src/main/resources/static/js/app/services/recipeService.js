@@ -87,12 +87,8 @@ servicesModule.service('RecipeService', function($http,$rootScope,SERVER_URL) {
             return [];
         });
     }
-    this.addNewIngredientRecipe = function (ir1,ir2,ir3,ir4,ir5) {
-        $http.post(SERVER_URL + '/api/ingredientRecipe', JSON.stringify(ir1));
-        $http.post(SERVER_URL + '/api/ingredientRecipe', JSON.stringify(ir2));
-        $http.post(SERVER_URL + '/api/ingredientRecipe', JSON.stringify(ir3));
-        $http.post(SERVER_URL + '/api/ingredientRecipe', JSON.stringify(ir4));
-        $http.post(SERVER_URL + '/api/ingredientRecipe', JSON.stringify(ir5));
+    this.addNewIngredientRecipe = function (ir) {
+        $http.post(SERVER_URL + '/api/ingredientRecipe', JSON.stringify(ir));
     }
 
     this.addNewMeasure = function(measure){

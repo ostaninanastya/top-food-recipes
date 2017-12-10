@@ -46,15 +46,17 @@ public class IngredientRecipeRestController {
 
     @ApiOperation(value = "Create ingredients of recipes", produces = APPLICATION_JSON_UTF8_VALUE)
     @RequestMapping(method = POST)
-    public ResponseEntity<? extends Object> createIngredientRecipe(@RequestBody IngredientRecipe ingredientRecipe) {
-        if (ingredientRecipe.getRecipe().getUser() != null) ingredientRecipe.getRecipe().getUser().setUser_id(userRepository.findByName(ingredientRecipe.getRecipe().getUser().getName()).get(0).getUser_id());
-        ingredientRecipe.getRecipe().setRecipe_id(recipeRepository.findByName(ingredientRecipe.getRecipe().getName()).get(0).getRecipe_id());
-        ErrorCodes code = ingredientRecipeService.add(ingredientRecipe);
+    public ResponseEntity<? extends Object> createIngredientRecipe(@RequestBody IngredientRecipe[] ingredientRecipeArray) {
 
-        if (!code.equals(ErrorCodes.OK))
-            return new ResponseEntity<String>(ErrorCodeMap.errors.get(code), HttpStatus.BAD_REQUEST);
-        else
-            return new ResponseEntity<IngredientRecipe>(ingredientRecipe, HttpStatus.OK);
+        for (IngredientRecipe ingredientRecipe: ingredientRecipeArray) {
+            if (ingredientRecipe.getRecipe().getUser() != null) ingredientRecipe.getRecipe().getUser().setUser_id(userRepository.findByName(ingredientRecipe.getRecipe().getUser().getName()).get(0).getUser_id());
+            ingredientRecipe.getRecipe().setRecipe_id(recipeRepository.findByName(ingredientRecipe.getRecipe().getName()).get(0).getRecipe_id());
+            ErrorCodes code = ingredientRecipeService.add(ingredientRecipe);
+            if (!code.equals(ErrorCodes.OK))
+                return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+        }
+
+            return new ResponseEntity<IngredientRecipe[]>(ingredientRecipeArray, HttpStatus.OK);
     }
 
     @ApiOperation(value = "Update ingredients of recipes", produces = APPLICATION_JSON_UTF8_VALUE)
