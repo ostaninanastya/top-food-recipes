@@ -7,7 +7,7 @@ controllerModule.controller('RecipeController', function ($scope, $location, $ht
     $scope.recipes = recipes;
     });
     -------------old version without reload---------------*/
-    
+
     RecipeService.getIngredients().then(function(ingredients){
         $scope.ingredients = ingredients;
     });
