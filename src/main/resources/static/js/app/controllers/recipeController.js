@@ -3,18 +3,22 @@ controllerModule.controller('RecipeController', function ($scope, $location, $ht
 
     RecipeService.getRecipes().then(function(recipes){
         $scope.AllRecipes = recipes;
-        if ($scope.recipes !== undefined)
-            $scope.recipes.clear();
-        if ($scope.option !== undefined){
-            for ($scope.rec in $scope.AllRecipes){
-                if ($scope.rec.cuisine == option)
-                    $scope.recipes.add($scope.rec);
-            }
+        $scope.recipes = $scope.AllRecipes;
+
+    });
+
+    $scope.updateRecipes = function (option) {
+        if (option !== null)
+        {
+            $scope.recipes = $scope.AllRecipes.filter(function (i){
+                return angular.equals(i.cuisine,option);
+            });
+
         }
         else
             $scope.recipes = $scope.AllRecipes;
 
-    });
+    }
 
     RecipeService.getIngredients().then(function(ingredients){
         $scope.ingredients = ingredients;

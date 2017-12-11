@@ -3,9 +3,8 @@
 </div>
 <div>
     <a href="#/createRecipe"  class="btn btn-link" ng-show="loggedIn">Create new recipe</a>
-    <select name="ngvalueselect" ng-model="searchCuisine.name">
+    Select cuisine: <select name="ngvalueselect" ng-model="option" ng-options='option.name for option in cuisines' ng-change="updateRecipes(option)">
         <option value="">ALL</option>
-        <option ng-repeat="option in cuisines" ng-value="option.name">{{option.name}}</option>
     </select>
 </div>
 <div>
