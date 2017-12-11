@@ -2,7 +2,18 @@ controllerModule.controller('RecipeController', function ($scope, $location, $ht
     $scope.like = {};
 
     RecipeService.getRecipes().then(function(recipes){
-        $scope.recipes = recipes;
+        $scope.AllRecipes = recipes;
+        if ($scope.recipes !== undefined)
+            $scope.recipes.clear();
+        if ($scope.option !== undefined){
+            for ($scope.rec in $scope.AllRecipes){
+                if ($scope.rec.cuisine == option)
+                    $scope.recipes.add($scope.rec);
+            }
+        }
+        else
+            $scope.recipes = $scope.AllRecipes;
+
     });
 
     RecipeService.getIngredients().then(function(ingredients){
@@ -59,8 +70,8 @@ controllerModule.controller('RecipeController', function ($scope, $location, $ht
     }
 
     $scope.Delete = function (recipe) {
-        console.log(recipe.recipe_id + 'id')
         RecipeService.deleteRecipe(recipe);
+        $location.path('#/recipes');
     }
 
     $scope.addLike = function (recipe) {
