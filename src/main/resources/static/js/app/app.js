@@ -39,6 +39,6 @@ const myApp = angular.module('topFoodRecipesApp', ["ngRoute", "topFoodRecipeAppC
         });
 
 })
-    //.constant('SERVER_URL', 'http://localhost:8080/');
+    //.constant('SERVER_URL', 'http://localhost:8020/');
 	.constant('SERVER_URL', 'http://188.166.30.145:8080/top_food_recipes-0.0.1-SNAPSHOT/')
 ;

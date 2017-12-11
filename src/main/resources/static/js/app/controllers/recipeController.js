@@ -14,9 +14,17 @@ controllerModule.controller('RecipeController', function ($scope, $location, $ht
     });
 
     $scope.ingredientRecipeArray = [{}];
-    $scope.addIngedient = function () {
+    $scope.addIngredient = function () {
         $scope.ingredientRecipeArray.push({});
+        $scope.lastItem = false;
     };
+
+    $scope.deleteIngredient = function () {
+        $scope.ingredientRecipeArray.pop();
+        if ($scope.ingredientRecipeArray.length === 1) $scope.lastItem = true;
+    };
+
+    $scope.lastItem = true;
 
     $scope.submit = function () {
         angular.forEach($scope.ingredientRecipeArray, function (ingredientRecipe) {
@@ -26,14 +34,12 @@ controllerModule.controller('RecipeController', function ($scope, $location, $ht
         RecipeService.addNewRecipe($scope.recipe, $scope.fff, function (response) {
             if (response.success) {
                 console.log('Successfully added recipe ' + response.recipe);
+                RecipeService.addNewIngredientRecipe($scope.ingredientRecipeArray);
+                $location.path('/recipes');
             } else {
                 console.log('Failed to add a recipe: ' + response.error);
             }
-
-            $scope.recipe = RecipeService.getRecipe($scope.recipe.id);
         });
-        RecipeService.addNewIngredientRecipe($scope.ingredientRecipeArray);
-        $location.path('/recipes');
     }
 
 
