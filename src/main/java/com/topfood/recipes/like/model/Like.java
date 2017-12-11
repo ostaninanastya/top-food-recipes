@@ -7,7 +7,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import java.util.Date;
 
-
 @Entity
 @Table(name="LikeModel")
 public class Like {
@@ -20,7 +19,7 @@ public class Like {
     @JoinColumn(name = "recipe_id")
     private Recipe recipe;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "user_id")
     private User user;
 
