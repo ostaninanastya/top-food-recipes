@@ -66,10 +66,10 @@ public class RecipeService {
         return recipe;
     }
 
-    public ErrorCodes add(Recipe recipe){
-        recipeRepository.save(recipe);
+    public Recipe add(Recipe recipe){
+        Recipe recipeSaved = recipeRepository.save(recipe);
         recipeRepository.flush();
-        return (OK);
+        return recipeSaved;
     }
     public void delete(String recipe_id){
         List<IngredientRecipe> ingredientRecipes = ingredientRecipeRepository.findByRecipe(recipeRepository.findOne(Long.valueOf(recipe_id)));

@@ -6,8 +6,10 @@ import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 import static org.springframework.web.bind.annotation.RequestMethod.PUT;
+
 import java.io.IOException;
 import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,11 +25,10 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.topfood.recipes.common.enums.ErrorCodeMap;
-import com.topfood.recipes.common.enums.ErrorCodes;
 import com.topfood.recipes.cuisine.service.CuisineService;
 import com.topfood.recipes.recipe.model.Recipe;
 import com.topfood.recipes.recipe.service.RecipeService;
+import com.topfood.recipes.user.model.User;
 import com.topfood.recipes.user.service.UserService;
 
 import io.swagger.annotations.ApiOperation;
@@ -68,27 +69,27 @@ public class RecipeRestController {
     public ResponseEntity<? extends Object> createRecipe(@RequestPart(value = "recipe") Recipe recipe,
                                                          @RequestPart(value = "file") MultipartFile file) throws IOException {
         recipeService.storeFile(file);
-
         recipe.setImage(imagePrefix + file.getOriginalFilename());
-        ErrorCodes code = recipeService.add(recipe);
 
-        if (!code.equals(ErrorCodes.OK))
-            return new ResponseEntity<String>(ErrorCodeMap.errors.get(code), HttpStatus.BAD_REQUEST);
-        else
-            return new ResponseEntity<Recipe>(recipe, HttpStatus.OK);
+        if (recipe.getUser() != null) {
+            User user = userService.findByName(recipe.getUser().getName()).get(0);
+            recipe.setUser(user);
+        }
+
+        Recipe recipeSaved = recipeService.add(recipe);
+        return new ResponseEntity<Recipe>(recipeSaved, HttpStatus.OK);
     }
 
     @ApiOperation(value = "Create a recipe without a picture", produces = APPLICATION_JSON_UTF8_VALUE)
     @RequestMapping(value = "/withoutpicture", method = POST)
     public ResponseEntity<? extends Object> createRecipeWithoutPicture(@RequestBody Recipe recipe) {
-        recipe.setRating(0);
-        if (recipe.getUser() != null) recipe.getUser().setUser_id(userService.findByName(recipe.getUser().getName()).get(0).getUser_id());
-        ErrorCodes code = recipeService.add(recipe);
+        if (recipe.getUser() != null) {
+            User user = userService.findByName(recipe.getUser().getName()).get(0);
+            recipe.setUser(user);
+        }
 
-        if (!code.equals(ErrorCodes.OK))
-            return new ResponseEntity<String>(ErrorCodeMap.errors.get(code), HttpStatus.BAD_REQUEST);
-        else
-            return new ResponseEntity<Recipe>(recipe, HttpStatus.OK);
+        Recipe recipeSaved = recipeService.add(recipe);
+        return new ResponseEntity<Recipe>(recipeSaved, HttpStatus.OK);
     }
 
     //@ApiOperation(value = "Upload image", produces = APPLICATION_JSON_UTF8_VALUE)

@@ -49,6 +49,11 @@ controllerModule.controller('RecipeController', function ($scope, $location, $ht
         RecipeService.addNewRecipe($scope.recipe, $scope.fff, function (response) {
             if (response.success) {
                 console.log('Successfully added recipe ' + response.recipe);
+
+                for (var i = 0; i < $scope.ingredientRecipeArray.length; i++) {
+                    $scope.ingredientRecipeArray[i].recipe = response.recipe;
+                }
+
                 RecipeService.addNewIngredientRecipe($scope.ingredientRecipeArray);
                 $location.path('/recipes');
             } else {
