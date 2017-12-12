@@ -87,6 +87,11 @@ servicesModule.service('RecipeService', function($http,$rootScope,SERVER_URL) {
             this.uploadRecipeAndPicture(recipe, f, callback);
         }
     }
+
+    this.updateRecipe = function(selectedRecipe){
+        $http.put(SERVER_URL + '/api/recipe', JSON.stringify(selectedRecipe));
+    }
+
     this.getIngredients = function() {
         return $http.get(SERVER_URL+'api/ingredient').then(function(response){
             return response.data;

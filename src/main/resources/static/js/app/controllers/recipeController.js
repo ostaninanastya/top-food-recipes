@@ -63,6 +63,8 @@ controllerModule.controller('RecipeController', function ($scope, $location, $ht
     }
 
 
+
+
     $scope.fileChanged = function (element) {
         $scope.fff = element.files[0];
         console.log('Uploaded file: ' + $scope.fff.name);
@@ -78,6 +80,15 @@ controllerModule.controller('RecipeController', function ($scope, $location, $ht
         $rootScope.selectedRecipe = recipe;
     }
 
+    $scope.editRecipe = function(){
+        RecipeService.updateRecipe($rootScope.selectedRecipe);
+
+    }
+    /*
+    $scope.initCuisine = function () {
+        $rootScope.selectedRecipe.cuisine = $scope.cuisines[0];
+    }
+*/
     $scope.Delete = function (recipe) {
         RecipeService.deleteRecipe(recipe, function() {
             RecipeService.getRecipes().then(function(recipes){

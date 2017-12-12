@@ -1,5 +1,5 @@
 <div class="header">
-    <h2>Create new recipe</h2>
+    <h2>Edit recipe</h2>
 </div>
 <div>
     <form name="form" ng-submit="editRecipe()" enctype="multipart/form-data">
@@ -10,7 +10,11 @@
             </div>
             <div class="createRecipe">
                 <label style="width: 100px; height: 25px;">Cuisine</label>
-                <select style="width: 300px; height: 25px;" ng-model="selectedRecipe.cuisine" name="cuisine" ng-options="c.name for c in cuisines" required></select>
+                <select style="width: 300px; height: 25px;"  name="cuisine"
+                                     ng-model="selectedRecipe.cuisine"
+                                     ng-options="c.name for c in cuisines track by c.name" required>
+                  <!--  <option value="">{{selectedRecipe.cuisine.name}}</option>-->
+                </select>
             </div>
             <div class="createRecipe">
                 <label style="width: 100px; height: 25px;">Ingredients</label>
