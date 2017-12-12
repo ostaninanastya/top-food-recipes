@@ -2,15 +2,15 @@
     <h2>Create new recipe</h2>
 </div>
 <div>
-    <form name="form" ng-submit="submit()" enctype="multipart/form-data">
+    <form name="form" ng-submit="editRecipe()" enctype="multipart/form-data">
         <div>
             <div class="createRecipe">
                 <label style="width: 100px; height: 25px;">Name</label>
-                <input style="width: 300px; height: 25px;" ng-model="recipe.name" name="name" required>
+                <input style="width: 300px; height: 25px;" ng-model="selectedRecipe.name" name="name" required>
             </div>
             <div class="createRecipe">
                 <label style="width: 100px; height: 25px;">Cuisine</label>
-                <select style="width: 300px; height: 25px;" ng-model="recipe.cuisine" name="cuisine" ng-options="c.name for c in cuisines" required></select>
+                <select style="width: 300px; height: 25px;" ng-model="selectedRecipe.cuisine" name="cuisine" ng-options="c.name for c in cuisines" required></select>
             </div>
             <div class="createRecipe">
                 <label style="width: 100px; height: 25px;">Ingredients</label>
@@ -22,7 +22,7 @@
                     <output style="width: 300px; height: 25px; display:inline-block;">{{ingredientRecipe.ingredient.measure.name}}</output>
                     <br/>
                     <div style ="width: 300px; height: 25px; margin: 0px;" ng-show="form.quantity.$error.min || form.quantity.$error.max">
-                    Not valid number</div>
+                        Not valid number</div>
 
                 </div>
 
@@ -38,7 +38,7 @@
             <div class="createRecipe">
                 <label style=" width: 100px; height: 25px; padding-top: 10px; margin-top: 0px">Text</label>
                 <br/>
-                <textarea style=" width: 800px; height: 200px;" ng-model="recipe.recipe" name="text" required>
+                <textarea style=" width: 800px; height: 200px;" ng-model="selectedRecipe.recipe" name="text" required>
                     </textarea>
             </div>
             <br/>
@@ -52,7 +52,7 @@
                 </div>
             </div>
             <div class="createRecipe">
-                <input type="submit" class="btn btn-default" ng-disabled="form.$invalid" id="submit" value="Add recipe"/>
+                <input type="submit" class="btn btn-default" ng-disabled="form.$invalid" id="submit" value="Edit recipe"/>
             </div>
         </div>
 
