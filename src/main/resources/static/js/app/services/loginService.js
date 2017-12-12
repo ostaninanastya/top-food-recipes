@@ -41,11 +41,6 @@ servicesModule.service('LoginService', function($http, $rootScope, SERVER_URL) {
                 f: 'a()'
             },
             {
-                title: 'POPULAR',
-                url: '#/popular',
-                f: 'a()'
-            },
-            {
                 title: 'ADVANCED SEARCH',
                 url: '#/recipes',
                 f: 'a()'
