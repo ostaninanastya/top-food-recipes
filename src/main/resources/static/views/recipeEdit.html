@@ -11,6 +11,9 @@
                 Cuisine name :  <select ng-model="selectedRecipe.cuisine" name = "cuisine" ng-options="c.name for c in cuisines" value = "selectedRecipe.cuisine.name">
             </select>
             </div>
+            <div>
+                <p><img src="{{selectedRecipe.image}}"></p>
+            </div>
         </div>
         <div>
             <input type="submit" id="submit" value="Submit" />

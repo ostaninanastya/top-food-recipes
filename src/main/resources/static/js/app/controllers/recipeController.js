@@ -1,5 +1,7 @@
 controllerModule.controller('RecipeController', function ($scope, $location, $http, $rootScope, $interval, RecipeService, CuisineService, LikeService) {
     $scope.like = {};
+    $scope.sortType = 'rating';
+    $scope.sortReverse = false;
 
     RecipeService.getRecipes().then(function(recipes){
         $scope.AllRecipes = recipes;
