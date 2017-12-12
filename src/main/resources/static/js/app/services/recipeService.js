@@ -13,10 +13,13 @@ servicesModule.service('RecipeService', function($http,$rootScope,SERVER_URL) {
         });
     }
 
-    this.deleteRecipe = function(recipe) {
-        $http.delete(SERVER_URL+'api/recipe/' + recipe.recipe_id).then(function(response)
-        {
-           return response.data;
+    this.deleteRecipe = function(recipe, callback) {
+        $http.delete(SERVER_URL+'api/recipe/' + recipe.recipe_id)
+        .then(function(response) {
+            callback();
+        })
+        .catch(function(err) {
+            console.log('Failed to delete recipe: ' + err.data);
         });
     }
 

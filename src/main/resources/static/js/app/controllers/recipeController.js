@@ -74,8 +74,12 @@ controllerModule.controller('RecipeController', function ($scope, $location, $ht
     }
 
     $scope.Delete = function (recipe) {
-        RecipeService.deleteRecipe(recipe);
-        $location.path('#/recipes');
+        RecipeService.deleteRecipe(recipe, function() {
+            RecipeService.getRecipes().then(function(recipes){
+                $scope.recipes = recipes;
+            });
+            $location.path('/recipes');
+        });
     }
 
     $scope.addLike = function (recipe) {
