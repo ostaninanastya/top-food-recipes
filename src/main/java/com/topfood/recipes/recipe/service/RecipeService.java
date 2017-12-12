@@ -8,6 +8,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
+import com.topfood.recipes.ingredientRecipe.model.IngredientRecipe;
+import com.topfood.recipes.ingredientRecipe.repository.IngredientRecipeRepository;
 import com.topfood.recipes.like.repository.LikeRepository;
 import com.topfood.recipes.like.service.LikeService;
 import org.slf4j.Logger;
@@ -42,6 +44,9 @@ public class RecipeService {
     @Autowired
     private LikeService likeService;
 
+    @Autowired
+    private IngredientRecipeRepository ingredientRecipeRepository;
+
     public List<Recipe> findAll() {
 
         List <Recipe> recipes = recipeRepository.findAll();
@@ -61,12 +66,15 @@ public class RecipeService {
         return recipe;
     }
 
-    public ErrorCodes add(Recipe recipe){
-        recipeRepository.save(recipe);
+    public Recipe add(Recipe recipe){
+        Recipe recipeSaved = recipeRepository.save(recipe);
         recipeRepository.flush();
-        return (OK);
+        return recipeSaved;
     }
     public void delete(String recipe_id){
+        List<IngredientRecipe> ingredientRecipes = ingredientRecipeRepository.findByRecipe(recipeRepository.findOne(Long.valueOf(recipe_id)));
+        for (IngredientRecipe i : ingredientRecipes)
+            ingredientRecipeRepository.delete(i.getId());
         recipeRepository.delete(Long.valueOf(recipe_id));
     }
 

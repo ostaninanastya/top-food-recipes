@@ -1,23 +1,22 @@
 package com.topfood.recipes.ingredientRecipe.controller;
 
 
-import com.topfood.recipes.common.enums.ErrorCodeMap;
-import com.topfood.recipes.common.enums.ErrorCodes;
-import com.topfood.recipes.ingredientRecipe.model.IngredientRecipe;
-import com.topfood.recipes.ingredientRecipe.service.IngredientRecipeService;
-import com.topfood.recipes.recipe.repository.RecipeRepository;
-import com.topfood.recipes.user.repository.UserRepository;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
+import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE;
+import static org.springframework.web.bind.annotation.RequestMethod.*;
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import com.topfood.recipes.common.enums.ErrorCodes;
+import com.topfood.recipes.ingredientRecipe.model.IngredientRecipe;
+import com.topfood.recipes.ingredientRecipe.service.IngredientRecipeService;
 
-import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE;
-import static org.springframework.web.bind.annotation.RequestMethod.*;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 
 @RestController
 @RequestMapping("/api/ingredientRecipe")
@@ -25,10 +24,6 @@ public class IngredientRecipeRestController {
 
     @Autowired
     private IngredientRecipeService ingredientRecipeService;
-    @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private RecipeRepository recipeRepository;
 
     @ApiOperation(value = "Get all ingredients in recipes", produces = APPLICATION_JSON_UTF8_VALUE)
     @RequestMapping(method = GET)
@@ -49,14 +44,14 @@ public class IngredientRecipeRestController {
     public ResponseEntity<? extends Object> createIngredientRecipe(@RequestBody IngredientRecipe[] ingredientRecipeArray) {
 
         for (IngredientRecipe ingredientRecipe: ingredientRecipeArray) {
-            if (ingredientRecipe.getRecipe().getUser() != null) ingredientRecipe.getRecipe().getUser().setUser_id(userRepository.findByName(ingredientRecipe.getRecipe().getUser().getName()).get(0).getUser_id());
-            ingredientRecipe.getRecipe().setRecipe_id(recipeRepository.findByName(ingredientRecipe.getRecipe().getName()).get(0).getRecipe_id());
             ErrorCodes code = ingredientRecipeService.add(ingredientRecipe);
-            if (!code.equals(ErrorCodes.OK))
+
+            if (!code.equals(ErrorCodes.OK)) {
                 return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+            }
         }
 
-            return new ResponseEntity<IngredientRecipe[]>(ingredientRecipeArray, HttpStatus.OK);
+        return new ResponseEntity<IngredientRecipe[]>(ingredientRecipeArray, HttpStatus.OK);
     }
 
     @ApiOperation(value = "Update ingredients of recipes", produces = APPLICATION_JSON_UTF8_VALUE)

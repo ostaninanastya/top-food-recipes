@@ -13,10 +13,13 @@ servicesModule.service('RecipeService', function($http,$rootScope,SERVER_URL) {
         });
     }
 
-    this.deleteRecipe = function(recipe) {
-        $http.delete(SERVER_URL+'api/recipe/' + recipe.recipe_id).then(function(response)
-        {
-           return response.data;
+    this.deleteRecipe = function(recipe, callback) {
+        $http.delete(SERVER_URL+'api/recipe/' + recipe.recipe_id)
+        .then(function(response) {
+            callback();
+        })
+        .catch(function(err) {
+            console.log('Failed to delete recipe: ' + err.data);
         });
     }
 
@@ -27,7 +30,7 @@ servicesModule.service('RecipeService', function($http,$rootScope,SERVER_URL) {
        	console.log('headers: ' + headers);
     }
 
-    this.uploadRecipeAndPicture = function(recipe, file) {
+    this.uploadRecipeAndPicture = function(recipe, file, callback) {
         var resp = {success: true, recipe: recipe};
 
         $http({
@@ -48,30 +51,29 @@ servicesModule.service('RecipeService', function($http,$rootScope,SERVER_URL) {
 
         }).success(function (data, status, headers, config) {
         	console.log('SUCCESS');
-            logResponse(data, status, headers, config);
+            resp.recipe = data;
+            callback(resp);
         }).error(function (data, status, headers, config) {
         	console.log('ERROR');
-            logResponse(data, status, headers, config);
             resp = {success: false, error: data};
+            callback(resp);
         });
-   
-        return resp;
     }
 
-    this.uploadRecipeOnly = function(recipe) {
+    this.uploadRecipeOnly = function(recipe, callback) {
         var resp = {success: true, recipe: recipe};
 
         $http.post(SERVER_URL + 'api/recipe/withoutpicture', JSON.stringify(recipe)
         ).success(function (data, status, headers, config) {
         	console.log('SUCCESS');
-            logResponse(data, status, headers, config);
+            resp.recipe = data;
+            callback(resp);
         }).error(function (data, status, headers, config) {
         	console.log('ERROR');
-            logResponse(data, status, headers, config);
             resp = {success: false, error: data};
+            callback(resp);
         });
    
-        return resp;
     }
 
     this.addNewRecipe = function(recipe, f, callback) {
@@ -80,11 +82,9 @@ servicesModule.service('RecipeService', function($http,$rootScope,SERVER_URL) {
         var resp = {};
 
         if (f === undefined) {
-            resp = this.uploadRecipeOnly(recipe);
-            callback(resp);
+            this.uploadRecipeOnly(recipe, callback);
         } else {
-            resp = this.uploadRecipeAndPicture(recipe, f);
-            callback(resp);
+            this.uploadRecipeAndPicture(recipe, f, callback);
         }
     }
     this.getIngredients = function() {

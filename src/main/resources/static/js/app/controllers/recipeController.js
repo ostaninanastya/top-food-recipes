@@ -2,8 +2,23 @@ controllerModule.controller('RecipeController', function ($scope, $location, $ht
     $scope.like = {};
 
     RecipeService.getRecipes().then(function(recipes){
-        $scope.recipes = recipes;
+        $scope.AllRecipes = recipes;
+        $scope.recipes = $scope.AllRecipes;
+
     });
+
+    $scope.updateRecipes = function (option) {
+        if (option !== null)
+        {
+            $scope.recipes = $scope.AllRecipes.filter(function (i){
+                return angular.equals(i.cuisine,option);
+            });
+
+        }
+        else
+            $scope.recipes = $scope.AllRecipes;
+
+    }
 
     RecipeService.getIngredients().then(function(ingredients){
         $scope.ingredients = ingredients;
@@ -34,6 +49,11 @@ controllerModule.controller('RecipeController', function ($scope, $location, $ht
         RecipeService.addNewRecipe($scope.recipe, $scope.fff, function (response) {
             if (response.success) {
                 console.log('Successfully added recipe ' + response.recipe);
+
+                for (var i = 0; i < $scope.ingredientRecipeArray.length; i++) {
+                    $scope.ingredientRecipeArray[i].recipe = response.recipe;
+                }
+
                 RecipeService.addNewIngredientRecipe($scope.ingredientRecipeArray);
                 $location.path('/recipes');
             } else {
@@ -59,8 +79,12 @@ controllerModule.controller('RecipeController', function ($scope, $location, $ht
     }
 
     $scope.Delete = function (recipe) {
-        console.log(recipe.recipe_id + 'id')
-        RecipeService.deleteRecipe(recipe);
+        RecipeService.deleteRecipe(recipe, function() {
+            RecipeService.getRecipes().then(function(recipes){
+                $scope.recipes = recipes;
+            });
+            $location.path('/recipes');
+        });
     }
 
     $scope.addLike = function (recipe) {
