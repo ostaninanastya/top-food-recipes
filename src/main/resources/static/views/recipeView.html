@@ -5,6 +5,9 @@
     <div>
         {{selectedRecipe.recipe}}
     </div>
+    <div>
+        <p><img src="{{selectedRecipe.image}}"></p>
+    </div>
 
     <div class="recipeView" ng-show="loggedIn">Created by {{selectedRecipe.user.name}}</div>
     <br/>
