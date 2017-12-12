@@ -68,8 +68,8 @@ public class RecipeRestController {
     @RequestMapping(method = POST, consumes = MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<? extends Object> createRecipe(@RequestPart(value = "recipe") Recipe recipe,
                                                          @RequestPart(value = "file") MultipartFile file) throws IOException {
-        recipeService.storeFile(file);
-        recipe.setImage(imagePrefix + file.getOriginalFilename());
+        recipeService.storeFile(file, recipe);
+        recipe.setImage(imagePrefix + recipe.getName()+ "_" + file.getOriginalFilename());
 
         if (recipe.getUser() != null) {
             User user = userService.findByName(recipe.getUser().getName()).get(0);

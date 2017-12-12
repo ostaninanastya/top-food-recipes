@@ -90,9 +90,10 @@ public class RecipeService {
         recipeRepository.flush();
     }
 
-    public void storeFile(MultipartFile file) throws IOException {
+    public void storeFile(MultipartFile file, Recipe recipe) throws IOException {
         byte[] bytes = file.getBytes();
-        Path path = Paths.get(uploadFolder + file.getOriginalFilename());
+        Path path = Paths.get(uploadFolder + recipe.getName()+ "_" + file.getOriginalFilename());
         Files.write(path, bytes);
+        Runtime.getRuntime().exec("chmod -R 755 /var/www/html/topfoodrecipes/");
     }
 }
