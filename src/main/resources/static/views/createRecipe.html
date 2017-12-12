@@ -27,7 +27,7 @@
                 </div>
 
                 <div class="createRecipe">
-                    <input class="btn btn-default" ng-disabled = "form.ingredient.$invalid" ng-click="addIngredient()" value="Add ingredient"/>
+                    <input class="btn btn-default" ng-disabled = "form.ingredient.$invalid || form.quantity.$invalid" ng-click="addIngredient()" value="Add ingredient"/>
                     <input class="btn btn-default" ng-disabled = "lastItem" ng-click="deleteIngredient()" value="Delete ingredient"/>
                 </div>
 
