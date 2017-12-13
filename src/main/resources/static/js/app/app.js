@@ -35,13 +35,13 @@ const myApp = angular.module('topFoodRecipesApp', ["ngRoute", "topFoodRecipeAppC
             controller: 'RecipeEditController'
         }).when('/createMeasure', {
             templateUrl: 'views/createMeasure.html',
-            controller: 'RecipeController'
+            controller: 'MeasureController'
         }).when('/editRecipe', {
             templateUrl: 'views/editRecipe.html',
             controller: 'RecipeController'
         });
 
 })
-    //.constant('SERVER_URL', 'http://localhost:8020/');
+    //.constant('SERVER_URL', 'http://localhost:8080/');
 	.constant('SERVER_URL', 'http://188.166.30.145:8080/top_food_recipes-0.0.1-SNAPSHOT/')
 ;
