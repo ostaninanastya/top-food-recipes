@@ -6,6 +6,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 import java.util.List;
 
+import com.topfood.recipes.recipe.model.Recipe;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,10 +26,10 @@ public class IngredientRecipeRestController {
     @Autowired
     private IngredientRecipeService ingredientRecipeService;
 
-    @ApiOperation(value = "Get all ingredients in recipes", produces = APPLICATION_JSON_UTF8_VALUE)
-    @RequestMapping(method = GET)
-    public ResponseEntity<List<IngredientRecipe>> getAllIngredientRecipes() {
-        List<IngredientRecipe> ingredientRecipes = ingredientRecipeService.findAll();
+    @ApiOperation(value = "Get all ingredientsRecipe for one recipe", produces = APPLICATION_JSON_UTF8_VALUE)
+    @RequestMapping(value="/getByRecipe", method = POST)
+    public ResponseEntity<List<IngredientRecipe>> getAllIngredientRecipes(@RequestBody Recipe recipe) {
+        List<IngredientRecipe> ingredientRecipes = ingredientRecipeService.findByRecipe(recipe);
         return new ResponseEntity<List<IngredientRecipe>>(ingredientRecipes, HttpStatus.OK);
     }
 
@@ -39,7 +40,7 @@ public class IngredientRecipeRestController {
         return new ResponseEntity<IngredientRecipe>(ingredientRecipe, HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Create ingredients of recipes", produces = APPLICATION_JSON_UTF8_VALUE)
+    @ApiOperation(value = "Create ingredientsRecipes", produces = APPLICATION_JSON_UTF8_VALUE)
     @RequestMapping(method = POST)
     public ResponseEntity<? extends Object> createIngredientRecipe(@RequestBody IngredientRecipe[] ingredientRecipeArray) {
 
@@ -55,16 +56,33 @@ public class IngredientRecipeRestController {
     }
 
     @ApiOperation(value = "Update ingredients of recipes", produces = APPLICATION_JSON_UTF8_VALUE)
-    @RequestMapping(value = "/{id}", method = PUT)
-    public ResponseEntity<IngredientRecipe> updateIngredientRecipe(@RequestBody IngredientRecipe ingredientRecipe) {
-        ingredientRecipeService.update(ingredientRecipe);
-        return new ResponseEntity<IngredientRecipe>(ingredientRecipe, HttpStatus.OK);
+    @RequestMapping(method = PUT)
+    public ResponseEntity<? extends Object> updateIngredientRecipe(@RequestBody IngredientRecipe[] ingredientRecipeArray) {
+        for (IngredientRecipe ingredientRecipe: ingredientRecipeArray) {
+            ErrorCodes code;
+            if (ingredientRecipe.getId()==null)
+            {
+                code = ingredientRecipeService.add(ingredientRecipe);
+            }
+            else code = ingredientRecipeService.update(ingredientRecipe);
+
+            if (!code.equals(ErrorCodes.OK)) {
+                return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+            }
+        }
+
+        return new ResponseEntity<IngredientRecipe[]>(ingredientRecipeArray, HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Delete ingredients of recipes", produces = APPLICATION_JSON_UTF8_VALUE)
-    @RequestMapping(value = "/{id}", method = DELETE)
-    public ResponseEntity<IngredientRecipe> deleteIngredientRecipe(@ApiParam(value = "id", required = true) @PathVariable String id) {
-        ingredientRecipeService.delete(id);
-        return new ResponseEntity<IngredientRecipe>(HttpStatus.OK);
+    @ApiOperation(value = "Delete ingredientsRecipes", produces = APPLICATION_JSON_UTF8_VALUE)
+    @RequestMapping(value="/delete", method = PUT)
+    public ResponseEntity<? extends Object> deleteIngredientRecipe(@RequestBody IngredientRecipe[] ingredientRecipeDeleteArray) {
+        for (IngredientRecipe ingredientRecipe: ingredientRecipeDeleteArray) {
+            ErrorCodes code = ingredientRecipeService.delete(ingredientRecipe);
+            if (!code.equals(ErrorCodes.OK)) {
+                return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+            }
+        }
+        return new  ResponseEntity<IngredientRecipe[]>(ingredientRecipeDeleteArray, HttpStatus.OK);
     }
 }

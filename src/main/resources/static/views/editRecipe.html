@@ -13,7 +13,6 @@
                 <select style="width: 300px; height: 25px;"  name="cuisine"
                                      ng-model="selectedRecipe.cuisine"
                                      ng-options="c.name for c in cuisines track by c.name" required>
-                  <!--  <option value="">{{selectedRecipe.cuisine.name}}</option>-->
                 </select>
             </div>
             <div class="createRecipe">
@@ -21,13 +20,13 @@
                 <br/>
 
                 <div ng-repeat="ingredientRecipe in ingredientRecipeArray" >
-                    <select name = "ingredient" style="width: 300px; height: 25px; display:inline-block;" ng-model="ingredientRecipe.ingredient" ng-options="i.name for i in ingredients" required></select>
+                    <select name = "ingredient" style="width: 300px; height: 25px; display:inline-block;" ng-model="ingredientRecipe.ingredient"
+                            ng-options="i.name for i in ingredients track by i.name" required></select>
                     <input type = "number"  min="0.1" max="1000000" step="any" name="quantity" id="quantity" class="form-control" style="width: 300px; height: 25px; display:inline-block;" ng-model="ingredientRecipe.quantity" required>
                     <output style="width: 300px; height: 25px; display:inline-block;">{{ingredientRecipe.ingredient.measure.name}}</output>
                     <br/>
                     <div style ="width: 300px; height: 25px; margin: 0px;" ng-show="form.quantity.$error.min || form.quantity.$error.max">
                         Not valid number</div>
-
                 </div>
 
                 <div class="createRecipe">

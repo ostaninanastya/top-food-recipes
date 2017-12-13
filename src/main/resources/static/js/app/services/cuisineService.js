@@ -2,7 +2,8 @@ var servicesModule = angular.module('topFoodRecipeAppServices', []);
 
 servicesModule.service('CuisineService', function($http, SERVER_URL) {
     this.getCuisines = function() {
-        return $http.get(SERVER_URL+'api/cuisine').then(function(response){
+        return $http.get(SERVER_URL+'api/cuisine')
+            .then(function(response){
             return response.data;
         }).catch(function(err) {
             return [];

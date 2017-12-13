@@ -3,6 +3,7 @@ controllerModule.controller('RecipeController', function ($scope, $location, $ht
     $scope.sortType = 'rating';
     $scope.sortReverse = false;
 
+
     RecipeService.getRecipes().then(function(recipes){
         $scope.AllRecipes = recipes;
         $scope.recipes = $scope.AllRecipes;
@@ -82,15 +83,6 @@ controllerModule.controller('RecipeController', function ($scope, $location, $ht
         $rootScope.selectedRecipe = recipe;
     }
 
-    $scope.editRecipe = function(){
-        RecipeService.updateRecipe($rootScope.selectedRecipe);
-
-    }
-    /*
-    $scope.initCuisine = function () {
-        $rootScope.selectedRecipe.cuisine = $scope.cuisines[0];
-    }
-*/
     $scope.Delete = function (recipe) {
         RecipeService.deleteRecipe(recipe, function() {
             RecipeService.getRecipes().then(function(recipes){
