@@ -42,7 +42,7 @@ servicesModule.service('LoginService', function($http, $rootScope, SERVER_URL) {
             },
             {
                 title: 'ADVANCED SEARCH',
-                url: '#/recipes',
+                url: '#/advancedSearch',
                 f: 'a()'
             }
         ];

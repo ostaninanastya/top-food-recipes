@@ -3,7 +3,10 @@ const myApp = angular.module('topFoodRecipesApp', ["ngRoute", "topFoodRecipeAppC
     	$routeProvider.when('/recipes', {
     		templateUrl:'views/recipes.html',
     		controller:'RecipeController'
-    	}).when('/cuisines', {
+    	}).when('/advancedSearch', {
+            templateUrl:'views/advancedSearch.html',
+            controller:'RecipeController'
+        }).when('/cuisines', {
     		templateUrl:'views/cuisines.html',
     		controller:'CuisineController'
     	}).when('/login', {
