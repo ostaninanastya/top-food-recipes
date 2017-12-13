@@ -48,6 +48,7 @@ servicesModule.service('LoginService', function($http, $rootScope, SERVER_URL) {
         ];
 
         if ($rootScope.user !== undefined) {
+            menu.push({title: 'Create Ingredient', url: '#/createIngredient', f: ''});
             menu.push({title: 'Logout', url: '#/logout', f: 'logout()'});
         } else {
             menu.push({title: 'Login', url: '#/login', f: ''});

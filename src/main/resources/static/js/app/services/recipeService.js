@@ -99,7 +99,4 @@ servicesModule.service('RecipeService', function($http,$rootScope,SERVER_URL) {
         $http.post(SERVER_URL + '/api/ingredientRecipe', JSON.stringify(ir));
     }
 
-    this.addNewMeasure = function(measure){
-        $http.post(SERVER_URL + '("/api/measure"', JSON.stringify(measure));
-    }
 });

@@ -1,4 +1,4 @@
-controllerModule.controller('EditRecipeController', function ($scope, $location, $http, $rootScope, $interval, RecipeService, CuisineService, EditRecipeService) {
+controllerModule.controller('EditRecipeController', function ($scope, $location, $http, $rootScope, RecipeService, CuisineService, EditRecipeService) {
 
     RecipeService.getIngredients().then(function(ingredients){
         $scope.ingredients = ingredients;

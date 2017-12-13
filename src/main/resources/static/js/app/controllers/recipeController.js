@@ -116,9 +116,4 @@ controllerModule.controller('RecipeController', function ($scope, $location, $ht
 
     $rootScope.loggedIn = ($rootScope.user !== undefined);
 
-    $scope.measure = {}
-    $scope.addMeasure = function () {
-        RecipeService.addNewMeasure($scope.measure);
-        $location.path('/createIngredient');
-    }
 });

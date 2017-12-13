@@ -6,4 +6,10 @@ servicesModule.service('MeasureService', function($http, SERVER_URL) {
             return [];
         });
     }
+
+    this.addNewMeasure = function(measure){
+        return $http.post(SERVER_URL+'api/measure', JSON.stringify(measure)).success(function(){
+            console.log("success");
+        });
+    }
 });

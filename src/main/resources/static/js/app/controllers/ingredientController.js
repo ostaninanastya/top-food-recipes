@@ -1,4 +1,4 @@
-controllerModule.controller('IngredientController', function($scope, $http, IngredientService, MeasureService) {
+controllerModule.controller('IngredientController', function($scope, $http, $route, IngredientService, MeasureService) {
     $scope.ingredients = [];
     $scope.measures = [];
     MeasureService.getMeasures().then(function(measures){
@@ -15,6 +15,7 @@ controllerModule.controller('IngredientController', function($scope, $http, Ingr
                 $scope.ingredients = ingredients;
             });
             console.log("completed");
+            $route.reload();
         });
     }
 });
