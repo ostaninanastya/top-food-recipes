@@ -12,9 +12,26 @@ import com.topfood.recipes.recipe.model.Recipe;
 import com.topfood.recipes.recipe.repository.RecipeRepository;
 import com.topfood.recipes.user.model.User;
 import com.topfood.recipes.user.repository.UserRepository;
+import org.apache.tomcat.util.http.fileupload.disk.DiskFileItem;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.PostConstruct;
+
+import com.topfood.recipes.recipe.service.RecipeService;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.mock.web.MockMultipartFile;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
+import sun.misc.IOUtils;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+import org.springframework.mock.web.MockMultipartFile;
 
 @org.springframework.stereotype.Service
 public class Service {
@@ -30,9 +47,13 @@ public class Service {
     private RecipeRepository recipeRepository;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private RecipeService recipeService;
+    @Value("${image.prefix}")
+    private String imagePrefix;
+
     @PostConstruct
-    public void init()
-    {
+    public void init() {
         userRepository.save(new User("admin", "admin"));
         User adminUser = userRepository.findByName("admin").get(0);
         String namePizzaRecipe = "Пицца маргарита";
@@ -55,7 +76,7 @@ public class Service {
                 "Дать закипеть воде в кастрюле.\n" +
                 "Добавить в кастрюлю нарезанный кубиками картофель, варить до полуготовности.";
         String recipeSushiStr = "Пока рис варится займемся заправкой, смешаем сахар, соль и уксус и хорошенько размешаем. Разрезаем рыбу на полоски толщиной 1,5 см. ";
-                //"Также очищаем авокадо и нарезаем ломтиками. (P.S При выборе авокадо старайтесь купить мягкий, спелый, поскольку если авокадо попадется не дозревший, роллы в готовом виду будут горчить и испортят весь вкус.)";
+        //"Также очищаем авокадо и нарезаем ломтиками. (P.S При выборе авокадо старайтесь купить мягкий, спелый, поскольку если авокадо попадется не дозревший, роллы в готовом виду будут горчить и испортят весь вкус.)";
         String recipeHawaiianPizzaStr = "Начнем с американского теста. " +
                 "Прямо в муку добавьте быстрые дрожжи, пару щепоток соли и 2 чайные ложки сахара, перемешайте." +
                 "Влейте 3 столовые ложки оливкового масла и стакан воды. " +
@@ -106,61 +127,84 @@ public class Service {
         ingredientRepository.save(new Ingredient("мука", measureRepository.findByName("г.").get(0)));
         ingredientRepository.save(new Ingredient("сливки", measureRepository.findByName("мл.").get(0)));
 
+        ClassLoader classLoader = getClass().getClassLoader();
 
         //pizza
-        recipeRepository.save(new Recipe(namePizzaRecipe, recipePizzaStr,"image", adminUser, cuisineRepository.findByName("Итальянская").get(0)));
+        recipeRepository.save(new Recipe(namePizzaRecipe, recipePizzaStr, "image", adminUser, cuisineRepository.findByName("Итальянская").get(0)));
         Recipe pizzaRecipe = recipeRepository.findByName(namePizzaRecipe).get(0);
         ingredientRecipeRepository.save(new IngredientRecipe(ingredientRepository.findByName("молоко").get(0), pizzaRecipe, 2));
         ingredientRecipeRepository.save(new IngredientRecipe(ingredientRepository.findByName("сахар").get(0), pizzaRecipe, 1));
-        ingredientRecipeRepository.save(new IngredientRecipe(ingredientRepository.findByName("томат").get(0), pizzaRecipe , 1));
+        ingredientRecipeRepository.save(new IngredientRecipe(ingredientRepository.findByName("томат").get(0), pizzaRecipe, 1));
         //pasta
-        recipeRepository.save(new Recipe(namePastaRecipe, recipePastaStr,"image", adminUser, cuisineRepository.findByName("Итальянская").get(0)));
+        recipeRepository.save(new Recipe(namePastaRecipe, recipePastaStr, "image", adminUser, cuisineRepository.findByName("Итальянская").get(0)));
         Recipe pastaRecipe = recipeRepository.findByName(namePastaRecipe).get(0);
+
+        /*--------------add picture-----------*/
+        Path path = Paths.get("files/main.jpg");
+        String name = "file.txt";
+        String originalFileName = "file.txt";
+        String contentType = "text/plain";
+        byte[] content = null;
+        try {
+            content = Files.readAllBytes(path);
+        } catch (final IOException e) {
+        }
+        MultipartFile result = new MockMultipartFile(name,
+                originalFileName, contentType, content);
+        try {
+            recipeService.storeFile(result, pastaRecipe);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        pastaRecipe.setImage(String.format("%s%s_%s", imagePrefix, pastaRecipe.getName(), result.getOriginalFilename()));
+
+        /*--------------add picture-----------*/
+
         ingredientRecipeRepository.save(new IngredientRecipe(ingredientRepository.findByName("спагетти").get(0), pastaRecipe, 2));
         ingredientRecipeRepository.save(new IngredientRecipe(ingredientRepository.findByName("бекон").get(0), pastaRecipe, 3));
-        ingredientRecipeRepository.save(new IngredientRecipe(ingredientRepository.findByName("соль").get(0), pastaRecipe , 1));
+        ingredientRecipeRepository.save(new IngredientRecipe(ingredientRepository.findByName("соль").get(0), pastaRecipe, 1));
         //burger
-        recipeRepository.save(new Recipe(nameBurgerRecipe, recipeBurgerStr,"image", adminUser, cuisineRepository.findByName("Американская").get(0)));
+        recipeRepository.save(new Recipe(nameBurgerRecipe, recipeBurgerStr, "image", adminUser, cuisineRepository.findByName("Американская").get(0)));
         Recipe burgerRecipe = recipeRepository.findByName(namePastaRecipe).get(0);
         ingredientRecipeRepository.save(new IngredientRecipe(ingredientRepository.findByName("соль").get(0), burgerRecipe, 2));
         ingredientRecipeRepository.save(new IngredientRecipe(ingredientRepository.findByName("бекон").get(0), burgerRecipe, 3));
-        ingredientRecipeRepository.save(new IngredientRecipe(ingredientRepository.findByName("кетчуп").get(0), burgerRecipe , 1));
+        ingredientRecipeRepository.save(new IngredientRecipe(ingredientRepository.findByName("кетчуп").get(0), burgerRecipe, 1));
         //soup
-        recipeRepository.save(new Recipe(nameSoupRecipe, recipeSoupStr,"image", adminUser, cuisineRepository.findByName("Русская").get(0)));
+        recipeRepository.save(new Recipe(nameSoupRecipe, recipeSoupStr, "image", adminUser, cuisineRepository.findByName("Русская").get(0)));
         Recipe soupRecipe = recipeRepository.findByName(namePastaRecipe).get(0);
         ingredientRecipeRepository.save(new IngredientRecipe(ingredientRepository.findByName("картофель").get(0), soupRecipe, 2));
         ingredientRecipeRepository.save(new IngredientRecipe(ingredientRepository.findByName("свекла").get(0), soupRecipe, 2));
-        ingredientRecipeRepository.save(new IngredientRecipe(ingredientRepository.findByName("соль").get(0), soupRecipe , 5));
+        ingredientRecipeRepository.save(new IngredientRecipe(ingredientRepository.findByName("соль").get(0), soupRecipe, 5));
         //сheese soup
-        recipeRepository.save(new Recipe(nameCheeseSoupRecipe,recipeCheeseSoupStr,"image", adminUser,cuisineRepository.findByName("Итальянская").get(0)));
+        recipeRepository.save(new Recipe(nameCheeseSoupRecipe, recipeCheeseSoupStr, "image", adminUser, cuisineRepository.findByName("Итальянская").get(0)));
         Recipe cheeseSouprecipe = recipeRepository.findByName(nameCheeseSoupRecipe).get(0);
-        ingredientRecipeRepository.save(new IngredientRecipe(ingredientRepository.findByName("соль").get(0),cheeseSouprecipe,10));
+        ingredientRecipeRepository.save(new IngredientRecipe(ingredientRepository.findByName("соль").get(0), cheeseSouprecipe, 10));
 //        ingredientRecipeRepository.save(new IngredientRecipe(ingredientRepository.findByName("сыр").get(0),cheeseSouprecipe,150));
-        ingredientRecipeRepository.save(new IngredientRecipe(ingredientRepository.findByName("картофель").get(0),cheeseSouprecipe,2));
-        ingredientRecipeRepository.save(new IngredientRecipe(ingredientRepository.findByName("масло").get(0),cheeseSouprecipe,20));
+        ingredientRecipeRepository.save(new IngredientRecipe(ingredientRepository.findByName("картофель").get(0), cheeseSouprecipe, 2));
+        ingredientRecipeRepository.save(new IngredientRecipe(ingredientRepository.findByName("масло").get(0), cheeseSouprecipe, 20));
         //sushi
-        recipeRepository.save(new Recipe(nameSushiCalifornia,recipeSushiStr,"image",adminUser,cuisineRepository.findByName("Японская").get(0)));
+        recipeRepository.save(new Recipe(nameSushiCalifornia, recipeSushiStr, "image", adminUser, cuisineRepository.findByName("Японская").get(0)));
         Recipe sushiRecipe = recipeRepository.findByName(nameSushiCalifornia).get(0);
-        ingredientRecipeRepository.save(new IngredientRecipe(ingredientRepository.findByName("соль").get(0), sushiRecipe,15));
-        ingredientRecipeRepository.save(new IngredientRecipe(ingredientRepository.findByName("рыба").get(0), sushiRecipe,200));
-        ingredientRecipeRepository.save(new IngredientRecipe(ingredientRepository.findByName("рис").get(0), sushiRecipe,150));
-        ingredientRecipeRepository.save(new IngredientRecipe(ingredientRepository.findByName("авокадо").get(0), sushiRecipe,1));
+        ingredientRecipeRepository.save(new IngredientRecipe(ingredientRepository.findByName("соль").get(0), sushiRecipe, 15));
+        ingredientRecipeRepository.save(new IngredientRecipe(ingredientRepository.findByName("рыба").get(0), sushiRecipe, 200));
+        ingredientRecipeRepository.save(new IngredientRecipe(ingredientRepository.findByName("рис").get(0), sushiRecipe, 150));
+        ingredientRecipeRepository.save(new IngredientRecipe(ingredientRepository.findByName("авокадо").get(0), sushiRecipe, 1));
         //pizza
-        recipeRepository.save(new Recipe(nameHawaiianPizza,recipeHawaiianPizzaStr,"image", adminUser,cuisineRepository.findByName("Итальянская").get(0)));
+        recipeRepository.save(new Recipe(nameHawaiianPizza, recipeHawaiianPizzaStr, "image", adminUser, cuisineRepository.findByName("Итальянская").get(0)));
         Recipe pizzaHRecipe = recipeRepository.findByName(nameHawaiianPizza).get(0);
-        ingredientRecipeRepository.save(new IngredientRecipe(ingredientRepository.findByName("соль").get(0),pizzaHRecipe,10));
-        ingredientRecipeRepository.save(new IngredientRecipe(ingredientRepository.findByName("курица").get(0),pizzaHRecipe,200));
-        ingredientRecipeRepository.save(new IngredientRecipe(ingredientRepository.findByName("ананас").get(0),pizzaHRecipe,1));
+        ingredientRecipeRepository.save(new IngredientRecipe(ingredientRepository.findByName("соль").get(0), pizzaHRecipe, 10));
+        ingredientRecipeRepository.save(new IngredientRecipe(ingredientRepository.findByName("курица").get(0), pizzaHRecipe, 200));
+        ingredientRecipeRepository.save(new IngredientRecipe(ingredientRepository.findByName("ананас").get(0), pizzaHRecipe, 1));
         //udon
-        recipeRepository.save(new Recipe(nameUdon,recipeUdon,"image",adminUser,cuisineRepository.findByName("Китайская").get(0)));
+        recipeRepository.save(new Recipe(nameUdon, recipeUdon, "image", adminUser, cuisineRepository.findByName("Китайская").get(0)));
         Recipe udonRecipe = recipeRepository.findByName(nameUdon).get(0);
-        ingredientRecipeRepository.save(new IngredientRecipe(ingredientRepository.findByName("спагетти").get(0), udonRecipe,120));
-        ingredientRecipeRepository.save(new IngredientRecipe(ingredientRepository.findByName("соль").get(0), udonRecipe,20));
-        ingredientRecipeRepository.save(new IngredientRecipe(ingredientRepository.findByName("курица").get(0), udonRecipe,120));
-        ingredientRecipeRepository.save(new IngredientRecipe(ingredientRepository.findByName("красный перец").get(0), udonRecipe,1));
-        ingredientRecipeRepository.save(new IngredientRecipe(ingredientRepository.findByName("авокадо").get(0), udonRecipe,1));
+        ingredientRecipeRepository.save(new IngredientRecipe(ingredientRepository.findByName("спагетти").get(0), udonRecipe, 120));
+        ingredientRecipeRepository.save(new IngredientRecipe(ingredientRepository.findByName("соль").get(0), udonRecipe, 20));
+        ingredientRecipeRepository.save(new IngredientRecipe(ingredientRepository.findByName("курица").get(0), udonRecipe, 120));
+        ingredientRecipeRepository.save(new IngredientRecipe(ingredientRepository.findByName("красный перец").get(0), udonRecipe, 1));
+        ingredientRecipeRepository.save(new IngredientRecipe(ingredientRepository.findByName("авокадо").get(0), udonRecipe, 1));
         //cake
-        recipeRepository.save(new Recipe(nameCake,recipeCake,"image", adminUser,cuisineRepository.findByName("Русская").get(0)));
+        recipeRepository.save(new Recipe(nameCake, recipeCake, "image", adminUser, cuisineRepository.findByName("Русская").get(0)));
         Recipe cakeRecipe = recipeRepository.findByName(nameCake).get(0);
         ingredientRecipeRepository.save(new IngredientRecipe(ingredientRepository.findByName("сахар").get(0), cakeRecipe, 100));
         ingredientRecipeRepository.save(new IngredientRecipe(ingredientRepository.findByName("шоколад").get(0), cakeRecipe, 140));
