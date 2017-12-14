@@ -1,19 +1,19 @@
 <div class="header">
-    <h2>Create new recipe</h2>
+    <h2>Создание нового рецепта</h2>
 </div>
 <div>
     <form name="form" ng-submit="submit()" enctype="multipart/form-data">
         <div>
             <div class="createRecipe">
-                <label style="width: 100px; height: 25px;">Name</label>
+                <label style="width: 100px; height: 25px;">Название</label>
                 <input style="width: 300px; height: 25px;" ng-model="recipe.name" name="name" required>
             </div>
             <div class="createRecipe">
-                <label style="width: 100px; height: 25px;">Cuisine</label>
+                <label style="width: 100px; height: 25px;">Кухня</label>
                 <select style="width: 300px; height: 25px;" ng-model="recipe.cuisine" name="cuisine" ng-options="c.name for c in cuisines" required></select>
             </div>
             <div class="createRecipe">
-                <label style="width: 100px; height: 25px;">Ingredients</label>
+                <label style="width: 100px; height: 25px;">Ингредиенты</label>
                 <br/>
 
                 <div ng-repeat="ingredientRecipe in ingredientRecipeArray" >
@@ -27,13 +27,13 @@
                 </div>
 
                 <div class="createRecipe">
-                    <input class="btn btn-default" ng-disabled = "form.ingredient.$invalid || form.quantity.$invalid" ng-click="addIngredient()" value="Add ingredient"/>
-                    <input class="btn btn-default" ng-disabled = "lastItem" ng-click="deleteIngredient()" value="Delete ingredient"/>
+                    <input class="btn btn-default" ng-disabled = "form.ingredient.$invalid || form.quantity.$invalid" ng-click="addIngredient()" value="Добавить ингредиент"/>
+                    <input class="btn btn-default" ng-disabled = "lastItem" ng-click="deleteIngredient()" value="Удалить ингредиент"/>
                 </div>
 
             </div>
             <div class="createRecipe">
-                <label style=" width: 100px; height: 25px; padding-top: 10px; margin-top: 0px">Text</label>
+                <label style=" width: 100px; height: 25px; padding-top: 10px; margin-top: 0px">Текст рецепта</label>
                 <br/>
                 <textarea style=" width: 800px; height: 200px;" ng-model="recipe.recipe" name="text" required>
                     </textarea>
@@ -45,11 +45,11 @@
             </div>
             <div>
                 <div style = "padding-left:21px; text-align:left; width: 300px; height: 25px;" ng-show="form.$dirty && form.$invalid">
-                    All fields must be completed
+                    Все поля должны быть заполнены
                 </div>
             </div>
             <div class="createRecipe">
-                <input type="submit" class="btn btn-default" ng-disabled="form.$invalid" id="submit" value="Add recipe"/>
+                <input type="submit" class="btn btn-default" ng-disabled="form.$invalid" id="submit" value="Создать рецепт"/>
             </div>
         </div>
 

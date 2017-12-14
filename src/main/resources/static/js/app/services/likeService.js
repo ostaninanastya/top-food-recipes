@@ -12,7 +12,7 @@ servicesModule.service('LikeService', function($http, $rootScope, SERVER_URL) {
             callback(resp);
         }).catch(function (response) {
             console.log('Failed to put a like ');
-            resp = {success: false, errorMessage: 'Failed to put a like: ' + response.data};
+            resp = {success: false, errorMessage: response.data};
             callback(resp);
         });
 
@@ -30,7 +30,7 @@ servicesModule.service('LikeService', function($http, $rootScope, SERVER_URL) {
             callback(resp);
         }).catch(function (response) {
             console.log('Failed to put a dislike ');
-            resp = {success: false, errorMessage: 'Failed to put a dislike: ' + response.data};
+            resp = {success: false, errorMessage: response.data};
             callback(resp);
         });
     }

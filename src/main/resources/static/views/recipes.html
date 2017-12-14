@@ -1,13 +1,14 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <div class="header">
-    <h3>Search <input style="width: 500px;" ng-model="searchRecipe"> </h3>
+    <h3>Поиск <input style="width: 500px;" ng-model="searchRecipe"> </h3>
 </div>
 <div>
-    <a href="#/createRecipe"  class="btn btn-link" ng-show="loggedIn">Create new recipe</a>
-    Select cuisine: <select name="ngvalueselect" ng-model="option" ng-options='option.name for option in cuisines' ng-change="updateRecipes(option)">
-        <option value="">ALL</option>
+    <a href="#/createRecipe"  class="btn btn-link" ng-show="loggedIn">Создать новый рецепт</a>
+    Выбор кухни: <select name="ngvalueselect" ng-model="option" ng-options='option.name for option in cuisines' ng-change="updateRecipes(option)">
+        <option value="">Все кухни</option>
     </select>
 </div>
+<div ng-show="$scope.often!=''">{{often}}</div>
 <div>
     <div>
         <table class="table">
@@ -15,22 +16,22 @@
             <tr>
                 <th>
                     <a href="#/recipes" ng-click="sortType = 'name'; sortReverse = !sortReverse">
-                    Name
+                    Название
                         <span ng-show="sortType == 'name' && !sortReverse" class="fa fa-caret-down"></span>
                         <span ng-show="sortType == 'name' && sortReverse" class="fa fa-caret-up"></span>
                     </a>
                 </th>
-                <th>Recipe</th>
+                <th>Рецепт</th>
                 <th>
                     <a href="#/recipes" ng-click="sortType = 'cuisine.name'; sortReverse = !sortReverse">
-                        Cuisine
+                        Кухня
                         <span ng-show="sortType == 'cuisine.name' && !sortReverse" class="fa fa-caret-down"></span>
                         <span ng-show="sortType == 'cuisine.name' && sortReverse" class="fa fa-caret-up"></span>
                     </a>
                 </th>
                 <th width="100">
                     <a href="#/recipes" ng-click="sortType = 'rating'; sortReverse = !sortReverse">
-                        Rating
+                        Рейтинг
                         <span ng-show="sortType == 'rating' && !sortReverse" class="fa fa-caret-down"></span>
                         <span ng-show="sortType == 'rating' && sortReverse" class="fa fa-caret-up"></span>
                     </a>
@@ -50,8 +51,8 @@
                 <td><a href="#/recipes" ng-click = "addLike(recipe)"><p><img style = "width: 40px; height: 40px" src="http://188.166.30.145/topfoodrecipes/likes/like.jpg"></p></a></td>
                 <td><a href="#/recipes" ng-click = "addDislike(recipe)"><p><img style = "width: 40px; height: 40px" src="http://188.166.30.145/topfoodrecipes/likes/dislike.jpg"></p></a></td>
                 <td></td>
-                <td><a href="#/editRecipe" ng-click="Edit(recipe)" ng-show="loggedIn">edit</a></td>
-                <td><a href="#/recipes" ng-click="Delete(recipe)"  ng-show="loggedIn">delete</a></td>
+                <td><a href="#/editRecipe" ng-click="Edit(recipe)" ng-show="loggedIn">Изменить</a></td>
+                <td><a href="#/recipes" ng-click="Delete(recipe)"  ng-show="loggedIn">Удалить</a></td>
             </tr>
             </tbody>
         </table>

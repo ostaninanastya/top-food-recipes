@@ -1,7 +1,7 @@
 controllerModule.controller('RecipeController', function ($scope, $location, $http, $rootScope, $interval, RecipeService, CuisineService, LikeService) {
     $scope.like = {};
     $scope.sortType = 'rating';
-    $scope.sortReverse = false;
+    $scope.sortReverse = true;
 
 
     RecipeService.getRecipes().then(function(recipes){
@@ -95,10 +95,12 @@ controllerModule.controller('RecipeController', function ($scope, $location, $ht
     $scope.addLike = function (recipe) {
         LikeService.addLike(recipe, $scope.like, function(response) {
             if (response.success) {
+                $scope.often = '';
                 console.log('Controller: success like');
                 recipe.rating++;
             } else {
                 console.log('Controller: fail like: ' + response.errorMessage);
+                $scope.often = response.errorMessage;
             }
         });
     }
@@ -106,10 +108,12 @@ controllerModule.controller('RecipeController', function ($scope, $location, $ht
     $scope.addDislike = function (recipe) {
         LikeService.addDislike(recipe, $scope.like, function(response) {
             if (response.success) {
+                $scope.often = '';
                 console.log('Controller: success dislike');
                 recipe.rating--;
             } else {
                 console.log('Controller: fail dislike: ' + response.errorMessage);
+                $scope.often = response.errorMessage;
             }
         });
     }

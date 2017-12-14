@@ -36,22 +36,22 @@ servicesModule.service('LoginService', function($http, $rootScope, SERVER_URL) {
                 f: 'a()'
             },
             {
-                title: 'RECIPES',
+                title: 'Рецепты',
                 url: '#/recipes',
                 f: 'a()'
             },
             {
-                title: 'ADVANCED SEARCH',
+                title: 'Расширенный поиск',
                 url: '#/advancedSearch',
                 f: 'a()'
             }
         ];
 
         if ($rootScope.user !== undefined) {
-            menu.push({title: 'Create Ingredient', url: '#/createIngredient', f: ''});
-            menu.push({title: 'Logout', url: '#/logout', f: 'logout()'});
+            menu.push({title: 'Выйти', url: '#/logout', f: 'logout()'});
+            menu.push({title: 'Создать ингредиент', url: '#/createIngredient', f: ''});
         } else {
-            menu.push({title: 'Login', url: '#/login', f: ''});
+            menu.push({title: 'Войти', url: '#/login', f: ''});
         }
 
         return menu;

@@ -9,12 +9,12 @@
         <p><img src="{{selectedRecipe.image}}"></p>
     </div>
 
-    <div class="recipeView" ng-show="loggedIn">Created by {{selectedRecipe.user.name}}</div>
+    <div class="recipeView" ng-show="loggedIn">Автор: {{selectedRecipe.user.name}}</div>
     <br/>
 
         <div class="recipeView">
-            <a class="btn btn-default" href="#/editRecipe" ng-click="Edit(recipe)" ng-show="loggedIn">edit</a>
-            <a class="btn btn-default" ng-click="Delete()" ng-show="loggedIn">delete</a>
+            <a class="btn btn-default" href="#/editRecipe" ng-click="Edit(recipe)" ng-show="loggedIn">Изменить</a>
+            <a class="btn btn-default" ng-click="Delete()" ng-show="loggedIn">Удалить</a>
         </div>
 </div>
 

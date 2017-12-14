@@ -1,5 +1,5 @@
 <div class="header">
-    <h2>Create new ingredient</h2>
+    <h2>Создание нового ингредиента</h2>
 </div>
 
 <div class="header">
@@ -7,16 +7,16 @@
         <form  ng-submit="submit()">
             <div>
                 <div>
-                    Name  <input type="text" ng-model="ingredient.name" name="ingredient" >
-                    Measure  <select ng-model="ingredient.measure" name = "measure" ng-options="m.name for m in measures">
+                    Название  <input type="text" ng-model="ingredient.name" name="ingredient" >
+                    Мера  <select ng-model="ingredient.measure" name = "measure" ng-options="m.name for m in measures">
                     </select>
                     <div class="createRecipe">
-                        <a href="#/createMeasure" class="btn btn-link">Create new measure</a>
+                        <a href="#/createMeasure" class="btn btn-link">Создать новую меру (кг, г, стакан и т.д.)</a>
                     </div>
                 </div>
             </div>
             <div>
-                <input class="btn btn-default" type="submit" id="submit" value="Submit" />
+                <input class="btn btn-default" type="submit" id="submit" value="Создать" />
             </div>
         </form>
     </div>
