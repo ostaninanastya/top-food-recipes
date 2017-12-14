@@ -127,7 +127,6 @@ public class Service {
         ingredientRepository.save(new Ingredient("мука", measureRepository.findByName("г.").get(0)));
         ingredientRepository.save(new Ingredient("сливки", measureRepository.findByName("мл.").get(0)));
 
-        ClassLoader classLoader = getClass().getClassLoader();
 
         //pizza
         recipeRepository.save(new Recipe(namePizzaRecipe, recipePizzaStr, "image", adminUser, cuisineRepository.findByName("Итальянская").get(0)));
@@ -141,7 +140,7 @@ public class Service {
 
         /*--------------add picture-----------*/
         Path path = Paths.get("files/main.jpg");
-        String name = "file.txt";
+        String name = "main.jpg";
         String originalFileName = "file.txt";
         String contentType = "text/plain";
         byte[] content = null;
