@@ -61,7 +61,7 @@ public class Service {
         String nameBurgerRecipe = "Бургер с курицей";
         String nameSoupRecipe = "Борщ";
         String nameCheeseSoupRecipe = "Сырный суп";
-        String nameSushiCalifornia = "Суши Калифорния";
+        String nameSushiCalifornia = "Красная рыба в пивном соусе";
         String nameHawaiianPizza = "Пицца Гавайская";
         String nameUdon = "Удон с курицей";
         String nameCake = "Торт Прага";
@@ -180,7 +180,6 @@ public class Service {
         recipeRepository.save(new Recipe(nameCheeseSoupRecipe, recipeCheeseSoupStr, "http://188.166.30.145/topfoodrecipes/cheeseSoup.jpg", adminUser, cuisineRepository.findByName("Итальянская").get(0)));
         Recipe cheeseSouprecipe = recipeRepository.findByName(nameCheeseSoupRecipe).get(0);
         ingredientRecipeRepository.save(new IngredientRecipe(ingredientRepository.findByName("соль").get(0), cheeseSouprecipe, 10));
-//        ingredientRecipeRepository.save(new IngredientRecipe(ingredientRepository.findByName("сыр").get(0),cheeseSouprecipe,150));
         ingredientRecipeRepository.save(new IngredientRecipe(ingredientRepository.findByName("картофель").get(0), cheeseSouprecipe, 2));
         ingredientRecipeRepository.save(new IngredientRecipe(ingredientRepository.findByName("масло").get(0), cheeseSouprecipe, 20));
         //sushi
