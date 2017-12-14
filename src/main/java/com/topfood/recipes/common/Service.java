@@ -141,7 +141,7 @@ public class Service {
         /*>>>>>>>>>>>>>>>add picture>>>>>>>>>>>>>>>*/
         /*-----------convert File to MultipartFile-----------*/
 
-        Path path = Paths.get("files/main.jpg");
+        Path path = Paths.get("/root/files/main.jpg");
         String name = "main.jpg";
         String originalFileName = "main.jpg";
         String contentType = "text/plain";

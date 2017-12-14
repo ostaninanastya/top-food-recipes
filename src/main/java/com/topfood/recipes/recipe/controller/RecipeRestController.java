@@ -122,6 +122,7 @@ public class RecipeRestController {
     @ApiOperation(value = "Update a recipe", produces = APPLICATION_JSON_UTF8_VALUE)
     @RequestMapping(method = PUT)
     public ResponseEntity<Recipe> updateRecipe(@RequestBody Recipe recipe) {
+
         LOG.info("Update recipe " + recipe + "...");
         recipeService.update(recipe);
         return new ResponseEntity<Recipe>(recipe, HttpStatus.OK);
