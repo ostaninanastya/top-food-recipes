@@ -138,10 +138,12 @@ public class Service {
         recipeRepository.save(new Recipe(namePastaRecipe, recipePastaStr, "image", adminUser, cuisineRepository.findByName("Итальянская").get(0)));
         Recipe pastaRecipe = recipeRepository.findByName(namePastaRecipe).get(0);
 
-        /*--------------add picture-----------*/
+        /*>>>>>>>>>>>>>>>add picture>>>>>>>>>>>>>>>*/
+        /*-----------convert File to MultipartFile-----------*/
+
         Path path = Paths.get("files/main.jpg");
         String name = "main.jpg";
-        String originalFileName = "file.txt";
+        String originalFileName = "main.jpg";
         String contentType = "text/plain";
         byte[] content = null;
         try {
@@ -157,7 +159,7 @@ public class Service {
         }
         pastaRecipe.setImage(String.format("%s%s_%s", imagePrefix, pastaRecipe.getName(), result.getOriginalFilename()));
 
-        /*--------------add picture-----------*/
+        /*<<<<<<<<<<<<<<<<add picture<<<<<<<<<<<<<<<<<*/
 
         ingredientRecipeRepository.save(new IngredientRecipe(ingredientRepository.findByName("спагетти").get(0), pastaRecipe, 2));
         ingredientRecipeRepository.save(new IngredientRecipe(ingredientRepository.findByName("бекон").get(0), pastaRecipe, 3));
