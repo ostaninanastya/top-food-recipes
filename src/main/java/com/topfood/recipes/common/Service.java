@@ -140,7 +140,7 @@ public class Service {
 
         /*>>>>>>>>>>>>>>>add picture>>>>>>>>>>>>>>>*/
         /*-----------convert File to MultipartFile-----------*/
-
+        /*
         Path path = Paths.get("/root/files/main.jpg");
         String name = "main.jpg";
         String originalFileName = "main.jpg";
@@ -158,7 +158,7 @@ public class Service {
             e.printStackTrace();
         }
         pastaRecipe.setImage(String.format("%s%s_%s", imagePrefix, pastaRecipe.getName(), result.getOriginalFilename()));
-
+        */
         /*<<<<<<<<<<<<<<<<add picture<<<<<<<<<<<<<<<<<*/
 
         ingredientRecipeRepository.save(new IngredientRecipe(ingredientRepository.findByName("спагетти").get(0), pastaRecipe, 2));
