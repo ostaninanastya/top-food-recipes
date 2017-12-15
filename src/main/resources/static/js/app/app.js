@@ -5,7 +5,7 @@ const myApp = angular.module('topFoodRecipesApp', ["ngRoute", "topFoodRecipeAppC
     		controller:'RecipeController'
     	}).when('/advancedSearch', {
             templateUrl:'views/advancedSearch.html',
-            controller:'RecipeController'
+            controller:'AdvancedSearchController'
         }).when('/cuisines', {
     		templateUrl:'views/cuisines.html',
     		controller:'CuisineController'

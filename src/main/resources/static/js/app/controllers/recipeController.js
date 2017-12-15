@@ -1,4 +1,4 @@
-controllerModule.controller('RecipeController', function ($scope, $location, $http, $rootScope, $interval, RecipeService, CuisineService, LikeService) {
+controllerModule.controller('AdvancedSearchController', function ($scope, $location, $http, $rootScope, $interval, RecipeService, CuisineService, LikeService) {
     $scope.like = {};
     $scope.sortType = 'rating';
     $scope.sortReverse = true;

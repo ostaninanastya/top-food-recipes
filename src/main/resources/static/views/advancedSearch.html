@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <div>
     Выбор кухни: <select name="ngvalueselect"
-                            ng-model="option"
+                            ng-model="searchRecipe.cuisine"
                             style="padding-top:10px; width: 200px; display:inline-block;"
                             ng-options='option.name for option in cuisines'
                             ng-change="updateRecipes(option)">
