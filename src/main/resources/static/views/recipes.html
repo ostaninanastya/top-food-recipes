@@ -51,8 +51,8 @@
                 <td><a href="#/recipes" ng-click = "addLike(recipe)"><p><img style = "width: 40px; height: 40px" src="http://188.166.30.145/topfoodrecipes/likes/like.jpg"></p></a></td>
                 <td><a href="#/recipes" ng-click = "addDislike(recipe)"><p><img style = "width: 40px; height: 40px" src="http://188.166.30.145/topfoodrecipes/likes/dislike.jpg"></p></a></td>
                 <td></td>
-                <td><a href="#/editRecipe" ng-click="Edit(recipe)" ng-show="loggedIn">Изменить</a></td>
-                <td><a href="#/recipes" ng-click="Delete(recipe)"  ng-show="loggedIn">Удалить</a></td>
+                <td><a href="#/editRecipe" ng-click="Edit(recipe)" ng-show="loggedIn && isOwner(recipe)">Изменить</a></td>
+                <td><a href="#/recipes" ng-click="Delete(recipe)"  ng-show="loggedIn && isOwner(recipe)">Удалить</a></td>
             </tr>
             </tbody>
         </table>
