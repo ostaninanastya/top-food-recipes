@@ -1,17 +1,14 @@
 package com.topfood.recipes.recipe.service;
 
-import static com.topfood.recipes.common.enums.ErrorCodes.OK;
-
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
-import com.topfood.recipes.ingredientRecipe.model.IngredientRecipe;
-import com.topfood.recipes.ingredientRecipe.repository.IngredientRecipeRepository;
-import com.topfood.recipes.like.repository.LikeRepository;
-import com.topfood.recipes.like.service.LikeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +16,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.topfood.recipes.common.enums.ErrorCodes;
 import com.topfood.recipes.cuisine.repository.CuisineRepository;
+import com.topfood.recipes.ingredientRecipe.model.IngredientRecipe;
+import com.topfood.recipes.ingredientRecipe.repository.IngredientRecipeRepository;
+import com.topfood.recipes.like.service.LikeService;
 import com.topfood.recipes.recipe.model.Recipe;
 import com.topfood.recipes.recipe.repository.RecipeRepository;
 import com.topfood.recipes.user.repository.UserRepository;
@@ -94,6 +93,33 @@ public class RecipeService {
         byte[] bytes = file.getBytes();
         Path path = Paths.get(uploadFolder + recipe.getName()+ "_" + file.getOriginalFilename());
         Files.write(path, bytes);
-        Runtime.getRuntime().exec("chmod -R 755 /var/www/html/topfoodrecipes/");
+        Runtime.getRuntime().exec("chmod -R 755 " + uploadFolder);
+    }
+
+    public void storeFile(File file, Recipe recipe) throws IOException {
+        byte[] bytes = fileToByteArray(file);
+        Path path = Paths.get(uploadFolder + recipe.getName()+ "_" + file.getName());
+        Files.write(path, bytes);
+        Runtime.getRuntime().exec("chmod -R 755 " + uploadFolder);
+    }
+
+    public byte[] fileToByteArray(File file) throws IOException {
+
+        byte[] buffer = new byte[(int) file.length()];
+        InputStream ios = null;
+        try {
+            ios = new FileInputStream(file);
+            if (ios.read(buffer) == -1) {
+                throw new IOException(
+                        "EOF reached while trying to read the whole file");
+            }
+        } finally {
+            try {
+                if (ios != null)
+                    ios.close();
+            } catch (IOException e) {
+            }
+        }
+        return buffer;
     }
 }
