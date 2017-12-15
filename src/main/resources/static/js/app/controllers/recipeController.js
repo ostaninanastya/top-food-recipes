@@ -120,4 +120,11 @@ controllerModule.controller('RecipeController', function ($scope, $location, $ht
 
     $rootScope.loggedIn = ($rootScope.user !== undefined);
 
+    $scope.isOwner = function (recipe) {
+        if (recipe.user.name == $rootScope.user.name)
+            return true;
+        else
+            return false;
+    }
+
 });

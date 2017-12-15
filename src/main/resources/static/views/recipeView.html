@@ -6,15 +6,15 @@
         {{selectedRecipe.recipe}}
     </div>
     <div>
-        <p><img width="525" height="790" src="{{selectedRecipe.image}}"></p>
+        <p><img width="500" height="500" src="{{selectedRecipe.image}}"></p>
     </div>
 
     <div class="recipeView" ng-show="loggedIn">Автор: {{selectedRecipe.user.name}}</div>
     <br/>
 
         <div class="recipeView">
-            <a class="btn btn-default" href="#/editRecipe" ng-click="Edit(recipe)" ng-show="loggedIn">Изменить</a>
-            <a class="btn btn-default" ng-click="Delete()" ng-show="loggedIn">Удалить</a>
+            <a class="btn btn-default" href="#/editRecipe" ng-click="Edit(recipe)" ng-show="loggedIn && isOwner()">Изменить</a>
+            <a class="btn btn-default" ng-click="Delete()" ng-show="loggedIn && isOwner()">Удалить</a>
         </div>
 </div>
 

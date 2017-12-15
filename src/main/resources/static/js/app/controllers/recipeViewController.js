@@ -1,4 +1,4 @@
-controllerModule.controller('RecipeViewController', function($scope, $http, $location, RecipeService) {
+controllerModule.controller('RecipeViewController', function($scope, $http, $location, $rootScope, RecipeService) {
 
     $scope.Delete = function () {
         RecipeService.deleteRecipe($scope.selectedRecipe, function() {
@@ -6,5 +6,11 @@ controllerModule.controller('RecipeViewController', function($scope, $http, $loc
                 $location.path('/recipes');
             });
         });
+    }
+    $scope.isOwner = function () {
+        if ($scope.selectedRecipe.user.name == $rootScope.user.name)
+            return true;
+        else
+            return false;
     }
 });
