@@ -50,6 +50,7 @@ servicesModule.service('LoginService', function($http, $rootScope, SERVER_URL) {
         if ($rootScope.user !== undefined) {
             menu.push({title: 'Выйти', url: '#/logout', f: 'logout()'});
             menu.push({title: 'Создать ингредиент', url: '#/createIngredient', f: ''});
+            menu.push({title: 'Создать рецепт', url: '#/createRecipe', f: ''});
         } else {
             menu.push({title: 'Войти', url: '#/login', f: ''});
         }
