@@ -146,7 +146,7 @@ public class Service {
             //burger
             filename = "burger.jpg";
             recipeRepository.save(new Recipe(nameBurgerRecipe, recipeBurgerStr, imagePrefix + filename, adminUser, cuisineRepository.findByName("Американская").get(0)));
-            Recipe burgerRecipe = recipeRepository.findByName(namePastaRecipe).get(0);
+            Recipe burgerRecipe = recipeRepository.findByName(nameBurgerRecipe).get(0);
             file = new File(getClass().getClassLoader().getResource("pictures/" + filename).getFile());
             recipeService.storeFile(file, burgerRecipe);
             ingredientRecipeRepository.save(new IngredientRecipe(ingredientRepository.findByName("соль").get(0), burgerRecipe, 2));
@@ -155,7 +155,7 @@ public class Service {
             //soup
             filename = "soup.jpg";
             recipeRepository.save(new Recipe(nameSoupRecipe, recipeSoupStr, imagePrefix + filename, adminUser, cuisineRepository.findByName("Русская").get(0)));
-            Recipe soupRecipe = recipeRepository.findByName(namePastaRecipe).get(0);
+            Recipe soupRecipe = recipeRepository.findByName(nameSoupRecipe).get(0);
             file = new File(getClass().getClassLoader().getResource("pictures/" + filename).getFile());
             recipeService.storeFile(file, soupRecipe);
             ingredientRecipeRepository.save(new IngredientRecipe(ingredientRepository.findByName("картофель").get(0), soupRecipe, 2));
