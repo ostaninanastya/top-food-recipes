@@ -10,7 +10,7 @@
     <div>
         Выбор ингредиентов: <select multiple name="ingredient"
                                     style="width: 200px; height: 130px; display:inline-block;"
-                                    ng-model="ingredientRecipeArray"
+                                    ng-model="selectedIngredients"
                                     ng-change="updateingredientRecipe()"
                                     ng-options="i.name for i in ingredients track by i.name"
                                     required></select>
@@ -49,7 +49,7 @@
             </tr>
             </thead>
             <tbody style="cursor:pointer;">
-            <tr ng-repeat="recipe in recipes | filter:searchRecipe | orderBy:sortType:sortReverse" ng-if="(recipe.recipe_id == 1)">
+            <tr ng-repeat="recipe in recipes | filter:searchRecipe | orderBy:sortType:sortReverse">
                 <td ng-class="{'selected':$index == selectedRow}" ng-click="setSelectedRecipe(recipe)">{{ recipe.name }}
                 </td>
                 <td ng-class="{'selected':$index == selectedRow}" ng-click="setSelectedRecipe(recipe)">{{ recipe.recipe

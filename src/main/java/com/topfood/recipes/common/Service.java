@@ -139,7 +139,7 @@ public class Service {
             recipeRepository.save(new Recipe(namePastaRecipe, recipePastaStr, imagePrefix + filename, adminUser, cuisineRepository.findByName("Итальянская").get(0)));
             Recipe pastaRecipe = recipeRepository.findByName(namePastaRecipe).get(0);
             file = new File(getClass().getClassLoader().getResource("pictures/" + filename).getFile());
-            recipeService.storeFile(file, pastaRecipe);
+            recipeService.storeFile((File)file, pastaRecipe);
             ingredientRecipeRepository.save(new IngredientRecipe(ingredientRepository.findByName("спагетти").get(0), pastaRecipe, 2));
             ingredientRecipeRepository.save(new IngredientRecipe(ingredientRepository.findByName("бекон").get(0), pastaRecipe, 3));
             ingredientRecipeRepository.save(new IngredientRecipe(ingredientRepository.findByName("соль").get(0), pastaRecipe, 1));

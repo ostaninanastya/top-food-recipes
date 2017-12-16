@@ -1,12 +1,12 @@
-controllerModule.controller('AdvancedSearchController', function ($scope, $location, $http, $rootScope, $interval, RecipeService, CuisineService, LikeService, AdvancedSearchService) {
+controllerModule.controller('AdvancedSearchController', function ($scope, $location, $http, $rootScope, $interval, RecipeService, CuisineService, LikeService) {
 
-    RecipeService.getRecipes().then(function(recipes){
+    RecipeService.getRecipes().then(function (recipes) {
         $scope.AllRecipes = recipes;
-        $scope.recipes = $scope.AllRecipes;
+        $scope.recipes = recipes;
 
     });
 
-    RecipeService.getIngredients().then(function(ingredients){
+    RecipeService.getIngredients().then(function (ingredients) {
         $scope.ingredients = ingredients;
     });
 
@@ -18,12 +18,38 @@ controllerModule.controller('AdvancedSearchController', function ($scope, $locat
         $scope.cuisines = cuisines;
     });
 
-
-    $scope.ingredientRecipeArray = [];
-    $scope.searchRecipe ={};
+    $scope.selectedIngredients = [];
+    $scope.searchRecipe = {};
 
     $scope.updateingredientRecipe = function () {
+        $scope.recipes = [];
+        for (var i = 0; i < $scope.AllRecipes.length; i++) {
+            $scope.ingredientsForOneRecipe = [];
+            //получаем ingredientRecipes для одного рецепта
+            for (var j = 0; j < $scope.ingredientsRecipes.length; j++) {
+                if ($scope.ingredientsRecipes[j].recipe.recipe_id === $scope.AllRecipes[i].recipe_id) {
+                    $scope.ingredientsForOneRecipe.push($scope.ingredientsRecipes[j].ingredient);
+                }
+            }
 
 
+            for (var j = 0; j < $scope.selectedIngredients.length; j++) {
+                var recipeContainsIngredient = false;
+                for (var v = 0; v <$scope.ingredientsForOneRecipe.length; v++)
+                {
+                    if ($scope.selectedIngredients[j].ingredient_id === $scope.ingredientsForOneRecipe[v].ingredient_id){
+                        recipeContainsIngredient = true;
+                    }
+                }
+                if (recipeContainsIngredient !== true)
+                {
+                    break;
+                }
+            }
+            if (recipeContainsIngredient === true) {
+                $scope.recipes.push($scope.AllRecipes[i]);
+            }
+            recipeContainsIngredient = false;
+        }
     }
 });
