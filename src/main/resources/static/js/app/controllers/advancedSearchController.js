@@ -22,7 +22,9 @@ controllerModule.controller('AdvancedSearchController', function ($scope, $locat
     $scope.searchRecipe = {};
 
     $scope.updateingredientRecipe = function () {
-        $scope.recipes = [];
+        if ($scope.selectedIngredients.length !== undefined) {
+            $scope.recipes = [];
+        }
         for (var i = 0; i < $scope.AllRecipes.length; i++) {
             $scope.ingredientsForOneRecipe = [];
             //получаем ingredientRecipes для одного рецепта
@@ -51,5 +53,71 @@ controllerModule.controller('AdvancedSearchController', function ($scope, $locat
             }
             recipeContainsIngredient = false;
         }
+    }
+
+    //from recipeController
+    $scope.like = {};
+    $scope.sortType = 'rating';
+    $scope.sortReverse = true;
+    $scope.setSelectedRecipe = function (recipe) {
+        $rootScope.selectedRecipe = recipe;
+        $location.path('/recipeView');
+    }
+    $scope.Edit = function (recipe) {
+        $rootScope.selectedRecipe = recipe;
+    }
+    $scope.Delete = function (recipe) {
+        RecipeService.deleteRecipe(recipe, function() {
+            RecipeService.getRecipes().then(function(recipes){
+                $scope.recipes = recipes;
+            });
+            $location.path('/recipes');
+        });
+    }
+    $scope.isOwner = function (recipe) {
+        if (recipe.user.name === $rootScope.user.name)
+            return true;
+        else
+            return false;
+        return false;
+    }
+    $rootScope.loggedIn = ($rootScope.user !== undefined);
+
+    $scope.addLike = function (recipe) {
+        LikeService.addLike(recipe, $scope.like, function(response) {
+            if (response.success) {
+                $scope.often = '';
+                console.log('Controller: success like');
+                recipe.rating++;
+            } else {
+                console.log('Controller: fail like: ' + response.errorMessage);
+                $scope.often = response.errorMessage;
+            }
+        });
+    }
+
+    $scope.addDislike = function (recipe) {
+        LikeService.addDislike(recipe, $scope.like, function(response) {
+            if (response.success) {
+                $scope.often = '';
+                console.log('Controller: success dislike');
+                recipe.rating--;
+            } else {
+                console.log('Controller: fail dislike: ' + response.errorMessage);
+                $scope.often = response.errorMessage;
+            }
+        });
+    }
+    $scope.updateRecipes = function (option) {
+        if (option !== null)
+        {
+            $scope.recipes = $scope.AllRecipes.filter(function (i){
+                return angular.equals(i.cuisine,option);
+            });
+
+        }
+        else
+            $scope.recipes = $scope.AllRecipes;
+
     }
 });
