@@ -1,10 +1,9 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <div class="header">
-    <h3>Поиск <input style="width: 500px;" ng-model="searchRecipe"> </h3>
+    <h4>Поиск <input style="width: 500px; height: 31px;" ng-model="searchRecipe"> </h4>
 </div>
 <div>
-    <a href="#/createRecipe"  class="btn btn-link" ng-show="loggedIn">Создать новый рецепт</a>
-    Выбор кухни: <select name="ngvalueselect" ng-model="option" ng-options='option.name for option in cuisines' ng-change="updateRecipes(option)">
+    Выбор кухни: <select name="ngvalueselect" style="padding-top:10px; width: 200px; display:inline-block;" ng-model="option" ng-options='option.name for option in cuisines' ng-change="updateRecipes(option)">
         <option value="">Все кухни</option>
     </select>
 </div>

@@ -1,19 +1,24 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <div>
-    <div>
-        Выбор кухни: <select ng-model="searchRecipe.cuisine"
-                             style="padding-top:10px; width: 200px; display:inline-block;"
-                             ng-options='option.name for option in cuisines'>
-        <option value="">Все кухни</option>
-    </select>
-    </div>
-    <div>
-        Выбор ингредиентов: <select multiple name="ingredient"
-                                    style="width: 200px; height: 130px; display:inline-block;"
-                                    ng-model="selectedIngredients"
-                                    ng-change="updateingredientRecipe()"
-                                    ng-options="i.name for i in ingredients track by i.name"
-                                    required></select>
+    <div style="margin:30px;">
+        <div style="display: inline-block;">
+            <h5>Выбор кухни:</h5>
+                <select ng-model="option"
+                        style="padding-top:10px; width: 200px; display:inline-block;"
+                        ng-options='option.name for option in cuisines'
+                        ng-change="updateRecipes(option)">
+                    <option value="">Все кухни</option>
+                </select>
+            </h5>
+        </div>
+        <div style="display: inline-block;">
+            <h5>Выбор ингредиентов:</h5><select multiple name="ingredient"
+                        style="width: 200px; height: 130px; display:inline-block;"
+                        ng-model="selectedIngredients"
+                        ng-change="updateingredientRecipe()"
+                        ng-options="i.name for i in ingredients track by i.name"
+                        required></select>
+        </div>
     </div>
 
     <div>
@@ -49,16 +54,28 @@
             </tr>
             </thead>
             <tbody style="cursor:pointer;">
-            <tr ng-repeat="recipe in recipes | filter:searchRecipe | orderBy:sortType:sortReverse" >
-                <td ng-class="{'selected':$index == selectedRow}" ng-click="setSelectedRecipe(recipe)" >{{ recipe.name }}</td>
-                <td ng-class="{'selected':$index == selectedRow}" ng-click="setSelectedRecipe(recipe)" >{{ recipe.recipe }}</td>
-                <td ng-class="{'selected':$index == selectedRow}" ng-click="setSelectedRecipe(recipe)" >{{ recipe.cuisine.name }}</td>
+            <tr ng-repeat="recipe in recipes | orderBy:sortType:sortReverse">
+                <td ng-class="{'selected':$index == selectedRow}" ng-click="setSelectedRecipe(recipe)">{{ recipe.name
+                    }}
+                </td>
+                <td ng-class="{'selected':$index == selectedRow}" ng-click="setSelectedRecipe(recipe)">{{ recipe.recipe
+                    }}
+                </td>
+                <td ng-class="{'selected':$index == selectedRow}" ng-click="setSelectedRecipe(recipe)">{{
+                    recipe.cuisine.name }}
+                </td>
                 <td>{{recipe.rating}}</td>
-                <td><a href="#/advancedSearch" ng-click = "addLike(recipe)"><p><img style = "width: 40px; height: 40px" src="http://188.166.30.145/topfoodrecipes/likes/like.jpg"></p></a></td>
-                <td><a href="#/advancedSearch" ng-click = "addDislike(recipe)"><p><img style = "width: 40px; height: 40px" src="http://188.166.30.145/topfoodrecipes/likes/dislike.jpg"></p></a></td>
+                <td><a href="#/advancedSearch" ng-click="addLike(recipe)"><p><img style="width: 40px; height: 40px"
+                                                                                  src="http://188.166.30.145/topfoodrecipes/likes/like.jpg">
+                </p></a></td>
+                <td><a href="#/advancedSearch" ng-click="addDislike(recipe)"><p><img style="width: 40px; height: 40px"
+                                                                                     src="http://188.166.30.145/topfoodrecipes/likes/dislike.jpg">
+                </p></a></td>
                 <td></td>
-                <td><a href="#/editRecipe" ng-click="Edit(recipe)" ng-show="loggedIn && isOwner(recipe)">Изменить</a></td>
-                <td><a href="#/advancedSearch" ng-click="Delete(recipe)"  ng-show="loggedIn && isOwner(recipe)">Удалить</a></td>
+                <td><a href="#/editRecipe" ng-click="Edit(recipe)" ng-show="loggedIn && isOwner(recipe)">Изменить</a>
+                </td>
+                <td><a href="#/advancedSearch" ng-click="Delete(recipe)"
+                       ng-show="loggedIn && isOwner(recipe)">Удалить</a></td>
             </tr>
             </tbody>
         </table>
