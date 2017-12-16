@@ -26,6 +26,13 @@ public class IngredientRecipeRestController {
     @Autowired
     private IngredientRecipeService ingredientRecipeService;
 
+    @ApiOperation(value = "Get all ingredientsRecipes", produces = APPLICATION_JSON_UTF8_VALUE)
+    @RequestMapping(method = GET)
+    public ResponseEntity<List<IngredientRecipe>> getIngredientRecipes() {
+        List<IngredientRecipe> ingredientRecipes = ingredientRecipeService.findAll();
+        return new ResponseEntity<List<IngredientRecipe>>(ingredientRecipes, HttpStatus.OK);
+    }
+
     @ApiOperation(value = "Get all ingredientsRecipe for one recipe", produces = APPLICATION_JSON_UTF8_VALUE)
     @RequestMapping(value="/getByRecipe", method = POST)
     public ResponseEntity<List<IngredientRecipe>> getAllIngredientRecipes(@RequestBody Recipe recipe) {

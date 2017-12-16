@@ -95,6 +95,15 @@ servicesModule.service('RecipeService', function($http,$rootScope,SERVER_URL) {
             return [];
         });
     }
+
+    this.getIngredientRecipes = function() {
+        return $http.get(SERVER_URL+'api/ingredientRecipe').then(function(response){
+            return response.data;
+        }).catch(function(err) {
+            return [];
+        });
+    }
+
     this.addNewIngredientRecipe = function (ir) {
         $http.post(SERVER_URL + '/api/ingredientRecipe', JSON.stringify(ir));
     }

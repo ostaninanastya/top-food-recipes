@@ -121,9 +121,10 @@ controllerModule.controller('AdvancedSearchController', function ($scope, $locat
     $rootScope.loggedIn = ($rootScope.user !== undefined);
 
     $scope.isOwner = function (recipe) {
-        if (recipe.user.name == $rootScope.user.name)
+        if (recipe.user.name === $rootScope.user.name)
             return true;
         else
+            return false;
             return false;
     }
 

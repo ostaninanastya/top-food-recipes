@@ -1,4 +1,4 @@
-controllerModule.controller('RecipeController', function ($scope, $location, $http, $rootScope, $interval, RecipeService, CuisineService, LikeService) {
+controllerModule.controller('AdvancedSearchController', function ($scope, $location, $http, $rootScope, $interval, RecipeService, CuisineService, LikeService, AdvancedSearchService) {
 
     RecipeService.getRecipes().then(function(recipes){
         $scope.AllRecipes = recipes;
@@ -10,10 +10,20 @@ controllerModule.controller('RecipeController', function ($scope, $location, $ht
         $scope.ingredients = ingredients;
     });
 
+    RecipeService.getIngredientRecipes().then(function (ingredientsRecipes) {
+        $scope.ingredientsRecipes = ingredientsRecipes;
+    })
+
     CuisineService.getCuisines().then(function (cuisines) {
         $scope.cuisines = cuisines;
     });
 
-    $scope.ingredientRecipe = {};
-    $scope.ingredientRecipe.ingredient = [];
+
+    $scope.ingredientRecipeArray = [];
+    $scope.searchRecipe ={};
+
+    $scope.updateingredientRecipe = function () {
+
+
+    }
 });
