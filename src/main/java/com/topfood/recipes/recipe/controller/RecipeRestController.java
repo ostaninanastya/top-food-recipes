@@ -14,15 +14,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.topfood.recipes.cuisine.service.CuisineService;
@@ -133,6 +128,18 @@ public class RecipeRestController {
     public ResponseEntity<Recipe> deleteRecipe(@ApiParam(value = "Recipe id", required = true) @PathVariable String id) {
         recipeService.delete(id);
         return new ResponseEntity<Recipe>(HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "Get page of recipes", produces = APPLICATION_JSON_UTF8_VALUE)
+    @RequestMapping(value = "/getPage", params = { "page", "size" }, method = GET)
+    public ResponseEntity<? extends Object> findPaginated(@RequestParam("page") int page, @RequestParam("size") int size) {
+
+        Page<Recipe> resultPage = recipeService.findPaginated(page, size);
+        if (page > resultPage.getTotalPages()) {
+            return new ResponseEntity<String>("Количество страниц меньше, чем указанное число page", HttpStatus.BAD_REQUEST);
+        }
+        else
+            return new ResponseEntity<Page<Recipe>>(resultPage, HttpStatus.OK);
     }
 
 }
