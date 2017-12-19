@@ -1,7 +1,4 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<div class="header">
-    <h4>Поиск <input style="width: 500px; height: 31px;" ng-model="searchRecipe"> </h4>
-</div>
 <div>
     Выбор кухни: <select name="ngvalueselect" style="padding-top:10px; width: 200px; display:inline-block;" ng-model="option" ng-options='option.name for option in cuisines' ng-change="updateRecipes(option)">
         <option value="">Все кухни</option>
@@ -42,7 +39,7 @@
             </tr>
             </thead>
             <tbody style="cursor:pointer;">
-            <tr ng-repeat="recipe in recipes | filter:searchRecipe | orderBy:sortType:sortReverse" >
+            <tr ng-repeat="recipe in recipes | orderBy:sortType:sortReverse" >
                 <td ng-class="{'selected':$index == selectedRow}" ng-click="setSelectedRecipe(recipe)" >{{ recipe.name }}</td>
                 <td ng-class="{'selected':$index == selectedRow}" ng-click="setSelectedRecipe(recipe)" >{{ recipe.recipe }}</td>
                 <td ng-class="{'selected':$index == selectedRow}" ng-click="setSelectedRecipe(recipe)" >{{ recipe.cuisine.name }}</td>

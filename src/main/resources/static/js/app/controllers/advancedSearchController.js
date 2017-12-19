@@ -19,7 +19,7 @@ controllerModule.controller('AdvancedSearchController', function ($scope, $locat
     });
 
     $scope.selectedIngredients = [];
-    $scope.searchRecipe = {};
+    //$scope.searchRecipe = {};
 
     $scope.updateingredientRecipe = function () {
         if ($scope.selectedIngredients !== undefined) {
