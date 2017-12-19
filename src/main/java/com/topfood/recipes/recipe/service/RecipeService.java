@@ -102,7 +102,7 @@ public class RecipeService {
         byte[] bytes = fileToByteArray(file);
         Path path = Paths.get(uploadFolder + recipe.getName()+ "_" + file.getName());
         Files.write(path, bytes);
-        Runtime.getRuntime().exec("chmod -R 755 " + uploadFolder);
+        //Runtime.getRuntime().exec("chmod -R 755 " + uploadFolder);
     }
 
     public byte[] fileToByteArray(File file) throws IOException {

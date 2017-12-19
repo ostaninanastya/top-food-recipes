@@ -1,4 +1,4 @@
-var servicesModule = angular.module('topFoodRecipeAppServices', []);
+var servicesModule = angular.module('topFoodRecipeAppServices', ['ui.grid','ui.grid.pagination']);
 
 servicesModule.service('CuisineService', function($http, SERVER_URL) {
     this.getCuisines = function() {

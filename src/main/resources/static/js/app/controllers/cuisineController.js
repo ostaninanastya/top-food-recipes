@@ -1,4 +1,4 @@
-var controllerModule = angular.module('topFoodRecipeAppControllers', []);
+var controllerModule = angular.module('topFoodRecipeAppControllers', ['ui.grid','ui.grid.pagination']);
 controllerModule.controller('CuisineController', function($scope, $http, CuisineService) {
     $scope.cuisines = [];
     CuisineService.getCuisines().then(function(cuisines){

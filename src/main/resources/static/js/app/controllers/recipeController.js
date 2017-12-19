@@ -1,4 +1,52 @@
 controllerModule.controller('RecipeController', function ($scope, $location, $http, $rootScope, $interval, RecipeService, CuisineService, LikeService) {
+    var paginationOptions = {
+        pageNumber: 0,
+        pageSize: 5,
+        sort: null
+    };
+    /*
+    CuisineService.getCuisines().then(function(cuisines){
+        $scope.cuisines = cuisines;
+    });
+    */
+    RecipeService.getRecipes(
+        paginationOptions.pageNumber,
+        paginationOptions.pageSize).then(function(data){
+        $scope.gridOptions.data = data.content;
+        $scope.gridOptions.totalItems = data.totalElements;
+    });
+
+    $scope.gridOptions = {
+        paginationPageSizes: [5,10],
+        paginationPageSize: paginationOptions.pageSize,
+        enableColumnMenus:false,
+        useExternalPagination: true,
+        columnDefs: [
+            { field: 'name', displayName: 'Название' },
+            { field: 'recipe', displayName: 'Рецепт' },
+            { field: 'cuisine.name', displayName: 'Кухня' },
+            { field: 'rating', displayName: 'Рейтинг' }
+        ],
+        onRegisterApi: function(gridApi) {
+            $scope.gridApi = gridApi;
+            gridApi.pagination.on.paginationChanged(
+                $scope,
+                function (newPage, pageSize) {
+                    paginationOptions.pageNumber = newPage;
+                    paginationOptions.pageSize = pageSize;
+                    RecipeService.getRecipes(newPage,pageSize)
+                        .then(function(data){
+                            $scope.gridOptions.data = data.content;
+                            $scope.gridOptions.totalItems = data.totalElements;
+                        });
+                });
+        }
+    };
+
+
+
+
+
     $scope.like = {};
     $scope.sortType = 'rating';
     $scope.sortReverse = true;

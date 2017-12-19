@@ -1,4 +1,5 @@
 servicesModule.service('RecipeService', function($http,$rootScope,SERVER_URL) {
+/*
     this.getRecipes = function() {
         return $http.get(SERVER_URL+'api/recipe').then(function(response){
             return response.data;
@@ -6,6 +7,24 @@ servicesModule.service('RecipeService', function($http,$rootScope,SERVER_URL) {
             return [{"name" : "рецепт пиццы", "recipe" : "dhduhdishdisj"}];
         });
     }
+    this.getCuisines = function() {
+        return $http.get(SERVER_URL+'api/cuisine')
+            .then(function(response){
+                return response.data;
+            }).catch(function(err) {
+                return [];
+            });
+    }*/
+    this.getRecipes = function(pageNumber,size) {
+        pageNumber = pageNumber > 0?pageNumber - 1:0;
+        return $http.get(SERVER_URL + 'api/recipe/getPage?page='+pageNumber+'&size='+size)
+            .then(function(response){
+                return response.data;
+            }).catch(function(err) {
+                return [];
+            });
+    }
+
 
     this.getRecipe = function(id) {
         $http.get(SERVER_URL + 'api/recipe/' + id).then(function(response){
