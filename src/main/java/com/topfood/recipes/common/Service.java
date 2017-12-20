@@ -272,7 +272,7 @@ public class Service {
             ingredientRepository.save(new Ingredient("кунжутное масло", measureRepository.findByName("мл.").get(0)));
             ingredientRepository.save(new Ingredient("перец чили", measureRepository.findByName("шт.").get(0)));
             ingredientRepository.save(new Ingredient("белокачанная капуста", measureRepository.findByName("шт.").get(0)));
-            ingredientRepository.save(new Ingredient("чеснок", measureRepository.findByName("зубчик.").get(0)));
+            ingredientRepository.save(new Ingredient("чеснок", measureRepository.findByName("зубчик").get(0)));
             ingredientRepository.save(new Ingredient("анчоусы", measureRepository.findByName("г.").get(0)));
             ingredientRepository.save(new Ingredient("оливковое масло", measureRepository.findByName("мл.").get(0)));
             ingredientRepository.save(new Ingredient("прошутто", measureRepository.findByName("г.").get(0)));
