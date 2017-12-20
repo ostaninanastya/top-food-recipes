@@ -126,6 +126,12 @@ public class RecipeService {
     }
 
     public Page<Recipe> findPaginated(int page, int size) {
-        return recipeRepository.findAll(new PageRequest(page, size));
+        Page<Recipe> recipes = recipeRepository.findAll(new PageRequest(page, size));
+        for (Recipe r: recipes)
+        {
+            r.setRating(likeService.Rating(String.valueOf(r.getRecipe_id())));
+            recipeRepository.save(r);
+        }
+        return recipes;
     }
 }
