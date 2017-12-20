@@ -279,7 +279,7 @@ public class Service {
             ingredientRepository.save(new Ingredient("телячья вырезка", measureRepository.findByName("г.").get(0)));
             ingredientRepository.save(new Ingredient("шалфей", measureRepository.findByName("пучок").get(0)));
             ingredientRepository.save(new Ingredient("белое сухое вино", measureRepository.findByName("мл.").get(0)));
-            ingredientRepository.save(new Ingredient("сыр пармезан", measureRepository.findByName("г.").get(0)));
+            ingredientRepository.save(new Ingredient("пармезан", measureRepository.findByName("г.").get(0)));
             ingredientRepository.save(new Ingredient("майонез", measureRepository.findByName("г.").get(0)));
             ingredientRepository.save(new Ingredient("зелёный лук", measureRepository.findByName("пучок").get(0)));
             ingredientRepository.save(new Ingredient("перец чёрный молотый", measureRepository.findByName("г.").get(0)));
