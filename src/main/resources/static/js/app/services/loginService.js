@@ -51,6 +51,7 @@ servicesModule.service('LoginService', function($http, $rootScope, SERVER_URL) {
             menu.push({title: 'Выйти', url: '#/logout', f: 'logout()'});
             menu.push({title: 'Создать ингредиент', url: '#/createIngredient', f: ''});
             menu.push({title: 'Создать рецепт', url: '#/createRecipe', f: ''});
+            menu.push({title: 'Создать кухню', url: '#/createCuisine', f: ''});
         } else {
             menu.push({title: 'Войти', url: '#/login', f: ''});
         }

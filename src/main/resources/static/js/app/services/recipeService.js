@@ -1,5 +1,17 @@
 servicesModule.service('RecipeService', function($http,$rootScope,SERVER_URL) {
+<<<<<<< HEAD
 /*
+=======
+
+    this.getRecipesPage = function(page, size) {
+        return $http.get(SERVER_URL+'api/recipe/getPage?page=' + page + '&size=' + size).then(function(response){
+            return response.data;
+        }).catch(function(err) {
+            return [{"name" : "рецепт пиццы", "recipe" : "dhduhdishdisj"}];
+        });
+    }
+
+>>>>>>> 54553e1bab7bbf9c12043f7162e715c2261d29c6
     this.getRecipes = function() {
         return $http.get(SERVER_URL+'api/recipe').then(function(response){
             return response.data;

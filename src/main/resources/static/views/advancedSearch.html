@@ -2,9 +2,12 @@
 <div>
     <div style="margin:30px;">
         <div style="display: inline-block;">
+            <h4>Поиск <input style="width: 400px; height: 20px; display:inline-block;" ng-model="searchRecipe"> </h4>
+        </div>
+        <div style="display: inline-block;">
             <h5>Выбор кухни:</h5>
                 <select ng-model="option"
-                        style="padding-top:10px; width: 200px; display:inline-block;"
+                        style=" width: 200px; height: 20px; display:inline-block;"
                         ng-options='option.name for option in cuisines'
                         ng-change="updateRecipes(option)">
                     <option value="">Все кухни</option>
@@ -13,7 +16,7 @@
         </div>
         <div style="display: inline-block;">
             <h5>Выбор ингредиентов:</h5><select multiple name="ingredient"
-                        style="width: 200px; height: 130px; display:inline-block;"
+                        style="width: 200px; height: 100px; display:inline-block;"
                         ng-model="selectedIngredients"
                         ng-change="updateingredientRecipe()"
                         ng-options="i.name for i in ingredients track by i.name"
@@ -54,7 +57,7 @@
             </tr>
             </thead>
             <tbody style="cursor:pointer;">
-            <tr ng-repeat="recipe in recipes | orderBy:sortType:sortReverse">
+            <tr ng-repeat="recipe in recipes | filter:searchRecipe | orderBy:sortType:sortReverse">
                 <td ng-class="{'selected':$index == selectedRow}" ng-click="setSelectedRecipe(recipe)">{{ recipe.name
                     }}
                 </td>
