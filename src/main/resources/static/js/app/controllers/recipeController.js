@@ -3,12 +3,47 @@ controllerModule.controller('RecipeController', function ($scope, $location, $ht
     $scope.sortType = 'rating';
     $scope.sortReverse = true;
 
+    $scope.pagination = {
+        pageSize: 5,
+        pageNumber: 1,
+        totalItems: null,
+        
+        getTotalPages: function () {
+            return Math.ceil(this.totalItems / this.pageSize);
+        },
+        
+        nextPage: function () {
+            if (this.pageNumber < this.getTotalPages()) {
+                this.pageNumber++;
+                $scope.loadRecipesPage();
+            }
+        },
+        
+        previousPage: function () {
+            if (this.pageNumber > 1) {
+                this.pageNumber--;
+                $scope.loadRecipesPage();
+            }
+        }
+        
+    }
+
+    $scope.loadRecipesPage = function() {
+        RecipeService.getRecipesPage($scope.pagination.pageNumber - 1, $scope.pagination.pageSize).then(function(recipes) {
+            $scope.AllRecipes = recipes.content;
+            $scope.recipes = $scope.AllRecipes;
+            $scope.pagination.totalItems = recipes.totalElements;
+        })
+    }
+
+    $scope.loadRecipesPage();
+/*
     RecipeService.getRecipes().then(function(recipes){
         $scope.AllRecipes = recipes;
         $scope.recipes = $scope.AllRecipes;
 
     });
-
+*/
     $scope.updateRecipes = function (option) {
         if (option !== null)
         {

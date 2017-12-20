@@ -1,4 +1,13 @@
 servicesModule.service('RecipeService', function($http,$rootScope,SERVER_URL) {
+
+    this.getRecipesPage = function(page, size) {
+        return $http.get(SERVER_URL+'api/recipe/getPage?page=' + page + '&size=' + size).then(function(response){
+            return response.data;
+        }).catch(function(err) {
+            return [{"name" : "рецепт пиццы", "recipe" : "dhduhdishdisj"}];
+        });
+    }
+
     this.getRecipes = function() {
         return $http.get(SERVER_URL+'api/recipe').then(function(response){
             return response.data;

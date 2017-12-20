@@ -52,5 +52,9 @@
             </tr>
             </tbody>
         </table>
+        <p>Current page:
+        <input type="number" min="1" max="{{ pagination.getTotalPages() }}" ng-model="pagination.pageNumber" ng-change="loadRecipesPage()">of {{ pagination.getTotalPages() }}</p>
+        <button type="button" class="btn btn-success" ng-click="pagination.previousPage()" ng-disabled="pagination.pageNumber==1">previous page</button>
+        <button type="button" class="btn btn-success" ng-click="pagination.nextPage()" ng-disabled="pagination.pageNumber==pagination.getTotalPages()">next page</button>
     </div>
 </div>
