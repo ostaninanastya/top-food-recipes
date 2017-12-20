@@ -14,16 +14,16 @@ public class IngredientRecipe {
     @Column(name ="id")
     private Long id;
 
-    public Integer getQuantity() {
+    public Double getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(Integer quantity) {
+    public void setQuantity(Double quantity) {
         this.quantity = quantity;
     }
 
     @Column(name = "quantity")
-    private Integer quantity;
+    private Double quantity;
 
     @ManyToOne
     @JoinColumn(name = "ingredient_id")
@@ -37,7 +37,7 @@ public class IngredientRecipe {
 
     }
 
-    public IngredientRecipe (Ingredient ingredient, Recipe recipe, Integer quantity) {
+    public IngredientRecipe (Ingredient ingredient, Recipe recipe, Double quantity) {
         this.ingredient = ingredient;
         this.recipe = recipe;
         this.quantity = quantity;

@@ -35,7 +35,6 @@
                         <span ng-show="sortType == 'name' && sortReverse" class="fa fa-caret-up"></span>
                     </a>
                 </th>
-                <th>Рецепт</th>
                 <th>
                     <a href="#/advancedSearch" ng-click="sortType = 'cuisine.name'; sortReverse = !sortReverse">
                         Кухня
@@ -53,15 +52,11 @@
                 <th width="100"></th>
                 <th width="100"></th>
                 <th width="100"></th>
-                <th width="100"></th>
             </tr>
             </thead>
             <tbody style="cursor:pointer;">
             <tr ng-repeat="recipe in recipes | filter:searchRecipe | orderBy:sortType:sortReverse">
                 <td ng-class="{'selected':$index == selectedRow}" ng-click="setSelectedRecipe(recipe)">{{ recipe.name
-                    }}
-                </td>
-                <td ng-class="{'selected':$index == selectedRow}" ng-click="setSelectedRecipe(recipe)">{{ recipe.recipe
                     }}
                 </td>
                 <td ng-class="{'selected':$index == selectedRow}" ng-click="setSelectedRecipe(recipe)">{{
