@@ -3,7 +3,7 @@
 </div>
 <div>
     <div>
-        <div style="display:inline-block;">
+        <p><img width="400" height="400" src="{{selectedRecipe.image}}"></p>
             <h3>Потребуется:</h3>
             <div ng-repeat="ingredientRecipe in ingredientRecipeArray">
                 <output style="width: 120px; height: 25px; display:inline-block;">{{ingredientRecipe.ingredient.name}}
@@ -12,10 +12,6 @@
                 <output style="width: 100px; height: 25px; display:inline-block;">
                     {{ingredientRecipe.ingredient.measure.name}}
                 </output>
-            </div>
-        </div>
-        <div style="display:inline-block;">
-            <p><img width="400" height="400" src="{{selectedRecipe.image}}"></p>
         </div>
     </div>
 

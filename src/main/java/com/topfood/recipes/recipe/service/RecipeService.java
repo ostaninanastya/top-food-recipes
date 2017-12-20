@@ -100,7 +100,7 @@ public class RecipeService {
 
     public void storeFile(File file, Recipe recipe) throws IOException {
         byte[] bytes = fileToByteArray(file);
-        Path path = Paths.get(uploadFolder + recipe.getName()+ "_" + file.getName());
+        Path path = Paths.get(uploadFolder + file.getName());
         Files.write(path, bytes);
         Runtime.getRuntime().exec("chmod -R 755 " + uploadFolder);
     }
