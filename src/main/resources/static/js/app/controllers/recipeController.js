@@ -14,6 +14,7 @@ controllerModule.controller('RecipeController', function ($scope, $location, $ht
         paginationOptions.pageSize).then(function(data){
         $scope.gridOptions.data = data.content;
         $scope.gridOptions.totalItems = data.totalElements;
+        $scope.recipes = data.content;
     });
 
     $scope.gridOptions = {
@@ -27,22 +28,39 @@ controllerModule.controller('RecipeController', function ($scope, $location, $ht
             { field: 'cuisine.name', displayName: 'Кухня' },
             { field: 'rating', displayName: 'Рейтинг' }
         ],
-        onRegisterApi: function(gridApi) {
-            $scope.gridApi = gridApi;
-            gridApi.pagination.on.paginationChanged(
-                $scope,
-                function (newPage, pageSize) {
-                    paginationOptions.pageNumber = newPage;
-                    paginationOptions.pageSize = pageSize;
-                    RecipeService.getRecipes(newPage,pageSize)
-                        .then(function(data){
-                            $scope.gridOptions.data = data.content;
-                            $scope.gridOptions.totalItems = data.totalElements;
-                        });
-                });
-        }
+
+
     };
 
+    $scope.pagination = {
+        pageSize: 5,
+        pageNumber: 1,
+        totalItems: null,
+        getTotalPages: function () {
+            return Math.ceil(this.totalItems / this.pageSize);
+        },
+        nextPage: function () {
+            if (this.pageNumber < this.getTotalPages()) {
+                this.pageNumber++;
+                $scope.load();
+            }
+        },
+        previousPage: function () {
+            if (this.pageNumber > 1) {
+                this.pageNumber--;
+                $scope.load();
+            }
+        }
+    }
+    $scope.load = function () {
+        RecipeService.getRecipes($scope.pagination.pageSize, $scope.pagination.pageNumber).then(function (response) {
+            $scope.gridOptions.data = response.data;
+            $scope.pagination.totalItems = response.totalRows;
+
+        });
+    }
+
+    $scope.load();
 
 
 
@@ -50,12 +68,12 @@ controllerModule.controller('RecipeController', function ($scope, $location, $ht
     $scope.like = {};
     $scope.sortType = 'rating';
     $scope.sortReverse = true;
-
+/*
     RecipeService.getRecipes().then(function(recipes){
         $scope.AllRecipes = recipes;
         $scope.recipes = $scope.AllRecipes;
 
-    });
+    });*/
 
     $scope.updateRecipes = function (option) {
         if (option !== null)
