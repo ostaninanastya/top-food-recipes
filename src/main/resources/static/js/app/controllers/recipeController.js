@@ -1,93 +1,31 @@
 controllerModule.controller('RecipeController', function ($scope, $location, $http, $rootScope, $interval, RecipeService, CuisineService, LikeService) {
-    var paginationOptions = {
-        pageNumber: 0,
-        pageSize: 5,
-        sort: null
-    };
-    /*
-    CuisineService.getCuisines().then(function(cuisines){
-        $scope.cuisines = cuisines;
-    });
-    */
-    RecipeService.getRecipes(
-        paginationOptions.pageNumber,
-        paginationOptions.pageSize).then(function(data){
-        $scope.gridOptions.data = data.content;
-        $scope.gridOptions.totalItems = data.totalElements;
-        $scope.recipes = data.content;
-    });
-
-    $scope.gridOptions = {
-        paginationPageSizes: [5,10],
-        paginationPageSize: paginationOptions.pageSize,
-        enableColumnMenus:false,
-        useExternalPagination: true,
-        columnDefs: [
-            { field: 'name', displayName: 'Название' },
-            { field: 'recipe', displayName: 'Рецепт' },
-            { field: 'cuisine.name', displayName: 'Кухня' },
-            { field: 'rating', displayName: 'Рейтинг' }
-        ],
-
-
-    };
+    $scope.like = {};
+    $scope.sortType = 'rating';
+    $scope.sortReverse = true;
 
     $scope.pagination = {
         pageSize: 5,
         pageNumber: 1,
         totalItems: null,
+
         getTotalPages: function () {
             return Math.ceil(this.totalItems / this.pageSize);
         },
-        nextPage: function () {
-            if (this.pageNumber < this.getTotalPages()) {
-                this.pageNumber++;
-                $scope.load();
-            }
-        },
-        previousPage: function () {
-            if (this.pageNumber > 1) {
-                this.pageNumber--;
-                $scope.load();
-            }
-        }
-    }
-    $scope.load = function () {
-        RecipeService.getRecipes($scope.pagination.pageSize, $scope.pagination.pageNumber).then(function (response) {
-            $scope.gridOptions.data = response.data;
-            $scope.pagination.totalItems = response.totalRows;
 
-        });
-    }
-
-    $scope.load();
-
-
-
-
-    $scope.pagination = {
-        pageSize: 5,
-        pageNumber: 1,
-        totalItems: null,
-        
-        getTotalPages: function () {
-            return Math.ceil(this.totalItems / this.pageSize);
-        },
-        
         nextPage: function () {
             if (this.pageNumber < this.getTotalPages()) {
                 this.pageNumber++;
                 $scope.loadRecipesPage();
             }
         },
-        
+
         previousPage: function () {
             if (this.pageNumber > 1) {
                 this.pageNumber--;
                 $scope.loadRecipesPage();
             }
         }
-        
+
     }
 
     $scope.loadRecipesPage = function() {
@@ -99,8 +37,12 @@ controllerModule.controller('RecipeController', function ($scope, $location, $ht
     }
 
     $scope.loadRecipesPage();
-    });
-
+    /*
+        RecipeService.getRecipes().then(function(recipes){
+            $scope.AllRecipes = recipes;
+            $scope.recipes = $scope.AllRecipes;
+        });
+    */
     $scope.updateRecipes = function (option) {
         if (option !== null)
         {
@@ -216,7 +158,7 @@ controllerModule.controller('RecipeController', function ($scope, $location, $ht
             return true;
         else
             return false;
-            return false;
+        return false;
     }
 
 });

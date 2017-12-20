@@ -1,12 +1,8 @@
-<!--<div ui-grid="gridOptions" class="grid" ui-grid-pagination>
-    <!-- ui-grid-pagination> -->
-</div>-->
-
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <div>
     Выбор кухни: <select name="ngvalueselect" style="padding-top:10px; width: 200px; display:inline-block;" ng-model="option" ng-options='option.name for option in cuisines' ng-change="updateRecipes(option)">
-        <option value="">Все кухни</option>
-    </select>
+    <option value="">Все кухни</option>
+</select>
 </div>
 <div ng-show="$scope.often!=''">{{often}}</div>
 <div>
@@ -16,7 +12,7 @@
             <tr>
                 <th>
                     <a href="#/recipes" ng-click="sortType = 'name'; sortReverse = !sortReverse">
-                    Название
+                        Название
                         <span ng-show="sortType == 'name' && !sortReverse" class="fa fa-caret-down"></span>
                         <span ng-show="sortType == 'name' && sortReverse" class="fa fa-caret-up"></span>
                     </a>
@@ -56,9 +52,8 @@
             </tr>
             </tbody>
         </table>
-
         <p>Current page:
-        <input type="number" min="1" max="{{ pagination.getTotalPages() }}" ng-model="pagination.pageNumber" ng-change="loadRecipesPage()">of {{ pagination.getTotalPages() }}</p>
+            <input min="1" max="{{ pagination.getTotalPages() }}" ng-model="pagination.pageNumber" ng-change="loadRecipesPage()">of {{ pagination.getTotalPages() }}</p>
         <button type="button" class="btn btn-success" ng-click="pagination.previousPage()" ng-disabled="pagination.pageNumber==1">previous page</button>
         <button type="button" class="btn btn-success" ng-click="pagination.nextPage()" ng-disabled="pagination.pageNumber==pagination.getTotalPages()">next page</button>
     </div>

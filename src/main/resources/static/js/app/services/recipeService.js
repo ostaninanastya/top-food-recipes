@@ -1,7 +1,4 @@
 servicesModule.service('RecipeService', function($http,$rootScope,SERVER_URL) {
-<<<<<<< HEAD
-/*
-=======
 
     this.getRecipesPage = function(page, size) {
         return $http.get(SERVER_URL+'api/recipe/getPage?page=' + page + '&size=' + size).then(function(response){
@@ -11,7 +8,6 @@ servicesModule.service('RecipeService', function($http,$rootScope,SERVER_URL) {
         });
     }
 
->>>>>>> 54553e1bab7bbf9c12043f7162e715c2261d29c6
     this.getRecipes = function() {
         return $http.get(SERVER_URL+'api/recipe').then(function(response){
             return response.data;
@@ -19,24 +15,6 @@ servicesModule.service('RecipeService', function($http,$rootScope,SERVER_URL) {
             return [{"name" : "рецепт пиццы", "recipe" : "dhduhdishdisj"}];
         });
     }
-    this.getCuisines = function() {
-        return $http.get(SERVER_URL+'api/cuisine')
-            .then(function(response){
-                return response.data;
-            }).catch(function(err) {
-                return [];
-            });
-    }*/
-    this.getRecipes = function(pageNumber,size) {
-        pageNumber = pageNumber > 0?pageNumber - 1:0;
-        return $http.get(SERVER_URL + 'api/recipe/getPage?page='+pageNumber+'&size='+size)
-            .then(function(response){
-                return response.data;
-            }).catch(function(err) {
-                return [];
-            });
-    }
-
 
     this.getRecipe = function(id) {
         $http.get(SERVER_URL + 'api/recipe/' + id).then(function(response){
@@ -46,19 +24,19 @@ servicesModule.service('RecipeService', function($http,$rootScope,SERVER_URL) {
 
     this.deleteRecipe = function(recipe, callback) {
         $http.delete(SERVER_URL+'api/recipe/' + recipe.recipe_id)
-        .then(function(response) {
-            callback();
-        })
-        .catch(function(err) {
-            console.log('Failed to delete recipe: ' + err.data);
-        });
+            .then(function(response) {
+                callback();
+            })
+            .catch(function(err) {
+                console.log('Failed to delete recipe: ' + err.data);
+            });
     }
 
     this.logResponse = function(data, status, headers, config) {
-      	console.log('SUCCESS');
-       	console.log('data: ' + data);
-       	console.log('status: ' + status);
-       	console.log('headers: ' + headers);
+        console.log('SUCCESS');
+        console.log('data: ' + data);
+        console.log('status: ' + status);
+        console.log('headers: ' + headers);
     }
 
     this.uploadRecipeAndPicture = function(recipe, file, callback) {
@@ -81,11 +59,11 @@ servicesModule.service('RecipeService', function($http,$rootScope,SERVER_URL) {
             data: { recipe: recipe, file: file }
 
         }).success(function (data, status, headers, config) {
-        	console.log('SUCCESS');
+            console.log('SUCCESS');
             resp.recipe = data;
             callback(resp);
         }).error(function (data, status, headers, config) {
-        	console.log('ERROR');
+            console.log('ERROR');
             resp = {success: false, error: data};
             callback(resp);
         });
@@ -96,15 +74,15 @@ servicesModule.service('RecipeService', function($http,$rootScope,SERVER_URL) {
 
         $http.post(SERVER_URL + 'api/recipe/withoutpicture', JSON.stringify(recipe)
         ).success(function (data, status, headers, config) {
-        	console.log('SUCCESS');
+            console.log('SUCCESS');
             resp.recipe = data;
             callback(resp);
         }).error(function (data, status, headers, config) {
-        	console.log('ERROR');
+            console.log('ERROR');
             resp = {success: false, error: data};
             callback(resp);
         });
-   
+
     }
 
     this.addNewRecipe = function(recipe, f, callback) {
