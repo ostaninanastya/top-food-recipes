@@ -17,7 +17,7 @@ public class Recipe {
     @Column(name ="name")
     private String name;
 
-    @Column(name="recipe")
+    @Column(name="recipe", length = 10000)
     private String recipe;
 
     @Column(name ="image")
