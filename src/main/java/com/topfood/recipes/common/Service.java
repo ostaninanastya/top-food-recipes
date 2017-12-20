@@ -420,12 +420,12 @@ public class Service {
             Recipe sousRecipe = recipeRepository.findByName(nameSous).get(0);
             file = new File(getClass().getClassLoader().getResource("pictures/" + filename).getFile());
             recipeService.storeFile(file, soupRecipe);
-            ingredientRecipeRepository.save(new IngredientRecipe(ingredientRepository.findByName("сахар").get(0), soupRecipe, 40.0));
-            ingredientRecipeRepository.save(new IngredientRecipe(ingredientRepository.findByName("уксус").get(0), soupRecipe, 50.0));
-            ingredientRecipeRepository.save(new IngredientRecipe(ingredientRepository.findByName("соевый соус").get(0), soupRecipe, 50.0));
-            ingredientRecipeRepository.save(new IngredientRecipe(ingredientRepository.findByName("томатное пюре").get(0), soupRecipe, 30.0));
-            ingredientRecipeRepository.save(new IngredientRecipe(ingredientRepository.findByName("апельсиновый сок").get(0), soupRecipe, 80.0));
-            ingredientRecipeRepository.save(new IngredientRecipe(ingredientRepository.findByName("кукурузная мука").get(0), soupRecipe, 10.0));
+            ingredientRecipeRepository.save(new IngredientRecipe(ingredientRepository.findByName("сахар").get(0), sousRecipe, 40.0));
+            ingredientRecipeRepository.save(new IngredientRecipe(ingredientRepository.findByName("уксус").get(0), sousRecipe, 50.0));
+            ingredientRecipeRepository.save(new IngredientRecipe(ingredientRepository.findByName("соевый соус").get(0), sousRecipe, 50.0));
+            ingredientRecipeRepository.save(new IngredientRecipe(ingredientRepository.findByName("томатное пюре").get(0), sousRecipe, 30.0));
+            ingredientRecipeRepository.save(new IngredientRecipe(ingredientRepository.findByName("апельсиновый сок").get(0), sousRecipe, 80.0));
+            ingredientRecipeRepository.save(new IngredientRecipe(ingredientRepository.findByName("кукурузная мука").get(0), sousRecipe, 10.0));
             //cucumber
             filename = "cucumber.jpg";
             recipeRepository.save(new Recipe(nameOgurec, recipeOgurec, imagePrefix + filename, adminUser, cuisineRepository.findByName("Китайская").get(0)));
