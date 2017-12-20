@@ -297,6 +297,8 @@ public class Service {
             filename = "pizza.jpg";
             recipeRepository.save(new Recipe(namePizzaRecipe, recipePizzaStr, imagePrefix + filename, adminUser, cuisineRepository.findByName("Итальянская").get(0)));
             Recipe pizzaRecipe = recipeRepository.findByName(namePizzaRecipe).get(0);
+            file = new File(getClass().getClassLoader().getResource("pictures/" + filename).getFile());
+            recipeService.storeFile(file, pizzaRecipe);
             ingredientRecipeRepository.save(new IngredientRecipe(ingredientRepository.findByName("молоко").get(0), pizzaRecipe, 2.0));
             ingredientRecipeRepository.save(new IngredientRecipe(ingredientRepository.findByName("сахар").get(0), pizzaRecipe, 1.0));
             ingredientRecipeRepository.save(new IngredientRecipe(ingredientRepository.findByName("томат").get(0), pizzaRecipe, 1.0));
@@ -305,7 +307,7 @@ public class Service {
             recipeRepository.save(new Recipe(namePastaRecipe, recipePastaStr, imagePrefix + filename, adminUser, cuisineRepository.findByName("Итальянская").get(0)));
             Recipe pastaRecipe = recipeRepository.findByName(namePastaRecipe).get(0);
             file = new File(getClass().getClassLoader().getResource("pictures/" + filename).getFile());
-            recipeService.storeFile((File)file, pastaRecipe);
+            recipeService.storeFile(file, pastaRecipe);
             ingredientRecipeRepository.save(new IngredientRecipe(ingredientRepository.findByName("спагетти").get(0), pastaRecipe, 2.0));
             ingredientRecipeRepository.save(new IngredientRecipe(ingredientRepository.findByName("бекон").get(0), pastaRecipe, 3.0));
             ingredientRecipeRepository.save(new IngredientRecipe(ingredientRepository.findByName("соль").get(0), pastaRecipe, 1.0));
