@@ -10,21 +10,21 @@
         <table class="table">
             <thead>
             <tr>
-                <th width="300">
+                <th width="500">
                     <a href="#/recipes" ng-click="sortType = 'name'; sortReverse = !sortReverse">
                         Название
                         <span ng-show="sortType == 'name' && !sortReverse" class="fa fa-caret-down"></span>
                         <span ng-show="sortType == 'name' && sortReverse" class="fa fa-caret-up"></span>
                     </a>
                 </th>
-                <th width="200">
+                <th width="400">
                     <a href="#/recipes" ng-click="sortType = 'cuisine.name'; sortReverse = !sortReverse">
                         Кухня
                         <span ng-show="sortType == 'cuisine.name' && !sortReverse" class="fa fa-caret-down"></span>
                         <span ng-show="sortType == 'cuisine.name' && sortReverse" class="fa fa-caret-up"></span>
                     </a>
                 </th>
-                <th width="100">
+                <th width="200">
                     <a href="#/recipes" ng-click="sortType = 'rating'; sortReverse = !sortReverse">
                         Рейтинг
                         <span ng-show="sortType == 'rating' && !sortReverse" class="fa fa-caret-down"></span>
